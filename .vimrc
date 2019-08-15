@@ -1,304 +1,128 @@
-syntax on
-" set color theme
-"colorscheme busybee
+"=====================开始安装插件===========================================
+set nocompatible               " be iMproved
+let mapleader=","              " change the leader to be a comma vs slash
+filetype off                   " required!
 
-set background=dark
-" solarized options 
-colorscheme solarized
-
-" Configuration section of vundle
-filetype off  " required!
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
-Plugin 'VundleVim/Vundle.vim'
+Bundle 'gmarik/vundle'
+Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'wincent/Command-T'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'ervandew/supertab'
+Bundle 'yann2192/vim-colorschemes'
+Bundle 'yann2192/vim-vitamins'
+Bundle 'fatih/vim-go'
+Bundle 'scrooloose/syntastic'
 
-" My Bundles here:
-Plugin 'mileszs/ack.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'majutsushi/tagbar'
-Plugin 'kien/ctrlp.vim' 
-Plugin 'vim-scripts/xml.vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'honza/vim-snippets'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rails'
-Plugin 'bling/vim-airline'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'TimothyYe/vim-tips'
-Plugin 'Shougo/neocomplete'
-Plugin 'mhinz/vim-startify'
-Plugin 'vim-scripts/wildfire.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'yonchu/accelerated-smooth-scroll'
-Plugin 'ianva/vim-youdao-translater'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'matze/vim-move'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'suan/vim-instant-markdown'
+" Snipmate
+Bundle 'tomtom/tlib_vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'garbas/vim-snipmate'
 
-" For fun...
-Plugin 'uguu-org/vim-matrix-screensaver'
-
-"Plugins for golang
-Plugin 'fatih/vim-go'
-"goimports settings
-"autocmd BufWritePre *.go :Fmt
-
-call vundle#end()
 filetype plugin indent on     " required!
- " End of vundle configuration
 
-let g:airline_theme='light'
- 
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 2
 
-"For vim-move
-let g:move_key_modifier = 'C'
+"=============其实就是在保存之后重新载入一下================================
+" 设置 vimrc 修改保存后立刻生效，不用在重新打开
+" 建议配置完成后将这个关闭
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
-"For ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
 
-"Settings for Golang
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap gd <Plug>(go-def-tab)
-
-"For Youdao Translater Plugin
-vnoremap <silent> <C-T> <Esc>:Ydv<CR> 
-nnoremap <silent> <C-T> <Esc>:Ydc<CR> 
-
-inoremap jj <Esc>
- 
-"Powerline setting
-"Set GUI font type
-if has("gui_running")
-	set guifont=Source\ Code\ Pro\:h18
-endif
-let g:airline_powerline_fonts = 1
-
-"improve autocomplete menu color
-highlight Pmenu ctermbg=238 gui=bold
-
-"Setup SuperTab
-let g:SuperTabRetainCompletionType="context"
-
-"For Indent Guides Plugin
-let g:indent_guides_enable_on_vim_startup = 1
-
-" 设定文件浏览器目录为当前目录  
-set bsdir=buffer  
-" 设置编码  
-set encoding=utf-8  
+"==============不知道这个东西有啥用，我先干掉了！============================
+" 关闭兼容模式
 set nocompatible
-set laststatus=2
-" 设置文件编码  
-set fenc=utf-8 
 
-"set to use clipboard of system
-set clipboard=unnamed
 
-" 设置文件编码检测类型及支持格式  
-set fencs=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936  
+"==============不知道这个东西有啥用，我先干掉了！============================
+set nu " 设置行号
+set cursorline "突出显示当前行
+" set cursorcolumn " 突出显示当前列
+set showmatch " 显示括号匹配
 
-"显示行号  
-set number
-"Show related row numbers
-set relativenumber
 
-"settings for backspace
-set backspace=2
-set backspace=indent,eol,start
+"==============tab 缩进============================
+set tabstop=4 " 设置Tab长度为4空格
+set shiftwidth=4 " 设置自动缩进长度为4空格
+set autoindent " 继承前一行的缩进方式，适用于多行注释
 
-"忽略大小写查找
-set ic
 
-" tab宽度  
-set tabstop=2  
-set cindent shiftwidth=2  
-set autoindent shiftwidth=2 
+"==============快捷键设置, 我暂时用不到，先干掉============================
+" 定义快捷键的前缀，即<Leader>
+" let mapleader=";" 
 
-" set 折叠
-set foldmethod=indent
-" 打开文件默认不折叠
-set foldlevelstart=99
 
-"set my leader
-let mapleader="\<Space>"
-let g:mapleader="\<Space>"
+"==============系统剪切板复制粘贴============================
+" v 模式下复制内容到系统剪切板
+vmap <Leader>c "+yy
+" n 模式下复制一行到系统剪切板
+nmap <Leader>c "+yy
+" n 模式下粘贴系统剪切板的内容
+nmap <Leader>v "+p
 
-"tabs
-nmap <leader>tn :tabnew<cr>
-nmap <leader>te :tabedit
-nmap <leader>tc :tabclose<cr>
-nmap <leader>tm :tabmove
 
-"  映射NERDTree插件
-:map <leader>n :NERDTree<CR>  
-"let loaded_nerd_tree=1
-let NERDTreeQuitOnOpen = 1
-let NERDChristmasTree=1
-let g:NERDTreeWinSize = 32 
-map <leader>f :NERDTreeToggle<CR>
+"==============搜索设置============================
+" 开启实时搜索
+set incsearch
+" 搜索时大小写不敏感
+set ignorecase
+syntax enable
+syntax on                    " 开启文件类型侦测
 
-" Settings for vim-easymotion
-let g:EasyMotion_leader_key = ","
 
-"Settings for TagBar
-map <leader>g :TagbarToggle<CR>
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds' : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin' : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+"==============文件自动保存============================
+" 退出插入模式指定类型的文件自动保存
+au InsertLeave *.go,*.sh,*.php write
 
-"switch window
-:map <leader>w <C-W>w
 
-"set zen coding
- let g:user_zen_settings = {
-  \  'php' : {
-  \    'extends' : 'html',
-  \    'filters' : 'c',
-  \  },
-  \  'xml' : {
-  \    'extends' : 'html',
-  \  },
-  \  'haml' : {
-  \    'extends' : 'html',
-  \  },
-  \  'erb' : {
-  \    'extends' : 'html',
-  \  },
-  \}
-"set CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-"use in  edit
-imap <C-A> <C-C><c-p>
+"==============NERDTREE============================
+" 自动启动NERDTREE 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.jpg,*.png,*.gif,*.jpeg,.DS_Store  " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+" 在目录栏显示隐藏文件
+let NERDTreeShowHidden=1
+" open NERDTree with Ctrl+n 
+map <C-n> :NERDTreeToggle<CR>
 
-" move lines up or down (command - D)
-nmap <D-j> mz:m+<cr>`z
-nmap <D-k> mz:m-2<cr>`z
-vmap <D-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <D-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" change default arrows
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
-" Tab move lines left or right (c-Ctrl,s-Shift)
-nmap    <c-tab>     v>
-nmap    <s-tab>     v<
-vmap    <c-tab>     >gv
-vmap    <s-tab>     <gv
+" Run NERDTreeTabs on console vim startup
+let g:nerdtree_tabs_open_on_console_startup=1
 
-" tab navigation like zsh
-:nmap <leader>h :tabprevious<CR>
-:nmap <leader>l :tabnext<CR>
 
-" settings for resize splitted window
-nmap w[ :vertical resize -3<CR>
-nmap w] :vertical resize +3<CR>
+"==============Tagbar============================
+" 启动Tagbar快捷键
+nmap <F8> :TagbarToggle<CR>
 
-nmap w- :resize -3<CR>
-nmap w= :resize +3<CR>
 
-"markdown hightlight
-let g:octopress_rake_executable = '/usr/bin/rake'
+"==============AutoPairs============================
+" autopairs默认设置
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
 
-"scss,sass
-au BufRead,BufNewFile *.scss set filetype=scss
-au BufRead,BufNewFile *.sass set filetype=scss
 
-"coffee script
-au BufWritePost *.coffee silent CoffeeMake!
-au BufWritePost *.coffee :CoffeeCompile watch vert
+"==============airline============================
+" airline主题配置默认设置
+let g:airline_theme='light'
 
-"let skim use slim syntax
-au BufRead,BufNewFile *.skim set filetype=slim
 
-"ctags
-set tags+=~/gitdb/rails/tags
+"==============Font Setting============================
+" 配置字体和大小 
+set guifont=menlo:h16
 
-"auto completed
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-" code search
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
-
-" For startify
-let g:startify_custom_header = [
-\ ' _   _        _  _          _____  _             _ ',
-\ '| | | |  ___ | || |  ___   |_   _|(_) _ __ ___  | |',
-\ '| |_| | / _ \| || | / _ \    | |  | ||  _   _ \ | |',
-\ '|  _  ||  __/| || || (_) |   | |  | || | | | | ||_|',
-\ '|_| |_| \___||_||_| \___/    |_|  |_||_| |_| |_|(_)',
-\ '',
-\ '',
-\]
