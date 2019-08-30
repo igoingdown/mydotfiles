@@ -27,7 +27,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'suan/vim-instant-markdown'
+Plugin 'w0rp/ale'
+
 " Snipmate
 Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -50,7 +51,7 @@ set nocompatible
 "==============不知道这个东西有啥用，我先干掉了！============================
 set nu " 设置行号
 set cursorline "突出显示当前行
-" set cursorcolumn " 突出显示当前列
+set cursorcolumn " 突出显示当前列
 set showmatch " 显示括号匹配
 
 
@@ -126,3 +127,18 @@ let g:airline_theme='light'
 " 配置字体和大小 
 set guifont=menlo:h16
 
+
+"==============ale Setting============================
+"let g:ale_fix_on_save = 1
+"let g:ale_completion_enabled = 1
+"let g:ale_sign_column_always = 1
+"let g:airline#extensions#ale#enabled = 1
+
+
+"==============jedi-vim Setting============================
+let g:jedi#completions_command = "<C-B>"
+
+
+"==============允许将函数和类折叠============================
+set foldmethod=indent
+set foldlevel=99

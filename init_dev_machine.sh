@@ -53,7 +53,6 @@ cd ~/local/go1.4
 git clone https://github.com/golang/go.git -b release-branch.go1.4
 cd go/src
 ./all.bash
-
 echo export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go > ~/.bashrc
 source ~/.bashrc
 
@@ -63,6 +62,13 @@ wget https://storage.googleapis.com/golang/go1.12.7.linux-amd64.tar.gz
 tar zxvf go1.12.7.linux-amd64.tar.gz
 cd go/src
 ./all.bash
+
+#=============== install cool projects =========================================
+# install some cool projects that I should learn through
+go get -d k8s.io/kubernetes
+cd $GOPATH/src/k8s.io/kubernetes
+make
+
 
 #=============== Golang Setting =========================================
 echo export GOROOT=$HOME/local/go1.12/go > ~/.bashrc

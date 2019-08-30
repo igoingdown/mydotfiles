@@ -6,7 +6,10 @@ export PATH=$PATH:$MYSQLPATH/bin
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
 export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
-export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
+#Temp setting
+export LDFLAGS=""
+#Correct setting
+#export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 
 #=============== Golang Setting =============================================
@@ -19,6 +22,23 @@ export PATH=$PATH:$GOROOT/bin
 alias build="go build ."
 
 
+#=============== ETCD Setting =============================================
+export ETCDCTL_API=3
+
+
+#=============== Dev machine Setting =============================================
+# virtualdev machine ssh login
+alias dev="ssh root@10.233.153.40"
+# copy local files to dev machine
+dscp() {
+	scp $1 root@10.233.153.40:~/
+}
+# copy file on dev machine to local desktop
+cpb() {
+	scp root@10.233.153.40:~/$1 ~/Desktop
+}
+
+
 #=============== EntryTask Setting =============================================
 # entry task env
 export ENV=dev
@@ -27,11 +47,29 @@ export APIIMAGE=entry-zhaomingxing-api
 export TCPIMAGE=entry-zhaomingxing-tcp
 
 
-#=============== RDS Setting =============================================
+#=============== ERU Setting =============================================
+export ERU=10.22.12.87:5001
+# support list and log operation on container level
+container() {
+	cli --eru $ERU container $1 $2 
+}
+# stop a eru container and delete it.
+stop_and_remove() {
+	cli --eru $ERU container stop $1
+	fail_report
+	cli --eru $ERU container remove $1
+}
+
+
+#=============== RDS Setting ===========================================
 alias entry_bus="cd ~/golang/src/git.garena.com/mingxing.zhao"
-alias zero_bus="cd ~/golang/src/git.garena.com/shopee/cloud/"
+alias zb="cd ~/golang/src/git.garena.com/shopee/cloud/"
 alias magy="cd ~/golang/src/git.garena.com/magy/"
-alias magy_test="cd ~/golang/src/self_test/test_backup"
+alias mt="cd ~/golang/src/self_test/"
+rds() {
+	cli --eru $ERU container list rdsmingxing
+	cli --eru $ERU container list rdswebui 
+}
 
 
 #=============== Redis Setting =============================================
@@ -41,7 +79,7 @@ alias redis="redis-server /usr/local/etc/redis.conf"
 
 #=============== CPP Setting =============================================
 # compile cpp program with c++11
-cpc() {
+cppc() {
 	g++ -std=c++11 $1
 }
 
@@ -80,12 +118,12 @@ alias gc="git commit -m"
 # after status and diff, push it through
 push_through(){
 	gs
-	fail_report
-	git add .
-	fail_report
-	git commit -m $1
-	fail_report
-	gps
+    fail_report
+    git add .
+    fail_report
+    git commit -m $1
+    fail_report
+    gps
 }
 
 
@@ -98,19 +136,23 @@ sublime() {
 vsc() {
 	open -a /Applications/Visual\ Studio\ Code.app $1
 }
-# execute shell script in a new terminal, works for MacOS 
-shnt() {
+# execute bash scripts in a new terminal 
+tm() {
 	open -a Terminal.app $1
+}
+# open markdown file with typora 
+tpr() {
+	open -a /Applications/Typora.app $1
 }
 
 
 #=============== Common Alias Setting =============================================
 alias ll='ls -al -G'
-alias zconf='vim ~/.zshrc'
+alias zconf='vim ~/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
 alias md="mkdir -p"
-alias rd="rmdir"
+alias rd="rm -rf"
 alias df="df -h"
 alias mv="mv -i"
 alias slink="link -s"
@@ -140,3 +182,15 @@ fail_report() {
     exit
   fi
 }
+
+
+
+#=============== Order Meal Setting =============================================
+od() {
+	curl 
+		-d '{"food_id": 6}' 
+		-H "Content-Type: application/json"\
+		-H 'Authorization: 104089c162aeffd9b03744adbe5a95be21a56237'\
+		-X POST http://api/order/2
+}
+
