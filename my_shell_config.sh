@@ -57,7 +57,7 @@ alias leetcode="cd $HOME/github/leetcode"
 
 
 #=============== Resume Setting =============================================
-alias leetcode="cd $HOME/github/MyResume"
+alias resume="cd $HOME/github/MyResume"
 
 
 #=============== Hexo Setting =============================================
@@ -154,3 +154,4 @@ fail_report() {
     exit
   fi
 }
+
