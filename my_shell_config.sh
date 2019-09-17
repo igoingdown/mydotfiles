@@ -15,7 +15,6 @@ export LDFLAGS=""
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
 export GOROOT=$HOME/local/go1.12/go
-export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 # build go project 
@@ -57,7 +56,7 @@ alias leetcode="cd $HOME/github/leetcode"
 
 
 #=============== Resume Setting =============================================
-alias leetcode="cd $HOME/github/MyResume"
+alias resume="cd $HOME/github/MyResume"
 
 
 #=============== Hexo Setting =============================================
@@ -154,3 +153,4 @@ fail_report() {
     exit
   fi
 }
+
