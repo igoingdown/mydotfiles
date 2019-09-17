@@ -27,15 +27,16 @@ export ETCDCTL_API=3
 
 
 #=============== Dev machine Setting =============================================
-# virtualdev machine ssh login
-alias dev="ssh root@10.233.153.40"
+# dev machine ssh login
+DEVMACHINE="zhaomingxing.93@10.224.27.31"
+alias dev="ssh $DEVMACHINE"
 # copy local files to dev machine
 dscp() {
-	scp $1 root@10.233.153.40:~/
+	scp $1 $DEVMACHINE:~/
 }
 # copy file on dev machine to local desktop
 cpb() {
-	scp root@10.233.153.40:~/$1 ~/Desktop
+	scp $DEVMACHINE:~/$1 ~/Desktop
 }
 
 
