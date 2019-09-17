@@ -14,7 +14,7 @@ export LDFLAGS=""
 
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
-export GOROOT=/usr/local/go
+export GOROOT=$HOME/local/go1.12
 export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
@@ -39,39 +39,6 @@ cpb() {
 }
 
 
-#=============== EntryTask Setting =============================================
-# entry task env
-export ENV=dev
-# entry task docker image 
-export APIIMAGE=entry-zhaomingxing-api
-export TCPIMAGE=entry-zhaomingxing-tcp
-
-
-#=============== ERU Setting =============================================
-export ERU=10.22.12.87:5001
-# support list and log operation on container level
-container() {
-	cli --eru $ERU container $1 $2 
-}
-# stop a eru container and delete it.
-stop_and_remove() {
-	cli --eru $ERU container stop $1
-	fail_report
-	cli --eru $ERU container remove $1
-}
-
-
-#=============== RDS Setting ===========================================
-alias entry_bus="cd ~/golang/src/git.garena.com/mingxing.zhao"
-alias zb="cd ~/golang/src/git.garena.com/shopee/cloud/"
-alias magy="cd ~/golang/src/git.garena.com/magy/"
-alias mt="cd ~/golang/src/self_test/"
-rds() {
-	cli --eru $ERU container list rdsmingxing
-	cli --eru $ERU container list rdswebui 
-}
-
-
 #=============== Redis Setting =============================================
 # start local redis server
 alias redis="redis-server /usr/local/etc/redis.conf"
@@ -85,15 +52,15 @@ cppc() {
 
 
 #=============== LEETCODE Setting =============================================
-alias leetcode="cd ~/leetcode"
+alias leetcode="cd $HOME/github/leetcode"
 
 
 #=============== Resume Setting =============================================
-alias resume="cd ~/MyResume"
+alias leetcode="cd $HOME/github/MyResume"
 
 
 #=============== Hexo Setting =============================================
-alias posts="cd ~/myblog/blog"
+alias posts="cd $HOME/github/myblog/blog"
 # new hexo post  
 newp() {
 	hexo new post $1
@@ -148,7 +115,7 @@ tpr() {
 
 #=============== Common Alias Setting =============================================
 alias ll='ls -al -G'
-alias zconf='vim ~/my_shell_config.sh'
+alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
 alias md="mkdir -p"
@@ -182,15 +149,3 @@ fail_report() {
     exit
   fi
 }
-
-
-
-#=============== Order Meal Setting =============================================
-od() {
-	curl 
-		-d '{"food_id": 6}' 
-		-H "Content-Type: application/json"\
-		-H 'Authorization: 104089c162aeffd9b03744adbe5a95be21a56237'\
-		-X POST http://api/order/2
-}
-
