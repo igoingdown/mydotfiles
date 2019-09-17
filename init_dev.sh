@@ -35,6 +35,8 @@ mkdir -p $HOME/github/
 cd $HOME/github
 git clone https://github.com/igoingdown/mydotfiles.git
 cd mydotfiles
+git config user.email "fycjmingxing@126.com"
+git config user.name "igoingdown"
 cp .vimrc ~/
 cp .zshrc ~/
 cp .tmux.conf ~/
