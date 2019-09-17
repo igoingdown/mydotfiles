@@ -15,6 +15,7 @@ export LDFLAGS=""
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
 export GOROOT=$HOME/local/go1.12/go
+export GO111MODULE=off
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 # build go project 
