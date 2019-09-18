@@ -156,3 +156,4 @@ fail_report() {
 
 #=============== shengji_con Setting =============================================
 alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
+alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
