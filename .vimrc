@@ -22,6 +22,7 @@ Bundle 'yann2192/vim-colorschemes'
 Bundle 'yann2192/vim-vitamins'
 Bundle 'fatih/vim-go'
 Bundle 'scrooloose/syntastic'
+Bundle 'solarnz/thrift.vim'
 
 " Snipmate
 Bundle 'tomtom/tlib_vim'
