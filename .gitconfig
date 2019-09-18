@@ -1,0 +1,14 @@
+[alias]
+	new = "!f() { git fetch && git checkout -b sandbox/`whoami`/`date +%m-%d`/${2:-`date +%H-%M`} origin/${1:-master};  }; f"
+	rvm = "!f() { git push origin HEAD:refs/for/master%${1};  }; f"
+	rv = "!f() { git push origin HEAD:refs/for/${1:-master}%${2};  }; f"
+	fp = "!f() { git fetch origin refs/changes/$(printf "%02d" $(expr ${1} % 100))/${1}/${2:-1} && git checkout FETCH_HEAD; }; f"
+	cin = commit --amend --no-edit
+	delbranch = "!f() {git branch | grep sandbox | xargs git branch -D; }; f"
+[user]
+    name = zhaomingxing.93
+    email = zhaomingxing.93@bytedance.com
+[url "git@code.byted.org:"]
+     insteadOf = https://code.byted.org/
+[url "ssh://zhaomingxing.93@git.byted.org:29418"]
+     insteadOf = https://git.byted.org

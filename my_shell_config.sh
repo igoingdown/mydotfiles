@@ -1,15 +1,13 @@
 #bin/zsh
 
+
 #=============== MySQL Setting =============================================
 export MYSQLPATH=/usr/local/mysql
 export PATH=$PATH:$MYSQLPATH/bin
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
 export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
-#Temp setting
-export LDFLAGS=""
-#Correct setting
-#export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
+export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 
 #=============== Golang Setting =============================================
@@ -154,4 +152,3 @@ fail_report() {
     exit
   fi
 }
-
