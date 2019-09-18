@@ -59,6 +59,7 @@ alias hd='hexo g -d'
 
 
 #=============== Github repos Setting =============================================
+alias gt="cd $HOME/github/"
 alias dots="cd $HOME/github/mydotfiles"
 alias lc="cd $HOME/github/leetcode"
 alias resume="cd $HOME/github/MyResume"

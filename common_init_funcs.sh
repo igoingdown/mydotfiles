@@ -77,14 +77,35 @@ fail_report() {
 }
 
 
-#=============== tmux, zsh, bash and vim config ============================================
-dragConfFromGithub() {
+#=============== clone my github repos ============================================
+cloneMyGithubRepos() {
 	mkdir -p $HOME/github/
 	cd $HOME/github
 	git clone https://github.com/igoingdown/mydotfiles.git
-	cd mydotfiles
-	git config user.email "fycjmingxing@126.com"
-	git config user.name "igoingdown"
+	git clone https://github.com/igoingdown/leetcode.git
+	git clone https://github.com/igoingdown/python_demo_and_tool.git
+	git clone https://github.com/igoingdown/hexo-posts.git
+	git clone https://github.com/igoingdown/MyResume.git
+	configMyGithubRepos
+}
+
+
+#=============== config github repos ============================================
+configMyGithubRepos() {
+	cd $HOME/github
+	for repo in `ls`
+	do
+		cd repo
+		git config user.email "fycjmingxing@126.com"
+		git config user.name "igoingdown"
+		cd ..
+	done
+}
+
+
+#=============== tmux, zsh, bash and vim config ============================================
+dragConfFromGithub() {
+	cd $HOME/github/mydotfiles
 	cp .vimrc ~/
 	cp .zshrc ~/
 	cp .tmux.conf ~/
