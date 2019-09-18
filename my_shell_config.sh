@@ -79,6 +79,7 @@ alias gps="git push"
 alias gco="git checkout"
 alias gl="git log"
 alias gc="git commit -m"
+alias gac="ga . & gc"
 # after status and diff, push it through
 push_through(){
 	gs
