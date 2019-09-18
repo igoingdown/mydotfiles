@@ -24,6 +24,10 @@ alias build="go build ."
 export ETCDCTL_API=3
 
 
+#=============== tmux Setting =============================================
+alias tmux="tmux a"
+
+
 #=============== Dev machine Setting =============================================
 # dev machine ssh login
 DEVMACHINE="zhaomingxing.93@10.224.27.31"
