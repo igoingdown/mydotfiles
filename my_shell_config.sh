@@ -50,21 +50,19 @@ cppc() {
 }
 
 
-#=============== LEETCODE Setting =============================================
-alias leetcode="cd $HOME/github/leetcode"
-
-
-#=============== Resume Setting =============================================
-alias resume="cd $HOME/github/MyResume"
-
-
 #=============== Hexo Setting =============================================
-alias posts="cd $HOME/github/myblog/blog"
 # new hexo post  
 newp() {
 	hexo new post $1
 }
 alias hd='hexo g -d'
+
+
+#=============== Github repos Setting =============================================
+alias dots="cd $HOME/github/mydotfiles"
+alias lc="cd $HOME/github/leetcode"
+alias resume="cd $HOME/github/MyResume"
+alias posts="cd $HOME/github/myblog/blog"
 
 
 #=============== Git Setting =============================================
@@ -152,3 +150,8 @@ fail_report() {
     exit
   fi
 }
+
+
+
+#=============== shengji_con Setting =============================================
+alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
