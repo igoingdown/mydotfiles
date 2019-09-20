@@ -165,7 +165,17 @@ installCoolProjects() {
 #=============== install ycm  =========================================
 # TODO: ycm should be installed at the end. or the vim will down!
 installYCM() {
+
 	cd ~/.vim/bundle/YouCompleteMe
 	go get golang.org/x/xerrors
 	./install.py --all
+}
+
+
+#=============== install redis =========================================
+installRedis() {
+	wget http://download.redis.io/releases/redis-5.0.5.tar.gz
+	tar xzf redis-5.0.5.tar.gz
+	cd redis-5.0.5
+	make
 }
