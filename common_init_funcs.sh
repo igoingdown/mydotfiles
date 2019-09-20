@@ -178,4 +178,5 @@ installRedis() {
 	tar xzf redis-5.0.5.tar.gz
 	cd redis-5.0.5
 	make
+	sudo cp src/redis-cli /usr/local/bin/
 }
