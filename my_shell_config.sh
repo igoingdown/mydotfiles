@@ -85,6 +85,8 @@ alias gco="git checkout"
 alias gl="git log"
 alias gc="git commit -m"
 alias gac="ga . & gc"
+alias st="git stash"
+alias sta="git stash apply"
 # after status and diff, push it through
 push_through(){
 	gs
