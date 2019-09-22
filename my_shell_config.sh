@@ -159,7 +159,10 @@ fail_report() {
   fi
 }
 
-
+# 删除当前目录下文件名符合特定pattern的文件
+rm_remote() {
+  find -name $1 | xargs rm -rf
+}
 
 #=============== shengji_con Setting =============================================
 alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
