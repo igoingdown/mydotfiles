@@ -158,10 +158,13 @@ fail_report() {
     exit
   fi
 }
-
 # 删除当前目录下文件名符合特定pattern的文件
-rm_remote() {
+rm_pattern_files() {
   find -name $1 | xargs rm -rf
+}
+# 使用doas运行测试, 需要两个参数，分别是服务psm和需要运行的测试函数名
+got() {
+  doas -p $1 go test -v -run $2
 }
 
 #=============== shengji_con Setting =============================================
@@ -170,3 +173,4 @@ alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias idls="cd ~/repos/toutiao/lib/idl"
 export RUNTIME_IDC_NAME=boe
+
