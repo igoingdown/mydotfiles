@@ -166,6 +166,10 @@ rm_pattern_files() {
 got() {
   doas -p $1 go test -v -run $2
 }
+# 在当前目录下创建特定conf的软链接
+lcnf() {
+  ln -s $1 conf
+}
 
 #=============== shengji_con Setting =============================================
 alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
@@ -173,4 +177,3 @@ alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias idls="cd ~/repos/toutiao/lib/idl"
 export RUNTIME_IDC_NAME=boe
-
