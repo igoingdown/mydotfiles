@@ -171,6 +171,14 @@ lcnf() {
   ln -s $1 conf
 }
 
+
+#=============== 头条开发机consul切换配置 =============================================
+# 切换开发机所在的consul, 可选参数为boe,langfang和huailai
+sc() {
+  /opt/tiger/consul_devbox/bin/switch.sh $1
+}
+
+
 #=============== shengji_con Setting =============================================
 alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
 alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
