@@ -54,7 +54,7 @@ set nocompatible
 "==============不知道这个东西有啥用，我先干掉了！============================
 set nu " 设置行号
 set cursorline "突出显示当前行
-set cursorcolumn " 突出显示当前列
+" set cursorcolumn " 突出显示当前列
 set showmatch " 显示括号匹配
 
 
@@ -109,6 +109,9 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " Run NERDTreeTabs on console vim startup
 let g:nerdtree_tabs_open_on_console_startup=1
 
+" 将nerdtree左侧的目录树显示为高亮
+highlight Directory ctermfg=cyan
+
 
 "==============Tagbar============================
 " 启动Tagbar快捷键
@@ -145,3 +148,7 @@ let g:jedi#completions_command = "<C-B>"
 "==============允许将函数和类折叠============================
 set foldmethod=indent
 set foldlevel=99
+
+
+"==============将注释字体颜色修改为蓝色============================
+hi Comment ctermfg=blue
