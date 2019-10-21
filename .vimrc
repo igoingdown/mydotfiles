@@ -36,6 +36,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'kien/rainbow_parentheses.vim'
 
 filetype plugin indent on     " required!
 
@@ -131,14 +133,14 @@ let g:airline_theme='light'
 
 "==============Font Setting============================
 " 配置字体和大小 
-set guifont=menlo:h16
+set guifont=menlo:\ 10
 
 
 "==============ale Setting============================
-"let g:ale_fix_on_save = 1
-"let g:ale_completion_enabled = 1
-"let g:ale_sign_column_always = 1
-"let g:airline#extensions#ale#enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
 
 
 "==============jedi-vim Setting============================
@@ -152,3 +154,39 @@ set foldlevel=99
 
 "==============将注释字体颜色修改为蓝色============================
 hi Comment ctermfg=blue
+
+
+"==============不同的匹配括号用不同的颜色匹配============================
+let g:rbpt_colorpairs = [
+                        \ ['brown',       'RoyalBlue3'],
+                        \ ['Darkblue',    'SeaGreen3'],
+                        \ ['darkgray',    'DarkOrchid3'],
+                        \ ['darkgreen',   'firebrick3'],
+                        \ ['darkcyan',    'RoyalBlue3'],
+                        \ ['darkred',     'SeaGreen3'],
+                        \ ['darkmagenta', 'DarkOrchid3'],
+                        \ ['brown',       'firebrick3'],
+                        \ ['gray',        'RoyalBlue3'],
+                        \ ['darkmagenta', 'DarkOrchid3'],
+                        \ ['Darkblue',    'firebrick3'],
+                        \ ['darkgreen',   'RoyalBlue3'],
+                        \ ['darkcyan',    'SeaGreen3'],
+                        \ ['darkred',     'DarkOrchid3'],
+                        \ ['red',         'firebrick3'],
+                        \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+
+"==============syntastic设置============================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
