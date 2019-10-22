@@ -118,8 +118,8 @@ tpr() {
 }
 
 #=============== proxy setting  =============================================
-export http_proxy=10.110.216.52:3128
-export https_proxy="http://10.110.216.52:3128" 
+#export http_proxy=10.110.216.52:3128
+#export https_proxy="http://10.110.216.52:3128" 
 
 
 #=============== Common Alias Setting =============================================
