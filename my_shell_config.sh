@@ -4,7 +4,7 @@
 #=============== MySQL Setting =============================================
 export MYSQLPATH=/usr/local/mysql
 export PATH=$PATH:$MYSQLPATH/bin
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export PATH=$PATH:/usr/local/opt/mysql-client/bin
 export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
 export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
 export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
@@ -30,16 +30,22 @@ alias tmux="tmux a"
 
 #=============== Dev machine Setting =============================================
 # dev machine ssh login
-DEVMACHINE="zhaomingxing.93@10.224.27.31"
-alias dev="ssh $DEVMACHINE"
+DEV_USER_NAME="zhaomingxing.93"
+DEV_IP="10.224.27.31"
+# 线上开发机
+ONLINE_DEV_IP="10.25.60.33"
+alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
+alias dev="ssh $DEV_USER_NAME@$DEV_IP"
 # copy local files to dev machine
 dscp() {
-	scp $1 $DEVMACHINE:~/
+	scp $1 $DEV_USER_NAME@$DEV_IP:~/
 }
 # copy file on dev machine to local desktop
 cpb() {
-	scp $DEVMACHINE:~/$1 ~/Desktop
+	scp $DEV_USER_NAME@$DEV_IP:~/$1 ~/Desktop
 }
+# 加入开发机的常用bin
+export PATH=$PATH:/opt/tiger/ss_bin
 
 
 #=============== Redis Setting =============================================
@@ -185,3 +191,4 @@ alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias idls="cd ~/repos/toutiao/lib/idl"
 export RUNTIME_IDC_NAME=boe
+
