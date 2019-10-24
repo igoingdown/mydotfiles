@@ -124,6 +124,7 @@ tpr() {
 }
 
 #=============== proxy setting  =============================================
+# 现在不需要设置proxy了，公司的网络都可以自动跳转proxy
 #export http_proxy=10.110.216.52:3128
 #export https_proxy="http://10.110.216.52:3128" 
 
@@ -190,5 +191,8 @@ alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume
 alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias idls="cd ~/repos/toutiao/lib/idl"
-export RUNTIME_IDC_NAME=boe
 
+
+#=============== boe Setting =============================================
+#将idc设为boe,但是这对逃逸之后联调和线上开发机联调不好
+#export RUNTIME_IDC_NAME=boe
