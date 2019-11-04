@@ -38,11 +38,19 @@ alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
 alias dev="ssh $DEV_USER_NAME@$DEV_IP"
 # copy local files to dev machine
 dscp() {
-	scp $1 $DEV_USER_NAME@$DEV_IP:~/
+	scp -r $1 $DEV_USER_NAME@$DEV_IP:~/
 }
-# copy file on dev machine to local desktop
+# copy file on dev machine to local
 cpb() {
-	scp $DEV_USER_NAME@$DEV_IP:~/$1 ~/Desktop
+	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 ~/
+}
+# copy local files to online dev machine
+odscp() {
+	scp -r $1 $DEV_USER_NAME@$ONLINE_DEV_IP:~/
+}
+# copy file on online dev machine to local
+ocpb() {
+	scp -r $DEV_USER_NAME@$ONLINE_DEV_IP:~/$1 ~/
 }
 # 加入开发机的常用bin
 export PATH=$PATH:/opt/tiger/ss_bin
@@ -124,9 +132,15 @@ tpr() {
 }
 
 #=============== proxy setting  =============================================
-# 现在不需要设置proxy了，公司的网络都可以自动跳转proxy
-#export http_proxy=10.110.216.52:3128
-#export https_proxy="http://10.110.216.52:3128" 
+# 现在基本不需要设置proxy了，公司的网络都可以自动跳转proxy
+pon() {
+	export http_proxy=10.110.216.52:3128
+	export https_proxy="http://10.110.216.52:3128"
+}
+poff() {
+	unset http_proxy
+	unset https_proxy
+}
 
 
 #=============== Common Alias Setting =============================================
@@ -194,5 +208,5 @@ alias idls="cd ~/repos/toutiao/lib/idl"
 
 
 #=============== boe Setting =============================================
-#将idc设为boe,但是这对逃逸之后联调和线上开发机联调不好
+#将idc设为boe,这对逃逸之后联调和线上开发机联调不好
 #export RUNTIME_IDC_NAME=boe
