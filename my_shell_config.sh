@@ -25,6 +25,7 @@ export ETCDCTL_API=3
 
 
 #=============== tmux Setting =============================================
+# 下面的设置并不是很好，使用下面的配置之前，应该先开启一个tmux session 然后再搞
 alias tmux="tmux a"
 
 
