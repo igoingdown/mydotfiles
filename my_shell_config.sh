@@ -211,3 +211,9 @@ alias idls="cd ~/repos/toutiao/lib/idl"
 #=============== boe Setting =============================================
 #将idc设为boe,这对逃逸之后联调和线上开发机联调不好
 #export RUNTIME_IDC_NAME=boe
+
+
+#=============== protobuffer version Setting =============================================
+#install protobuffer 2.6.1 first
+ 
+export LD_LIBRARY_PATH=/usr/local/lib

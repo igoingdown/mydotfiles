@@ -180,3 +180,19 @@ installRedis() {
 	make
 	sudo cp src/redis-cli /usr/local/bin/
 }
+
+
+#=============== install protobuffer 2.6.1  =========================================
+installPB() {
+	mkdir -p ~/github/
+	cd ~/github/
+	wget https://github.com/google/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.gz
+	tar -zxvf protobuf-2.6.1.tar.gz 
+	# 不确定下面这句要不要，开发环境如果是旧的话，这些基本都有，如果是全新的，最好加上
+	# sudo apt-get install build-essential # 不装会报错
+	cd protobuf-2.6.1/ 
+	./configure 
+	make 
+	make check 
+	sudo make install
+}
