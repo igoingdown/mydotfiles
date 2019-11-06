@@ -1,6 +1,5 @@
 #bin/zsh
 
-
 #=============== MySQL Setting =============================================
 export MYSQLPATH=/usr/local/mysql
 export PATH=$PATH:$MYSQLPATH/bin
@@ -204,8 +203,7 @@ sc() {
 #=============== shengji_con Setting =============================================
 alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
 alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
-alias li="ln -s ~/repos/toutiao/lib/idl idl"
-alias idls="cd ~/repos/toutiao/lib/idl"
+
 
 
 #=============== boe Setting =============================================
@@ -214,6 +212,10 @@ alias idls="cd ~/repos/toutiao/lib/idl"
 
 
 #=============== protobuffer version Setting =============================================
-#install protobuffer 2.6.1 first
- 
+# need install protobuffer 2.6.1 first
 export LD_LIBRARY_PATH=/usr/local/lib
+
+
+#=============== idl Setting =============================================
+alias li="ln -s ~/repos/toutiao/lib/idl idl"
+alias ldi="ln -s ~/repos/data/idl data_idl"
