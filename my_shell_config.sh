@@ -12,11 +12,18 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
 export GOROOT=$HOME/local/go1.12/go
-export GO111MODULE=off
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 # build go project 
 alias build="go build ."
+# 开启go mod
+mod_on() {
+	export GO111MODULE=on
+}
+# 关闭go mod
+mod_off() {
+	export GO111MODULE=off
+}
 
 
 #=============== ETCD Setting =============================================
