@@ -60,7 +60,7 @@ ocpb() {
 	scp -r $DEV_USER_NAME@$ONLINE_DEV_IP:~/$1 ~/
 }
 # 加入开发机的常用bin
-export PATH=$PATH:/opt/tiger/ss_bin
+export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
 
 
 #=============== Redis Setting =============================================
