@@ -130,6 +130,19 @@ installGo12(){
 }
 
 
+#=============== install go1.13 =========================================
+installGo13(){
+	mkdir -p ~/local/go1.13
+	cd ~/local/go1.13
+	#wget https://dl.google.com/go/$1
+	tar -zxf $1
+	cd go/src
+	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
+	./all.bash
+}
+
+
+
 #=============== install go  =========================================
 installGo() {
 	installGo4

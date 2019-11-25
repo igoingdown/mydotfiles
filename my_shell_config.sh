@@ -1,5 +1,12 @@
 #bin/zsh
 
+
+#=============== Base PATH Setting =============================================
+export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
+# 加入开发机的常用bin
+export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
+
+
 #=============== MySQL Setting =============================================
 export MYSQLPATH=/usr/local/mysql
 export PATH=$PATH:$MYSQLPATH/bin
@@ -11,7 +18,7 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
-export GOROOT=$HOME/local/go1.12/go
+export GOROOT=$HOME/local/go1.13/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 # build go project 
@@ -59,8 +66,7 @@ odscp() {
 ocpb() {
 	scp -r $DEV_USER_NAME@$ONLINE_DEV_IP:~/$1 ~/
 }
-# 加入开发机的常用bin
-export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
+
 
 
 #=============== Redis Setting =============================================
@@ -226,3 +232,17 @@ export LD_LIBRARY_PATH=/usr/local/lib
 #=============== idl Setting =============================================
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias ldi="ln -s ~/repos/data/idl data_idl"
+
+
+
+#=============== kitool Setting =============================================
+alias kv="kitool -v"
+
+
+#=============== go mod setting =============================================
+# 在当前目录下创建特定conf的软链接
+go113() {
+	go env -w GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
+	go env -w GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
+	go env -w GOSUMDB="sum.golang.google.cn"
+}
