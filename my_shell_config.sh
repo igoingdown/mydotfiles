@@ -3,6 +3,7 @@
 
 #=============== Base PATH Setting =============================================
 export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
+export PATH=$PATH:/usr/sbin:/sbin:/opt/puppetlabs/bin:/usr/local/munki
 # 加入开发机的常用bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
 
@@ -144,6 +145,7 @@ tpr() {
 	open -a /Applications/Typora.app $1
 }
 
+
 #=============== proxy setting  =============================================
 # 现在基本不需要设置proxy了，公司的网络都可以自动跳转proxy
 pon() {
@@ -218,7 +220,6 @@ alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume
 alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
 
 
-
 #=============== boe Setting =============================================
 #将idc设为boe,这对逃逸之后联调和线上开发机联调不好
 #export RUNTIME_IDC_NAME=boe
@@ -232,7 +233,6 @@ export LD_LIBRARY_PATH=/usr/local/lib
 #=============== idl Setting =============================================
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias ldi="ln -s ~/repos/data/idl data_idl"
-
 
 
 #=============== kitool Setting =============================================
