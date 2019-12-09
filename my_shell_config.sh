@@ -246,3 +246,7 @@ go113() {
 	go env -w GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 	go env -w GOSUMDB="sum.golang.google.cn"
 }
+
+
+#=============== python setting =============================================
+alias python="~/repos/toutiao/runtime/bin/python"
