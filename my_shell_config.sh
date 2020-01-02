@@ -2,7 +2,7 @@
 
 
 #=============== Base PATH Setting =============================================
-export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
+export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin
 # 加入开发机的常用bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
 
@@ -39,7 +39,8 @@ export ETCDCTL_API=3
 
 #=============== tmux Setting =============================================
 # 下面的设置并不是很好，使用下面的配置之前，应该先开启一个tmux session 然后再搞
-alias tmux="tmux a"
+alias tma="tmux a"
+alias tx="tmux"
 
 
 #=============== Dev machine Setting =============================================
@@ -251,3 +252,5 @@ go113() {
 
 #=============== python setting =============================================
 alias python="~/repos/toutiao/runtime/bin/python"
+export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/toutiao/lib/python_package/lib/python2.7/site-packages:~/repos/toutiao/lib/python_package" 
+
