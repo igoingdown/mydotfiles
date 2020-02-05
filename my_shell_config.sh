@@ -1,6 +1,14 @@
 #bin/zsh
 
 
+#=============== Base PATH Setting =============================================
+export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin
+# 加入开发机的常用bin
+export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
+# 加入node的bin
+export PATH=$PATH:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
+
+
 #=============== MySQL Setting =============================================
 export MYSQLPATH=/usr/local/mysql
 export PATH=$PATH:$MYSQLPATH/bin
@@ -97,7 +105,7 @@ alias gbr='git branch'
 alias gpl="git pull"
 alias gps="git push"
 alias gco="git checkout"
-alias gl="git log"
+alias gl="git log --pretty=oneline"
 alias gc="git commit -m"
 alias gac="ga . & gc"
 alias st="git stash"
