@@ -20,12 +20,19 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
-export GOROOT=$HOME/local/go1.12/go
-export GO111MODULE=off
+export GOROOT=$HOME/local/go1.13/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 # build go project 
 alias build="go build ."
+# 开启go mod
+mod_on() {
+	export GO111MODULE=on
+}
+# 关闭go mod
+mod_off() {
+	export GO111MODULE=off
+}
 
 
 #=============== ETCD Setting =============================================
@@ -34,7 +41,8 @@ export ETCDCTL_API=3
 
 #=============== tmux Setting =============================================
 # 下面的设置并不是很好，使用下面的配置之前，应该先开启一个tmux session 然后再搞
-alias tmux="tmux a"
+alias tma="tmux a"
+alias tx="tmux"
 
 
 #=============== Dev machine Setting =============================================
@@ -61,8 +69,7 @@ odscp() {
 ocpb() {
 	scp -r $DEV_USER_NAME@$ONLINE_DEV_IP:~/$1 ~/
 }
-# 加入开发机的常用bin
-export PATH=$PATH:/opt/tiger/ss_bin
+
 
 
 #=============== Redis Setting =============================================
@@ -212,10 +219,40 @@ sc() {
 #=============== shengji_con Setting =============================================
 alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
 alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
-alias li="ln -s ~/repos/toutiao/lib/idl idl"
-alias idls="cd ~/repos/toutiao/lib/idl"
+
 
 
 #=============== boe Setting =============================================
 #将idc设为boe,这对逃逸之后联调和线上开发机联调不好
 #export RUNTIME_IDC_NAME=boe
+
+
+#=============== protobuffer version Setting =============================================
+# need install protobuffer 2.6.1 first
+export LD_LIBRARY_PATH=/usr/local/lib
+
+
+#=============== idl Setting =============================================
+alias li="ln -s ~/repos/toutiao/lib/idl idl"
+alias ldi="ln -s ~/repos/data/idl data_idl"
+
+
+
+#=============== kitool Setting =============================================
+alias kv="kitool -v"
+
+
+#=============== go mod setting =============================================
+# 在当前目录下创建特定conf的软链接
+go113() {
+	go env -w GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
+	go env -w GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
+	go env -w GOSUMDB="sum.golang.google.cn"
+}
+
+
+
+#=============== python setting =============================================
+alias python="~/repos/toutiao/runtime/bin/python"
+export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/toutiao/lib/python_package/lib/python2.7/site-packages:~/repos/toutiao/lib/python_package" 
+

@@ -130,6 +130,19 @@ installGo12(){
 }
 
 
+#=============== install go1.13 =========================================
+installGo13(){
+	mkdir -p ~/local/go1.13
+	cd ~/local/go1.13
+	#wget https://dl.google.com/go/$1
+	tar -zxf $1
+	cd go/src
+	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
+	./all.bash
+}
+
+
+
 #=============== install go  =========================================
 installGo() {
 	installGo4
@@ -179,4 +192,20 @@ installRedis() {
 	cd redis-5.0.5
 	make
 	sudo cp src/redis-cli /usr/local/bin/
+}
+
+
+#=============== install protobuffer 2.6.1  =========================================
+installPB() {
+	mkdir -p ~/github/
+	cd ~/github/
+	wget https://github.com/google/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.gz
+	tar -zxvf protobuf-2.6.1.tar.gz 
+	# 不确定下面这句要不要，开发环境如果是旧的话，这些基本都有，如果是全新的，最好加上
+	# sudo apt-get install build-essential # 不装会报错
+	cd protobuf-2.6.1/ 
+	./configure 
+	make 
+	make check 
+	sudo make install
 }
