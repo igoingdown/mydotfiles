@@ -160,7 +160,7 @@ poff() {
 
 
 #=============== Common Alias Setting =============================================
-alias ll='ls -al -G'
+alias ll='ls -al -G -h'
 alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
