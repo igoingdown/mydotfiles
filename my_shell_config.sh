@@ -209,24 +209,6 @@ lcnf() {
 }
 
 
-#=============== 头条开发机consul切换配置 =============================================
-# 切换开发机所在的consul, 可选参数为boe,langfang和huailai
-sc() {
-  /opt/tiger/consul_devbox/bin/switch.sh $1
-}
-
-
-#=============== shengji_con Setting =============================================
-alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
-alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
-
-
-
-#=============== boe Setting =============================================
-#将idc设为boe,这对逃逸之后联调和线上开发机联调不好
-#export RUNTIME_IDC_NAME=boe
-
-
 #=============== protobuffer version Setting =============================================
 # need install protobuffer 2.6.1 first
 export LD_LIBRARY_PATH=/usr/local/lib
@@ -235,7 +217,6 @@ export LD_LIBRARY_PATH=/usr/local/lib
 #=============== idl Setting =============================================
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias ldi="ln -s ~/repos/data/idl data_idl"
-
 
 
 #=============== kitool Setting =============================================
@@ -249,7 +230,6 @@ go113() {
 	go env -w GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 	go env -w GOSUMDB="sum.golang.google.cn"
 }
-
 
 
 #=============== python setting =============================================
