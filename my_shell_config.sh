@@ -114,7 +114,7 @@ alias gbr='git branch'
 alias gpl="git pull"
 alias gps="git push"
 alias gco="git checkout"
-alias gl="git log --pretty=oneline"
+alias gl="git log --abbrev-commit --pretty=oneline"
 alias gc="git commit -m"
 alias gac="ga . & gc"
 alias st="git stash"
