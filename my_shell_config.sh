@@ -49,7 +49,7 @@ alias tx="tmux"
 #=============== Dev machine Setting =============================================
 # dev machine ssh login
 DEV_USER_NAME="zhaomingxing.93"
-DEV_IP="10.224.27.31"
+DEV_IP="10.227.19.33"
 # 线上开发机
 ONLINE_DEV_IP="10.25.60.33"
 alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
@@ -218,16 +218,6 @@ lcnf() {
 sc() {
   /opt/tiger/consul_devbox/bin/switch.sh $1
 }
-
-
-#=============== shengji_con Setting =============================================
-alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
-alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
-
-
-#=============== boe Setting =============================================
-#将idc设为boe,这对逃逸之后联调和线上开发机联调不好
-#export RUNTIME_IDC_NAME=boe
 
 
 #=============== protobuffer version Setting =============================================
