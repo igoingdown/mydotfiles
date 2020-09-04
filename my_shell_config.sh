@@ -115,7 +115,7 @@ alias gbr='git branch'
 alias gpl="git pull"
 alias gps="git push"
 alias gco="git checkout"
-alias gl="git log --abbrev-commit --pretty=oneline"
+alias gl="git log --oneline --graph --decorate --all"
 alias gc="git commit -m"
 alias gac="ga . & gc"
 alias st="git stash"
@@ -246,3 +246,9 @@ go113() {
 #=============== python setting =============================================
 alias python="~/repos/toutiao/runtime/bin/python"
 export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/toutiao/lib/python_package/lib/python2.7/site-packages:~/repos/toutiao/lib/python_package"
+
+
+#=============== quick command to open software =============================================
+chrome() {
+   open -a 'Google Chrome' "$@"
+}
