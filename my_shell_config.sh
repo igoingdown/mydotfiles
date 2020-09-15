@@ -120,6 +120,7 @@ alias gc="git commit -m"
 alias gac="ga . & gc"
 alias st="git stash"
 alias sta="git stash apply"
+alias grhom="git reset --hard origin/master"
 # after status and diff, push it through
 push_through(){
 	gs
@@ -251,4 +252,16 @@ export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/
 #=============== quick command to open software =============================================
 chrome() {
    open -a 'Google Chrome' "$@"
+}
+
+
+#=============== quick command to common tools =============================================
+stamp2time() {
+   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/timestamp.py $1
+}
+now_time() {
+   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/now_time.py
+}
+time2stamp() {
+   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/time2stamp.py $1
 }
