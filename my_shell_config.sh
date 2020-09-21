@@ -112,7 +112,7 @@ alias grb='git rebase'
 alias grst='git reset'
 alias gmd='git commit --amend'
 alias gbr='git branch'
-alias gpl="git pull"
+alias gpl="git pull -p"
 alias gps="git push"
 alias gco="git checkout"
 alias gl="git log --oneline --graph --decorate --all"
@@ -265,3 +265,9 @@ now_time() {
 time2stamp() {
    /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/time2stamp.py $1
 }
+
+
+#=============== docker Setting =============================================
+# git command alias
+alias dops="docker ps -a"
+alias dorm='docker rm'
