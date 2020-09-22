@@ -213,6 +213,11 @@ lcnf() {
   ln -s $1 conf
 }
 
+# 文件生成
+# 参数表示文件和长度
+pwfgen() {
+    pwgen -H $1 -Bncyv $2 1 | pbcopy
+}
 
 #=============== 头条开发机consul切换配置 =============================================
 # 切换开发机所在的consul, 可选参数为boe,langfang和huailai
