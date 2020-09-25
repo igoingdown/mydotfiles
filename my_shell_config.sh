@@ -273,6 +273,10 @@ time2stamp() {
 
 
 #=============== docker Setting =============================================
-# git command alias
 alias dops="docker ps -a"
 alias dorm='docker rm'
+
+
+#=============== ag Setting =============================================
+alias ag='ag --ignore-dir thrift_gen '
+
