@@ -183,6 +183,7 @@ alias cd....="cd ../../.."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias did="echo -n 4063392393857421 | tee >(pbcopy)"
+alias eid="echo -n 8152681 | tee >(pbcopy)"
 
 
 #=============== Common Function Setting =============================================
@@ -279,5 +280,5 @@ alias dorm='docker rm'
 
 
 #=============== ag Setting =============================================
-alias ag='ag --ignore-dir thrift_gen --ignore-dir clients'
+alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen'
 
