@@ -1,6 +1,20 @@
-## Introduction
-This repository is used to manage all my dot configuration files, it includes:
+# my dot files
+This repository is used to manage all my dot configuration files
+## Project Structure
+``` bash
+├── .bashrc                 # bash settings
+├── .gitconfig              # git settings
+├── .gitignore              # git ignore settings
+├── .tmux.conf              # tmux settings
+├── .vimrc                  # vim settings
+├── .zshrc                  # zsh settings
+├── common_init_funcs.sh    # some functions used in different OS like Linux and macOS
+├── init_dev.sh             # scripts used to init Linux env
+├── init_mac.sh             # scripts used to init macOS env
+└── my_shell_config.sh      # alias used in multi env
+```
 
+## Requirements
 >* Vim
 >* Tmux <= V2.8
 >* Zsh

@@ -121,6 +121,7 @@ alias gac="ga . & gc"
 alias st="git stash"
 alias sta="git stash apply"
 alias grhom="git reset --hard origin/master"
+alias grmb="git branch | grep -v master | xargs git branch -D "
 # after status and diff, push it through
 push_through(){
 	gs
@@ -184,6 +185,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias did="echo -n 4063392393857421 | tee >(pbcopy)"
 alias eid="echo -n 8152681 | tee >(pbcopy)"
+alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
 
 
 #=============== Common Function Setting =============================================
@@ -280,5 +282,5 @@ alias dorm='docker rm'
 
 
 #=============== ag Setting =============================================
-alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen'
+alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
