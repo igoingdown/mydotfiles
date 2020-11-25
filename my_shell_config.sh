@@ -239,3 +239,6 @@ time2stamp() {
 #=============== ag Setting =============================================
 alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
+
+#=============== autojump setting =============================================
+. /usr/share/autojump/autojump.sh
