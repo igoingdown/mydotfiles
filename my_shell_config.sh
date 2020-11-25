@@ -3,11 +3,12 @@
 
 #=============== Base PATH Setting =============================================
 export PATH=$PATH:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin
+
 # 加入开发机的常用bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
+
 # 加入node的bin
 export PATH=$PATH:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
-
 
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
@@ -25,7 +26,6 @@ mod_off() {
 	export GO111MODULE=off
 }
 
-
 #=============== tmux Setting =============================================
 # 下面的设置并不是很好，使用下面的配置之前，应该先开启一个tmux session 然后再搞
 alias tma="tmux a"
@@ -33,10 +33,8 @@ alias tx="tmux"
 
 
 #=============== Dev machine Setting =============================================
-# 线上开发机
-ONLINE_DEV_IP="10.25.60.33"
-alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
-alias dev="ssh $DEV_USER_NAME@$DEV_IP"
+DEV_USER_NAME="zhaomingxing.93"
+DEV_IP="10.227.19.33"
 # copy local files to dev machine
 dscp() {
 	scp -r $1 $DEV_USER_NAME@$DEV_IP:~/
@@ -45,20 +43,6 @@ dscp() {
 cpb() {
 	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 ~/
 }
-# copy local files to online dev machine
-odscp() {
-	scp -r $1 $DEV_USER_NAME@$ONLINE_DEV_IP:~/
-}
-# copy file on online dev machine to local
-ocpb() {
-	scp -r $DEV_USER_NAME@$ONLINE_DEV_IP:~/$1 ~/
-}
-
-
-
-#=============== Redis Setting =============================================
-# start local redis server
-alias redis="redis-server /usr/local/etc/redis.conf"
 
 
 #=============== CPP Setting =============================================
@@ -95,14 +79,16 @@ alias grb='git rebase'
 alias grst='git reset'
 alias gmd='git commit --amend'
 alias gbr='git branch'
-alias gpl="git pull"
+alias gpl="git pull -p"
 alias gps="git push"
 alias gco="git checkout"
-alias gl="git log --abbrev-commit --pretty=oneline"
+alias gl="git log --oneline --graph --decorate --all"
 alias gc="git commit -m"
 alias gac="ga . & gc"
 alias st="git stash"
 alias sta="git stash apply"
+alias grhom="git reset --hard origin/master"
+alias grmb="git branch | grep -v master | xargs git branch -D "
 # after status and diff, push it through
 push_through(){
 	gs
@@ -133,6 +119,7 @@ tpr() {
 	open -a /Applications/Typora.app $1
 }
 
+
 #=============== proxy setting  =============================================
 # 现在基本不需要设置proxy了，公司的网络都可以自动跳转proxy
 pon() {
@@ -146,7 +133,7 @@ poff() {
 
 
 #=============== Common Alias Setting =============================================
-alias ll='ls -al -G -h'
+alias ll='ls -al -G'
 alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
@@ -163,6 +150,9 @@ alias cd...="cd ../.."
 alias cd....="cd ../../.."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias did="echo -n 4063392393857421 | tee >(pbcopy)"
+alias eid="echo -n 8152681 | tee >(pbcopy)"
+alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
 
 
 #=============== Common Function Setting =============================================
@@ -194,23 +184,11 @@ lcnf() {
   ln -s $1 conf
 }
 
-
-#=============== 头条开发机consul切换配置 =============================================
-# 切换开发机所在的consul, 可选参数为boe,langfang和huailai
-sc() {
-  /opt/tiger/consul_devbox/bin/switch.sh $1
+# 文件生成
+# 参数表示文件和长度
+pwfgen() {
+    pwgen -H $1 -Bncyv $2 1 | pbcopy
 }
-
-
-#=============== shengji_con Setting =============================================
-alias sj="cd ~/golang/src/code.byted.org/toutiao_ugc/shengji_con_content_consume_scripts"
-alias vt="cd ~/golang/src/git.byted.org/toutiao/ugc/vote"
-
-
-
-#=============== boe Setting =============================================
-#将idc设为boe,这对逃逸之后联调和线上开发机联调不好
-#export RUNTIME_IDC_NAME=boe
 
 
 #=============== protobuffer version Setting =============================================
@@ -221,7 +199,6 @@ export LD_LIBRARY_PATH=/usr/local/lib
 #=============== idl Setting =============================================
 alias li="ln -s ~/repos/toutiao/lib/idl idl"
 alias ldi="ln -s ~/repos/data/idl data_idl"
-
 
 
 #=============== kitool Setting =============================================
@@ -237,8 +214,23 @@ go113() {
 }
 
 
-
 #=============== python setting =============================================
 alias python="~/repos/toutiao/runtime/bin/python"
-export PYTHONPATH= ""
+export PYTHONPATH=""
+
+
+#=============== quick command to common tools =============================================
+stamp2time() {
+   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/timestamp.py $1
+}
+now_time() {
+   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/now_time.py
+}
+time2stamp() {
+   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/time2stamp.py $1
+}
+
+
+#=============== ag Setting =============================================
+alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
