@@ -3,8 +3,6 @@
 
 #=============== load common funcs ===========================================
 source common_init_funcs.sh
-
-
 # TODO: update source list
 
 
@@ -63,15 +61,6 @@ sudo apt-get install gdb
 
 #=============== Install dlv ============================================
 installDlv
-
-
-#=============== install cool projects =========================================
-# install some cool projects that I should learn through
-installCoolProjects
-
-
-#=============== install YCM  =========================================
-installYCM
 
 
 #=============== install PB =========================================

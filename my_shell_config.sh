@@ -2,20 +2,11 @@
 
 
 #=============== Base PATH Setting =============================================
-export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin
+export PATH=$PATH:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin
 # 加入开发机的常用bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
 # 加入node的bin
 export PATH=$PATH:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
-
-
-#=============== MySQL Setting =============================================
-export MYSQLPATH=/usr/local/mysql
-export PATH=$PATH:$MYSQLPATH/bin
-export PATH=$PATH:/usr/local/opt/mysql-client/bin
-export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
-export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
-export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 
 #=============== Golang Setting =============================================
@@ -35,10 +26,6 @@ mod_off() {
 }
 
 
-#=============== ETCD Setting =============================================
-export ETCDCTL_API=3
-
-
 #=============== tmux Setting =============================================
 # 下面的设置并不是很好，使用下面的配置之前，应该先开启一个tmux session 然后再搞
 alias tma="tmux a"
@@ -46,9 +33,6 @@ alias tx="tmux"
 
 
 #=============== Dev machine Setting =============================================
-# dev machine ssh login
-DEV_USER_NAME="zhaomingxing.93"
-DEV_IP="10.224.27.31"
 # 线上开发机
 ONLINE_DEV_IP="10.25.60.33"
 alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
@@ -256,5 +240,5 @@ go113() {
 
 #=============== python setting =============================================
 alias python="~/repos/toutiao/runtime/bin/python"
-export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/toutiao/lib/python_package/lib/python2.7/site-packages:~/repos/toutiao/lib/python_package" 
+export PYTHONPATH= ""
 
