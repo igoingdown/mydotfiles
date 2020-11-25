@@ -6,6 +6,8 @@ initAlias
 #=============== Base PATH Setting =============================================
 export PATH=/home/zhaomingxing.93/bin:/home/zhaomingxing.93/bin:/opt/tiger/toutiao/lib:/opt/tiger/jdk/jdk1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/tiger/ss_bin:/usr/local/jdk/bin:/usr/sbin/:/opt/tiger/ss_lib/bin:/opt/tiger/ss_lib/python_package/lib/python2.7/site-packages/django/bin:/opt/tiger/yarn_deploy/hadoop/bin/:/opt/tiger/yarn_deploy/hive/bin/:/opt/tiger/yarn_deploy/jdk/bin/:/opt/tiger/hadoop_deploy/jython-2.5.2/bin:/opt/tiger/dev_toolkit/bin:/home/zhaomingxing.93/golang/bin:/home/zhaomingxing.93/local/go1.13/go/bin:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/home/zhaomingxing.93/bin:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
 
+export PATH=$PATH:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin
+
 
 # 加入开发机的常用bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
