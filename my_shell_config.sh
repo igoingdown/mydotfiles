@@ -284,7 +284,3 @@ alias dorm='docker rm'
 #=============== ag Setting =============================================
 alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
-
-#=============== kitex Setting =============================================
-alias kx="kitex"
-
