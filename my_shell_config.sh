@@ -240,9 +240,5 @@ time2stamp() {
 alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
 
-#=============== kitex Setting =============================================
-alias kx='kitex'
-
-
 #=============== autojump setting =============================================
 . /usr/share/autojump/autojump.sh
