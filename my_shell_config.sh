@@ -186,6 +186,7 @@ alias ....="cd ../../.."
 alias did="echo -n 4063392393857421 | tee >(pbcopy)"
 alias eid="echo -n 8152681 | tee >(pbcopy)"
 alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
+alias ref="cd $HOME/Desktop/004bbs && cat text.txt | pbcopy && goto bbs"
 
 
 #=============== Common Function Setting =============================================
@@ -236,7 +237,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 
 #=============== idl Setting =============================================
-alias li="ln -s ~/repos/toutiao/lib/idl idl"
+alias li="ln -s $GOPATH/src/code.byted.org/cpputil/service_rpc_idl idl"
 alias ldi="ln -s ~/repos/data/idl data_idl"
 
 
@@ -283,4 +284,5 @@ alias dorm='docker rm'
 
 #=============== ag Setting =============================================
 alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
+
 
