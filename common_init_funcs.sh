@@ -110,6 +110,7 @@ dragConfFromGithub() {
 installGo4() {
 	mkdir -p ~/local/go1.4
 	cd ~/local/go1.4
+	# 手动下载并移动至该目录更快
 	wget https://dl.google.com/go/go1.4-bootstrap-20171003.tar.gz
 	tar -zxf go1.4-bootstrap-20171003.tar.gz
 	cd go/src
@@ -118,24 +119,12 @@ installGo4() {
 }
 
 
-#=============== install go1.12 =========================================
-installGo12(){
-	mkdir -p ~/local/go1.12 
-	cd ~/local/go1.12
-	wget https://dl.google.com/go/$1
-	tar -zxf $1
-	cd go/src
-	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
-	./all.bash
-}
-
-
 #=============== install go1.13 =========================================
 installGo13(){
 	mkdir -p ~/local/go1.13
 	cd ~/local/go1.13
-	#wget https://dl.google.com/go/$1
-	tar -zxf $1
+	git clone git@github.com:golang/go.git
+	gco go1.13
 	cd go/src
 	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
 	./all.bash
@@ -146,7 +135,7 @@ installGo13(){
 #=============== install go  =========================================
 installGo() {
 	installGo4
-	installGo12 $1
+	installGo13
 }
 
 
