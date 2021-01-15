@@ -37,8 +37,7 @@ brew install nmap
 
 
 #=============== install golang =========================================
-installGo go1.12.9.darwin-amd64.tar.gz
-
+installGo
 
 
 #=============== Install dlv ============================================

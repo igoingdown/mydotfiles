@@ -44,7 +44,7 @@ sudo apt-get install cmake
 
 
 #=============== install golang =========================================
-installGo go1.12.7.linux-amd64.tar.gz
+installGo
 
 
 #=============== install cool projects =========================================
