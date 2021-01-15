@@ -119,23 +119,22 @@ installGo4() {
 }
 
 
-#=============== install go1.13 =========================================
-installGo13(){
+#=============== install go in specific version  =========================================
+installGoxx(){
 	mkdir -p ~/local/go1.13
 	cd ~/local/go1.13
 	git clone git@github.com:golang/go.git
-	gco go1.13
 	cd go/src
+	gco go1.15
 	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
 	./all.bash
 }
 
 
-
 #=============== install go  =========================================
 installGo() {
 	installGo4
-	installGo13
+	installGoxx
 }
 
 
