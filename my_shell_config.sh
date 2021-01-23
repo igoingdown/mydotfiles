@@ -186,6 +186,7 @@ alias ....="cd ../../.."
 alias did="echo -n 4063392393857421 | tee >(pbcopy)"
 alias eid="echo -n 8152681 | tee >(pbcopy)"
 alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
+alias fcid="echo -n 6214830155051807 | tee >(pbcopy)"
 alias ref="cd $HOME/github/referral/004bbs/social && cat text.txt | pbcopy && goto bbs"
 
 
