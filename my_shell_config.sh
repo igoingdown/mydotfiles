@@ -189,6 +189,13 @@ alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
 alias fcid="echo -n 6214830155051807 | tee >(pbcopy)"
 alias pnum="echo -n 18810860130 | tee >(pbcopy)"
 alias ref="cd $HOME/github/referral/004bbs/social && cat text.txt | pbcopy && goto bbs"
+alias msref="cd $HOME/github/referral/004bbs/002ms && cat text.txt | pbcopy && goto bbs"
+alias mapref="cd $HOME/github/referral/004bbs/004amap && cat text.txt | pbcopy && goto bbs"
+alias hi="cd $HOME/github/referral/002-wechat && cat hello.txt | pbcopy"
+
+alias gkb="ginkgo bootstrap"
+alias gkg="ginkgo generate"
+alias gink="gkb && gkg"
 
 
 #=============== Common Function Setting =============================================
