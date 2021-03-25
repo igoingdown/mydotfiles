@@ -192,10 +192,10 @@ alias ref="cd $HOME/github/referral/004bbs/social && cat text.txt | pbcopy && go
 alias msref="cd $HOME/github/referral/004bbs/002ms && cat text.txt | pbcopy && goto bbs"
 alias mapref="cd $HOME/github/referral/004bbs/004amap && cat text.txt | pbcopy && goto bbs"
 alias hi="cd $HOME/github/referral/002-wechat && cat hello.txt | pbcopy"
-
 alias gkb="ginkgo bootstrap"
 alias gkg="ginkgo generate"
 alias gink="gkb && gkg"
+alias aga='apply-git-acl'
 
 
 #=============== Common Function Setting =============================================
@@ -232,13 +232,6 @@ lcnf() {
 pwfgen() {
     pwgen -H $1 -Bncyv $2 1 | pbcopy
 }
-
-#=============== 头条开发机consul切换配置 =============================================
-# 切换开发机所在的consul, 可选参数为boe,langfang和huailai
-sc() {
-  /opt/tiger/consul_devbox/bin/switch.sh $1
-}
-
 
 #=============== protobuffer version Setting =============================================
 # need install protobuffer 2.6.1 first
