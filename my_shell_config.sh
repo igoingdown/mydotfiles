@@ -104,8 +104,11 @@ alias posts="cd $HOME/github/myblog/blog"
 #=============== Git Setting =============================================
 # git command alias
 alias gs="git status"
+alias gs.="git status ."
 alias ga='git add'
+alias ga.='git add .'
 alias gd='git diff'
+alias gd.='git diff .'
 alias gf='git fetch'
 alias grv='git remote -v'
 alias grb='git rebase'
