@@ -35,6 +35,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
+Plugin 'mileszs/ack.vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -190,3 +191,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+
+
+"==============用 ag 代替 ack============================
+let g:ackprg = 'ag --nogroup --nocolor --column'
