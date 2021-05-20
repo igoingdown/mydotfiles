@@ -1,6 +1,18 @@
+"=====================配置快捷键的前缀======================================
+" 定义快捷键的前缀，即<Leader>
+let mapleader=";"
+
+
+"=====================配色方案======================================
+" 配色方案
+set background=dark
+"colorscheme solarized
+"colorscheme molokai
+colorscheme phd
+
+
 "=====================开始安装插件===========================================
 set nocompatible               " be iMproved
-let mapleader=","              " change the leader to be a comma vs slash
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -34,13 +46,22 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'w0rp/ale'
 Plugin 'mileszs/ack.vim'
+Plugin 'w0rp/ale'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'kien/rainbow_parentheses.vim'
 
 filetype plugin indent on     " required!
+
+
+"=====================文件类型侦测设置===========================================
+" 开启文件类型侦测
+filetype on
+
+" 根据侦测到的不同类型加载对应的插件
+" C++ 的语法高亮插件与python 的不同
+filetype plugin on
 
 
 "=============其实就是在保存之后重新载入一下================================
@@ -49,12 +70,21 @@ filetype plugin indent on     " required!
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 
-"==============不知道这个东西有啥用，我先干掉了！============================
+"=============搜索与补全================================
+" 开启实时搜索功能
+set incsearch
+" 搜索时大小写不敏感
+set ignorecase
+" vim 自身命令行模式智能补全
+set wildmenu
+
+
+"==============不知道这个东西有啥用============================
 " 关闭兼容模式
 set nocompatible
 
 
-"==============不知道这个东西有啥用，我先干掉了！============================
+"==============设置突出显示============================
 set nu " 设置行号
 set cursorline "突出显示当前行
 " set cursorcolumn " 突出显示当前列
@@ -65,11 +95,8 @@ set showmatch " 显示括号匹配
 set tabstop=4 " 设置Tab长度为4空格
 set shiftwidth=4 " 设置自动缩进长度为4空格
 set autoindent " 继承前一行的缩进方式，适用于多行注释
-
-
-"==============快捷键设置, 我暂时用不到，先干掉============================
-" 定义快捷键的前缀，即<Leader>
-" let mapleader=";" 
+set softtabstop=4   " 使得按退格键时可以一次删掉 4 个空格
+set expandtab"
 
 
 "==============系统剪切板复制粘贴============================
@@ -191,7 +218,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
 
 
 "==============用 ag 代替 ack============================
