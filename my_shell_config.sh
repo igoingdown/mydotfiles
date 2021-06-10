@@ -203,7 +203,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 
 #=============== idl Setting =============================================
-alias li="ln -s $GOPATH/code.byted.org/cpputil/service_rpc_idl idl"
+alias li="ln -s $GOPATH/src/code.byted.org/cpputil/service_rpc_idl idl"
 alias ldi="ln -s ~/repos/data/idl data_idl"
 
 
