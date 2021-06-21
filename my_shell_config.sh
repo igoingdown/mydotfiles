@@ -123,6 +123,7 @@ alias gc="git commit -m"
 alias gac="ga . & gc"
 alias st="git stash"
 alias sta="git stash apply"
+alias stp="git stash pop"
 alias grhom="git reset --hard origin/master"
 alias grmb="git branch | grep -v master | xargs git branch -D "
 # after status and diff, push it through
@@ -169,7 +170,7 @@ poff() {
 
 
 #=============== Common Alias Setting =============================================
-alias ll='ls -al -G'
+alias ll='exa -al'
 alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
