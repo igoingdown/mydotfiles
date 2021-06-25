@@ -5,7 +5,8 @@
 export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
 export PATH=$PATH:/usr/sbin:/sbin:/opt/puppetlabs/bin:/usr/local/munki
 export PATH=$PATH:~/bin
-
+# 加入 latex 工具集命令
+export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-darwin
 # 加入开发机的常用bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
 
