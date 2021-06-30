@@ -222,3 +222,18 @@ let g:syntastic_check_on_wq = 0
 
 "==============用 ag 代替 ack============================
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+
+
+"==============ack 快捷键配置============================
+nnoremap √ <C-v>
+nnoremap ˙ <C-w>h
+nnoremap ∆ <C-w>j
+nnoremap ˚ <C-w>k
+nnoremap ¬ <C-w>l
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
