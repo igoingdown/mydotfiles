@@ -294,3 +294,11 @@ alias dorm='docker rm'
 alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
 
+
+
+#=============== ppe shell config =============================================
+jump_ppe_by_psm () {
+    cat ~/psm.txt | cut -f 1 -d " " | fzf | read psm
+    ~/scripts/bytedance/byteshell_ppe.sh $psm
+}
+alias ppe=jump_ppe_by_psm
