@@ -119,6 +119,7 @@ alias gbr='git branch'
 alias gpl="git pull -p"
 alias gps="git push"
 alias gco="git checkout"
+alias gcz="git checkout zmx_dev"
 alias gl="git log --oneline --graph --decorate --all"
 alias gc="git commit -m"
 alias gac="ga . & gc"
