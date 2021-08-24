@@ -53,6 +53,8 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'zivyangll/git-blame.vim'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'jspringyc/vim-word'
+
 
 filetype plugin indent on     " required!
 
