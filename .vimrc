@@ -7,8 +7,9 @@ let mapleader=";"
 " 配色方案
 set background=dark
 "colorscheme solarized
-"colorscheme molokai
-colorscheme phd
+colorscheme molokai
+
+"colorscheme phd
 
 
 "=====================开始安装插件===========================================
