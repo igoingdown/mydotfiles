@@ -199,6 +199,7 @@ alias ref="cd $HOME/github/referral/004-platforms/001-byr-bbs/003-bytedance/002-
 alias msref="cd $HOME/github/referral/004-platforms/001-byr-bbs/002-ms-stca/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias mapref="cd $HOME/github/referral/004-platforms/001-byr-bbs/004-amap/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias raref="cd $HOME/github/referral/004-platforms/001-byr-bbs/005-msra/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
+alias wgbyref="cd $HOME/github/referral/004-platforms/001-byr-bbs/007-weiguanboyi/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias hi="cd $HOME/github/referral/002-wechat-hello && cat hello.md | pbcopy"
 alias gkb="ginkgo bootstrap"
 alias gkg="ginkgo generate"
