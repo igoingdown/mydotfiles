@@ -7,8 +7,10 @@ export PATH=$PATH:/usr/sbin:/sbin:/opt/puppetlabs/bin:/usr/local/munki
 export PATH=$PATH:~/bin
 # 加入 latex 工具集命令
 export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-darwin
-# 加入开发机的常用bin
+# 加入开发机的常用 bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
+# 加入 maven 的 bin
+export PATH=$PATH:/Users/zhaomingxing/apache-maven-3.8.4/bin
 
 
 #=============== MySQL Setting =============================================
@@ -194,12 +196,13 @@ alias eid="echo -n 8152681 | tee >(pbcopy)"
 alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
 alias fcid="echo -n 6214830155051807 | tee >(pbcopy)"
 alias pnum="echo -n 18810860130 | tee >(pbcopy)"
-alias intro="echo -n '我是赵明星-北邮-硕-19届-字节后端'| tee >(pbcopy)"
+alias intro="echo -n '我是赵明星-北邮-硕-19届-字节后端，因拿到微观博易的 offer，获得了内推资格；与文贤投资建立了长期的内推合作；家人在微软 bing multimedia 组做nlp 算法工程师'| tee >(pbcopy)"
 alias ref="cd $HOME/github/referral/004-platforms/001-byr-bbs/003-bytedance/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias msref="cd $HOME/github/referral/004-platforms/001-byr-bbs/002-ms-stca/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias mapref="cd $HOME/github/referral/004-platforms/001-byr-bbs/004-amap/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias raref="cd $HOME/github/referral/004-platforms/001-byr-bbs/005-msra/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias wgbyref="cd $HOME/github/referral/004-platforms/001-byr-bbs/007-weiguanboyi/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
+alias wxref="cd $HOME/github/referral/004-platforms/001-byr-bbs/008-wenxianlianghua/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 alias hi="cd $HOME/github/referral/002-wechat-hello && cat hello.md | pbcopy"
 alias gkb="ginkgo bootstrap"
 alias gkg="ginkgo generate"
