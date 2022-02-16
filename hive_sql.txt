@@ -1,0 +1,61 @@
+-- ********************************************************************
+-- Author: hanruixin
+-- CreateTime: 2021-11-10 17:33:18.000
+-- Description: 
+-- Update: Task Update Description
+-- ********************************************************************
+set spark.sql.adaptive.maxNumPostShufflePartitions=4000;
+insert overwrite DIRECTORY 'hdfs://haruna/byte_search/ecom/full_order_search/${date}' row FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+select  t.order_id,
+        t.shop_order_id,
+        t.user_id,
+        t.product_id,
+        t.create_time,
+        t.product_name,
+        t.shop_name,
+        t.author_name,
+        t.first_name,
+        t.second_name,
+        t.third_name,
+        t.fourth_name
+from    (
+            select  order_id,
+                    shop_order_id,
+                    user_id,
+                    product_id,
+                    create_time,
+                    regexp_replace(product_name, '\t|\n', '') as product_name,
+                    regexp_replace(shop_name, '\t|\n', '') as shop_name,
+                    regexp_replace(nickname, '\t|\n', '') as author_name,
+                    regexp_replace(first_name, '\t|\n', '') as first_name,
+                    regexp_replace(second_name, '\t|\n', '') as second_name,
+                    regexp_replace(third_name, '\t|\n', '') as third_name,
+                    regexp_replace(fourth_name, '\t|\n', '') as fourth_name,
+                    row_number() over (
+                        partition by
+                                order_id
+                        order by
+                                create_time desc
+                    ) as rn
+            from    ecom.app_order_cl_source_search_detail_di
+            where   date = '${date}'
+        ) t
+where   t.rn = 1
+union all
+SELECT
+    order_id,
+    '!GROUP!' as shop_order_id,
+    user_id,
+    'N' as product_id,
+    create_time,
+    regexp_replace(product_name, '\t|\n', '') as product_name,
+    'N' as shop_name,
+    'N' as author_name,
+    'N' as first_name,
+    'N' as second_name,
+    'N' as third_name,
+    'N' as fourth_name
+FROM
+    ecom.app_order_third_source_search_detail_di
+where
+    date = '${date}'
