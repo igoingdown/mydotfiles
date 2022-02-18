@@ -2,40 +2,40 @@
 
 #=============== config github repos ============================================
 initAlias() {
-#=============== Git Setting =============================================
-# git command alias
-alias gs="git status"
-alias ga='git add'
-alias gd='git diff'
-alias gf='git fetch'
-alias grv='git remote -v'
-alias grb='git rebase'
-alias gbr='git branch'
-alias gpl="git pull"
-alias gps="git push"
-alias gco="git checkout"
-alias gl="git log"
-alias gc="git commit -m"
-alias grst="git reset"
 
-
-#=============== Common Alias Setting =============================================
-alias ll='ls -al -G'
-alias ssh="ssh -X"
-alias md="mkdir -p"
-alias rd="rm -rf"
-alias df="df -h"
-alias mv="mv -i"
-alias slink="link -s"
-alias sed="sed -E"
-alias l="ls -l"
-alias la="ls -lhAF"
-alias cd..="cd .."
-alias cd...="cd ../.."
-alias cd....="cd ../../.."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias rd="rm -rf"
+  #=============== Git Alias Setting =============================================
+  alias gs="git status"
+  alias ga='git add'
+  alias gd='git diff'
+  alias gf='git fetch'
+  alias grv='git remote -v'
+  alias grb='git rebase'
+  alias gbr='git branch'
+  alias gpl="git pull"
+  alias gps="git push"
+  alias gco="git checkout"
+  alias gl="git log"
+  alias gc="git commit -m"
+  alias grst="git reset"
+  
+  
+  #=============== Common Alias Setting =============================================
+  alias ll='ls -al -G'
+  alias ssh="ssh -X"
+  alias md="mkdir -p"
+  alias rd="rm -rf"
+  alias df="df -h"
+  alias mv="mv -i"
+  alias slink="link -s"
+  alias sed="sed -E"
+  alias l="ls -l"
+  alias la="ls -lhAF"
+  alias cd..="cd .."
+  alias cd...="cd ../.."
+  alias cd....="cd ../../.."
+  alias ...="cd ../.."
+  alias ....="cd ../../.."
+  alias rd="rm -rf"
 }
 
 

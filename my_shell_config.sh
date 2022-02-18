@@ -1,6 +1,7 @@
 #!bin/zsh
 
 source ~/github/mydotfiles/common_init_funcs.sh
+source ~/github/mydotfiles/common/funcs.sh
 initAlias
 
 #=============== Base PATH Setting =============================================
