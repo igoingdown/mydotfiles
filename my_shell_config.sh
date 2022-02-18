@@ -165,6 +165,10 @@ alias ....="cd ../../.."
 alias did="echo -n 4063392393857421 | tee >(pbcopy)"
 alias eid="echo -n 8152681 | tee >(pbcopy)"
 alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
+alias fcid="echo -n 6214830155051807 | tee >(pbcopy)"
+alias pnum="echo -n 18810860130 | tee >(pbcopy)"
+alias intro="echo -n '我是赵明星-北邮-硕-19届-字节后端，因拿到微观博易的 offer 获得了内推资格；目前与安贤量化建立了长期内推合作；家人在微软 bing multimedia 组做nlp 算法工程师'| tee >(pbcopy)"
+alias ref="cd $HOME/github/referral/004-platforms/001-byr-bbs/003-bytedance/002-bbs-raw && cat text.txt | pbcopy && goto bbs"
 
 
 #=============== Common Function Setting =============================================
