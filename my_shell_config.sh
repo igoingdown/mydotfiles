@@ -77,26 +77,31 @@ alias posts="cd $HOME/github/myblog/blog"
 #=============== Git Setting =============================================
 # git command alias
 alias gs="git status"
+alias gs.="git status ."
 alias ga='git add'
+alias ga.='git add .'
 alias gd='git diff'
+alias gd.='git diff .'
 alias gf='git fetch'
 alias grv='git remote -v'
 alias grb='git rebase'
-alias grmb='git branch | grep -v master | xargs git branch -D'
 alias grst='git reset'
 alias gmd='git commit --amend'
 alias gbr='git branch'
 alias gpl="git pull -p"
 alias gps="git push"
 alias gco="git checkout"
+alias gcz="git checkout zmx_dev"
 alias gl="git log --oneline --graph --decorate --all"
 alias gc="git commit -m"
 alias gac="ga . & gc"
 alias st="git stash"
 alias sta="git stash apply"
+alias stp="git stash pop"
 alias grhom="git reset --hard origin/master"
 alias grmb="git branch | grep -v master | xargs git branch -D "
 # after status and diff, push it through
+
 push_through(){
 	gs
     fail_report
