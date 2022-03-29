@@ -121,11 +121,20 @@ installGo4() {
 
 #=============== install go in specific version  =========================================
 installGoxx(){
-	mkdir -p ~/local/go1.13
-	cd ~/local/go1.13
-	git clone git@github.com:golang/go.git
+    destPath=$HOME/local/go1.13
+    if [ ! -d "$destPath"]; then
+        echo "$destPath 不存在"
+        mkdir -p "$destPath"
+        cd $destPath
+	    git clone git@github.com:golang/go.git
+    else
+        echo "$destPath 已存在"
+        cd $destPath
+        git pull
+    fi
 	cd go/src
-	gco go1.15
+    echo "目标 go 版本：\"$1\""
+	gco go$1
 	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
 	./all.bash
 }
