@@ -206,3 +206,43 @@ installPB() {
 	make check 
 	sudo make install
 }
+
+
+#=============== 检测文件和目录是否存在 =========================================
+existD() {
+    if [ ! -d "$1" ]; then
+        echo "$1 not exist"
+    else
+        echo "$1 OK"
+    fi
+
+}
+
+existF() {
+    if [ ! -f "$1" ]; then
+        echo "$1 not exist"
+    else
+        echo "$1 OK"
+    fi
+}
+
+
+#================== 为 sed 命令转义 ==========================
+expr_for_sed() {
+    new_expr=$(echo $1 | gsed 's/\//\\\//g')
+    echo $new_expr
+}
+
+
+#================== 利用 sed 命令实现递归关键词搜索并替换 ==========================
+k_repalce() {
+    search_keyword=$1
+    origin_keyword=$2
+    new_keyword=$3
+    dest_dir=$4
+    origin_expr=$(expr_for_sed $origin_keyword)
+    new_expr=$(expr_for_sed $new_keyword)
+    echo $new_expr $origin_expr
+    grep -Rl "$search_keyword" $dest_dir | xargs gsed -i "s#$origin_expr#$new_expr#g"
+}
+
