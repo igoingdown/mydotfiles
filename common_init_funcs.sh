@@ -58,25 +58,35 @@ configMyGithubRepos() {
 
 #=============== install go1.4 ==========================================
 installGo4() {
-	mkdir -p ~/local/go1.4
-	cd ~/local/go1.4
-	wget https://dl.google.com/go/go1.4-bootstrap-20171003.tar.gz
-	tar -zxf go1.4-bootstrap-20171003.tar.gz
-	cd go/src
-	export CGO_ENABLED=0
-	./make.bash
+    mkdir -p ~/local/go1.4
+    cd ~/local/go1.4
+    # 手动下载并移动至该目录更快
+    wget https://dl.google.com/go/go1.4-bootstrap-20171003.tar.gz
+    tar -zxf go1.4-bootstrap-20171003.tar.gz
+    cd go/src
+    export CGO_ENABLED=0
+    ./make.bash
 }
 
 
 #=============== install go in specific version  =========================================
 installGoxx(){
-	mkdir -p ~/local/go1.13
-	cd ~/local/go1.13
-	git clone git@github.com:golang/go.git
-	cd go/src
-	gco go1.15
-	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
-	./all.bash
+    destPath=$HOME/local/go1.13
+    if [ ! -d "$destPath"]; then
+        echo "$destPath 不存在"
+        mkdir -p "$destPath"
+        cd $destPath
+        git clone git@github.com:golang/go.git
+    else
+        echo "$destPath 已存在"
+        cd $destPath
+        git pull
+    fi
+    cd go/src
+    echo "目标 go 版本：\"$1\""
+    gco go$1
+    export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
+    ./all.bash
 }
 
 
