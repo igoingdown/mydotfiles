@@ -243,6 +243,14 @@ k_repalce() {
     origin_expr=$(expr_for_sed $origin_keyword)
     new_expr=$(expr_for_sed $new_keyword)
     echo $new_expr $origin_expr
-    grep -Rl "$search_keyword" $dest_dir | xargs gsed -i "s#$origin_expr#$new_expr#g"
+    grep -Rl --exclude-dir=kitex_gen "$search_keyword" $dest_dir | xargs gsed -i "s#$origin_expr#$new_expr#g"
 }
 
+
+#================== 为 sed 命令转义 ==========================
+battery() {
+    design_capacity=$(ioreg -rn AppleSmartBattery | grep -i DesignCapacity | tail -1 |awk -F= '{print $2 }'| sed 's/ //g')
+    max_capacity=$(ioreg -rn AppleSmartBattery | grep -i MaxCapacity | tail -1| awk -F= '{print $2 }'| sed 's/ //g')
+    echo $max_capacity / $design_capacity 
+    awk -v a="$design_capacity" -v b="$max_capacity" 'BEGIN { print b/a }'
+}
