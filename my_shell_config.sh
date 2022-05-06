@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#=============== load common funcs =============================================
+source $HOME/github/mydotfiles/common_init_funcs.sh
+
 
 #=============== Base PATH Setting =============================================
 export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
@@ -164,12 +167,14 @@ tpr() {
 #=============== proxy setting  =============================================
 # 现在基本不需要设置proxy了，公司的网络都可以自动跳转proxy
 pon() {
-	export http_proxy=10.110.216.52:3128
-	export https_proxy="http://10.110.216.52:3128"
+    echo "ok"
+	#export http_proxy=10.110.216.52:3128
+	#export https_proxy="http://10.110.216.52:3128"
 }
 poff() {
-	unset http_proxy
-	unset https_proxy
+    echo "ok"
+	#unset http_proxy
+	#unset https_proxy
 }
 
 
@@ -261,7 +266,7 @@ go113() {
 
 
 #=============== python setting =============================================
-alias python="~/repos/toutiao/runtime/bin/python"
+alias python="/usr/local/bin/python "
 export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/toutiao/lib/python_package/lib/python2.7/site-packages:~/repos/toutiao/lib/python_package"
 
 
@@ -303,3 +308,4 @@ jump_ppe_by_psm () {
     ~/scripts/bytedance/byteshell_ppe.sh $psm
 }
 alias ppe=jump_ppe_by_psm
+
