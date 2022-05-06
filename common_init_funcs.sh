@@ -34,11 +34,6 @@ push_through(){
 }
 
 
-#=============== proxy setting  =============================================
-export http_proxy=10.110.216.52:3128
-export https_proxy="http://10.110.216.52:3128" 
-
-
 #=============== Common Alias Setting =============================================
 alias ll='ls -al -G'
 alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
