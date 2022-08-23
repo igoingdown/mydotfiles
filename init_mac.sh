@@ -1,57 +1,65 @@
 #/bin/bash
 
-source common_init_funcs.sh
+#source common_init_funcs.sh
 
 
 #=============== generate ssh key and upload it to github ===========================================
-ssh-keygen
+# ssh-keygen
 # TODO: upload public key to github or use http first
 
 
 #=============== install brew ===========================================
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 
 #=============== install wget ===========================================
-brew install wget
+# brew install wget
 
 
 #=============== install zsh  ===========================================
-installZsh
+# installZsh
 
 
 #=============== install vundle  ========================================
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 
 #=============== Install tmux ====================================
-brew install tmux
+# brew install tmux
 
 
 #=============== config tmux, vim, zsh and bash ====================================
-dragConfFromGithub
+# dragConfFromGithub
 
 
 #=============== Install nmap ====================================
-brew install nmap 
+# brew install nmap 
+
+
+#=============== Install exa ====================================
+#brew install exa
+
+
+#=============== Install j ====================================
+brew install --cask j
 
 
 #=============== install golang =========================================
-installGo
+# installGo
 
 
 #=============== Install dlv ============================================
-installDlv
+# installDlv
 
 
 #=============== install cool projects =========================================
 # install some cool projects that I should learn through
-installCoolProjects
+# installCoolProjects
 
 
 #=============== install YCM  =========================================
-installYCM
+# installYCM
 
 
 #=============== install PB =========================================
-installPB
+# installPB
