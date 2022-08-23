@@ -14,6 +14,8 @@ export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-darwin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
 # 加入 maven 的 bin
 export PATH=$PATH:/Users/zhaomingxing/apache-maven-3.8.4/bin
+# 加入 homebrew 的 bin
+export PATH=$PATH:/opt/homebrew/bin
 
 
 #=============== MySQL Setting =============================================
