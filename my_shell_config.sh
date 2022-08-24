@@ -29,9 +29,8 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
-export GOROOT=$HOME/local/go1.13/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
 # build go project 
 alias build="go build ."
 # 开启go mod

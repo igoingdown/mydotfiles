@@ -1,6 +1,6 @@
 #/bin/bash
 
-#source common_init_funcs.sh
+source common_init_funcs.sh
 
 
 #=============== generate ssh key and upload it to github ===========================================
@@ -41,11 +41,15 @@
 
 
 #=============== Install j ====================================
-brew install --cask j
+#brew install autojump
 
 
 #=============== install golang =========================================
-# installGo
+#  brew install go
+
+
+#=============== install ag =========================================
+brew install the_silver_searcher
 
 
 #=============== Install dlv ============================================
