@@ -36,6 +36,7 @@ Bundle 'yann2192/vim-vitamins'
 Bundle 'fatih/vim-go'
 Bundle 'scrooloose/syntastic'
 Bundle 'solarnz/thrift.vim'
+Bundle 'ruanyl/vim-gh-line'
 
 " Snipmate
 Bundle 'tomtom/tlib_vim'
@@ -243,3 +244,9 @@ nnoremap <C-l> <C-w>l
 
 "==============git blame 配置============================
 nnoremap gb :<C-u>call gitblame#echo()<CR>
+
+
+
+"============== browse remote 插件配置 ============================
+" TODO：更新为自己的domain 
+let g:gh_gitlab_domain = "xxx.org"

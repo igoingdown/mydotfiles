@@ -49,7 +49,11 @@ source common_init_funcs.sh
 
 
 #=============== install ag =========================================
-brew install the_silver_searcher
+#brew install the_silver_searcher
+
+
+#=============== install jq =========================================
+brew install jq
 
 
 #=============== Install dlv ============================================
