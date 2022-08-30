@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+source $HOME/github/mydotfiles/my_shell_config.sh
+
+case $1 in
+    wechat)
+    chrome "https://mp.weixin.qq.com/cgi-bin/appmsg?begin=0&count=10&type=10&action=list_card&token=2046895322&lang=zh_CN";;
+    bbs)
+    chrome "https://bbs.byr.cn/#!board/JobInfo";;
+    map)
+    chrome "https://ditu.amap.com/search?id=B0FFH9S2JG&city=110114&geoobj=116.330638%7C40.066032%7C116.337921%7C40.06915&query_type=IDQ&query=%E9%A6%96%E5%BC%80%C2%B7%E5%9B%BD%E9%A3%8E%E7%BE%8E%E5%94%902%E6%9C%9F15%E5%8F%B7%E6%A5%BC&zoom=17.5"
+esac
