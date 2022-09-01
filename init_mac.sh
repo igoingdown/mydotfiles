@@ -56,6 +56,10 @@ source common_init_funcs.sh
 brew install jq
 
 
+#=============== install git delta for git diff =========================================
+brew install git-delta
+
+
 #=============== Install dlv ============================================
 # installDlv
 
