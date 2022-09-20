@@ -247,6 +247,13 @@ nnoremap gb :<C-u>call gitblame#echo()<CR>
 
 
 
-"============== browse remote 插件配置 ============================
-" TODO：更新为自己的domain 
-let g:gh_gitlab_domain = "xxx.org"
+"============== browse remote ============================
+let g:gh_gitlab_domain = "xxx"
+
+
+"============== code 折叠与展开配置 ============================
+set foldmethod=indent
+
+
+"============== 复制粘贴配置 ============================
+set clipboard=unnamedplus,unnamed,autoselect
