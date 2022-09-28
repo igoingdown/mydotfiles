@@ -56,6 +56,11 @@ source common_init_funcs.sh
 brew install jq
 
 
+#=============== install plantuml =========================================
+brew install plantuml
+export PLANTUML_LIMIT_SIZE=65536
+
+
 #=============== install git delta for git diff =========================================
 brew install git-delta
 
