@@ -187,7 +187,7 @@ alias ssh="ssh -X"
 alias md="mkdir -p"
 alias rd="rm -rf"
 alias df="df -h"
-alias mv="mv -i"
+alias mv="mv -f"
 alias slink="link -s"
 alias sed="sed -E"
 alias l="ls -l"
@@ -310,3 +310,7 @@ jump_ppe_by_psm () {
 }
 alias ppe=jump_ppe_by_psm
 
+
+
+#=============== plantuml config =============================================
+export PLANTUML_LIMIT_SIZE=65536
