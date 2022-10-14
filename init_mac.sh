@@ -80,3 +80,8 @@ brew install git-delta
 
 #=============== install PB =========================================
 # installPB
+
+
+#=============== install GNU sed =========================================
+brew install gnu-sed
+
