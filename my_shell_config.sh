@@ -311,6 +311,9 @@ jump_ppe_by_psm () {
 alias ppe=jump_ppe_by_psm
 
 
-
 #=============== plantuml config =============================================
 export PLANTUML_LIMIT_SIZE=65536
+
+
+#=============== sonic compile config =============================================
+export GOARCH=amd64
