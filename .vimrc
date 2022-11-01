@@ -47,7 +47,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'w0rp/ale'
 Plugin 'sheerun/vim-polyglot'
@@ -257,3 +257,8 @@ set foldmethod=indent
 
 "============== 复制粘贴配置 ============================
 set clipboard=unnamedplus,unnamed,autoselect
+
+
+
+"============== snipmate parser 更新减少warning ============================
+let g:snipMate = { 'snippet_version' : 1 }
