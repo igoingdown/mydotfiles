@@ -263,3 +263,11 @@ alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen
 
 #=============== autojump setting =============================================
 . /usr/share/autojump/autojump.sh
+
+
+#=============== j 命令 =============================================
+ [[ -s /home/zhaomingxing.93/.autojump/etc/profile.d/autojump.sh  ]] && source /home/zhaomingxing.93/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
+
+
