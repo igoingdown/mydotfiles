@@ -1,0 +1,2 @@
+Plug '<extension-github-reference>'
+source $HOME/.vimrc

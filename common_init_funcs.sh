@@ -249,3 +249,14 @@ battery() {
     echo $max_capacity / $design_capacity 
     awk -v a="$design_capacity" -v b="$max_capacity" 'BEGIN { print b/a }'
 }
+
+
+#================== 非交互式使用 kinit ==========================
+alias knp='kinit --password-file=$HOME/password/kinit.txt zhaomingxing.93@BYTEDANCE.COM'
+
+
+#================== 安装 rust ==========================
+install_rust() {
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+}
+

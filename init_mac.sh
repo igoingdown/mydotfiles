@@ -85,3 +85,6 @@ brew install git-delta
 #=============== install GNU sed =========================================
 brew install gnu-sed
 
+
+#=============== install rust =========================================
+install_rust

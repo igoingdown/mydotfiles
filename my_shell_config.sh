@@ -5,7 +5,7 @@ source $HOME/github/mydotfiles/common_init_funcs.sh
 
 
 #=============== Base PATH Setting =============================================
-export PATH=/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
+export PATH=$HOME/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
 export PATH=$PATH:/usr/sbin:/sbin:/opt/puppetlabs/bin:/usr/local/munki
 export PATH=$PATH:~/bin
 # 加入 latex 工具集命令
@@ -13,9 +13,11 @@ export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-darwin
 # 加入开发机的常用 bin
 export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
 # 加入 maven 的 bin
-export PATH=$PATH:/Users/zhaomingxing/apache-maven-3.8.4/bin
+export PATH=$PATH:$HOME/apache-maven-3.8.4/bin
 # 加入 homebrew 的 bin
 export PATH=$PATH:/opt/homebrew/bin
+# 加入 rust 的 bin
+export PATH=$PATH:$HOME/.cargo/bin
 
 
 #=============== MySQL Setting =============================================
@@ -29,8 +31,9 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
+#export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin
+export GOSUMDB="sum.golang.google.cn"
 # build go project 
 alias build="go build ."
 # 开启go mod
@@ -56,7 +59,7 @@ alias tx="tmux"
 #=============== Dev machine Setting =============================================
 # dev machine ssh login
 DEV_USER_NAME="zhaomingxing.93"
-DEV_IP="10.227.19.33"
+DEV_IP="10.37.2.187"
 # 线上开发机
 ONLINE_DEV_IP="10.25.60.33"
 alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
@@ -68,6 +71,10 @@ dscp() {
 # copy file on dev machine to local
 cpb() {
 	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 ~/
+}
+# copy file on dev machine to local with specified destination
+cpbd() {
+	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 $2 
 }
 # copy local files to online dev machine
 odscp() {
@@ -257,17 +264,8 @@ alias ldi="ln -s ~/repos/data/idl data_idl"
 alias kv="kitool -v"
 
 
-#=============== go mod setting =============================================
-# 在当前目录下创建特定conf的软链接
-go113() {
-	go env -w GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
-	go env -w GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
-	go env -w GOSUMDB="sum.golang.google.cn"
-}
-
-
 #=============== python setting =============================================
-alias python="/usr/local/bin/python "
+alias python="/usr/bin/python "
 export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/toutiao/lib/python_package/lib/python2.7/site-packages:~/repos/toutiao/lib/python_package"
 
 
@@ -279,13 +277,13 @@ chrome() {
 
 #=============== quick command to common tools =============================================
 stamp2time() {
-   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/timestamp.py $1
+   python3 $HOME/github/python_demo_and_tool/tools/time_tools/timestamp.py $1
 }
 now_time() {
-   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/now_time.py
+   python3 $HOME/github/python_demo_and_tool/tools/time_tools/now_time.py
 }
 time2stamp() {
-   /usr/local/bin/python3 $HOME/github/python_demo_and_tool/tools/time_tools/time2stamp.py $1
+   python3 $HOME/github/python_demo_and_tool/tools/time_tools/time2stamp.py $1
 }
 
 
@@ -317,3 +315,14 @@ export PLANTUML_LIMIT_SIZE=65536
 
 #=============== sonic compile config =============================================
 export GOARCH=amd64
+
+
+#=============== sonic compile config =============================================
+export CONSUL_HTTP_HOST=10.37.2.187
+export CONSUL_HTTP_PORT=2280
+
+
+#=============== rust config =============================================
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+
