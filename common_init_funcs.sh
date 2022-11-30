@@ -99,10 +99,17 @@ installGo() {
 
 #=============== install zsh =========================================
 installZsh() {
+	sudo apt install zsh
 	sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 	which zsh
 	chsh -s /usr/bin/zsh
 	echo $SHELL
+}
+
+
+#=============== install ag =========================================
+installSilverSearch() {
+	sudo   apt-get install silversearcher-ag
 }
 
 
