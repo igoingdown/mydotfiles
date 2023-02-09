@@ -53,16 +53,16 @@ source common_init_funcs.sh
 
 
 #=============== install jq =========================================
-brew install jq
+#brew install jq
 
 
 #=============== install plantuml =========================================
-brew install plantuml
-export PLANTUML_LIMIT_SIZE=65536
+#brew install plantuml
+#export PLANTUML_LIMIT_SIZE=65536
 
 
 #=============== install git delta for git diff =========================================
-brew install git-delta
+#brew install git-delta
 
 
 #=============== Install dlv ============================================
@@ -83,8 +83,13 @@ brew install git-delta
 
 
 #=============== install GNU sed =========================================
-brew install gnu-sed
+#brew install gnu-sed
 
 
 #=============== install rust =========================================
-install_rust
+#install_rust
+
+
+
+#=============== install GNU reallink =========================================
+brew install coreutils
