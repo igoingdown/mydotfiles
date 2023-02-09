@@ -18,6 +18,8 @@ export PATH=$PATH:$HOME/apache-maven-3.8.4/bin
 export PATH=$PATH:/opt/homebrew/bin
 # 加入 rust 的 bin
 export PATH=$PATH:$HOME/.cargo/bin
+# 加入 gnu 的 bin
+export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
 
 
 #=============== MySQL Setting =============================================
@@ -31,9 +33,8 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
-#export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOPATH/bin
-export GOSUMDB="sum.golang.google.cn"
+export PATH=/opt/homebrew/opt/go@1.18/bin:$PATH
 # build go project 
 alias build="go build ."
 # 开启go mod
