@@ -310,20 +310,30 @@ jump_ppe_by_psm () {
 alias ppe=jump_ppe_by_psm
 
 
+#=============== devbox mock Setting =============================================
+source $HOME/github/mydotfiles/mac_mock_devbox.sh
+set_devbox_env_var
+
+
+
+#=============== online dev config =============================================
+dev_log_dir() {
+    echo 'cd /opt/tiger/toutiao/log/app' | pbcopy
+}
+
+
 #=============== plantuml config =============================================
 export PLANTUML_LIMIT_SIZE=65536
 
 
 #=============== sonic compile config =============================================
 export GOARCH=amd64
-
-
-#=============== sonic compile config =============================================
-export CONSUL_HTTP_HOST=10.37.2.187
-export CONSUL_HTTP_PORT=2280
-
-
 #=============== rust config =============================================
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
+#=============== golang config =============================================
+export GO111MODULE=on
+export GOPROXY="https://go-mod-proxy.byted.org,https://proxy.golang.org,direct"
+export GOPRIVATE="*.byted.org,*.everphoto.cn"
+export GOSUMDB="sum.golang.google.cn"

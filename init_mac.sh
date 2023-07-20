@@ -1,6 +1,6 @@
 #/bin/bash
 
-source common_init_funcs.sh
+#source common_init_funcs.sh
 
 
 #=============== generate ssh key and upload it to github ===========================================
@@ -45,7 +45,9 @@ source common_init_funcs.sh
 
 
 #=============== install golang =========================================
-#  brew install go
+#brew install go
+export GOPROXY="https://go-mod-proxy.byted.org,https://proxy.golang.org,direct"
+export GOPRIVATE="*.byted.org,*.everphoto.cn"
 
 
 #=============== install ag =========================================
