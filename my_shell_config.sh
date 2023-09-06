@@ -143,14 +143,14 @@ alias stp="git stash pop"
 alias grhom="git reset --hard origin/master"
 alias grmb="git branch | grep -v master | xargs git branch -D "
 # after status and diff, push it through
-push_through(){
+gacp(){
 	gs
     fail_report
     git add .
     fail_report
     git commit -m $1
     fail_report
-    gps
+    gps origin $2
 }
 
 
