@@ -43,6 +43,7 @@
 
 #=============== Install j ====================================
 #brew install autojump
+### copy some lines to .zshrc
 
 
 #=============== install golang =========================================
