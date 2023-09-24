@@ -13,19 +13,20 @@
 
 
 #=============== install wget ===========================================
-# brew install wget
+#brew install wget
 
 
 #=============== install zsh  ===========================================
-# installZsh
+#installZsh
 
 
 #=============== install vundle  ========================================
-# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+## run :PluginInstall
 
 
 #=============== Install tmux ====================================
-# brew install tmux
+#brew install tmux
 
 
 #=============== config tmux, vim, zsh and bash ====================================
@@ -33,7 +34,7 @@
 
 
 #=============== Install nmap ====================================
-# brew install nmap 
+#brew install nmap 
 
 
 #=============== Install exa ====================================
@@ -94,4 +95,4 @@ export GOPRIVATE="*.byted.org,*.everphoto.cn"
 
 
 #=============== install GNU reallink =========================================
-brew install coreutils
+#brew install coreutils
