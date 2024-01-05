@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship-prompt/spaceship"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -99,3 +99,25 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source $HOME/github/mydotfiles/my_shell_config.sh
+
+# j 命令配置
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+
+# apply-git-access 命令配置
+[ -f "$HOME/.bytebm/config/config.sh" ] && . "$HOME/.bytebm/config/config.sh"
+
+
+# got 命令配置
+chrome() {
+   open -a 'Google Chrome' "$@"
+}
+alias goto="~/goto"
+_goto_completion () {
+    compadd `\grep ")" ~/goto | cut -f 1 -d ")"`
+}
+compdef _goto_completion goto
+
+
+
+export SPACESHIP_DIR_TRUNC=0

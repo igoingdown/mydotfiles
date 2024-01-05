@@ -20,6 +20,8 @@ export PATH=$PATH:/opt/homebrew/bin
 export PATH=$PATH:$HOME/.cargo/bin
 # 加入 gnu 的 bin
 export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
+# 加入 python 脚本 bin
+export PATH=$HOME/golang/src/code.byted.org/wenqing.88/python_tools/tools:$PATH
 
 
 #=============== MySQL Setting =============================================
@@ -34,7 +36,11 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 #=============== Golang Setting =============================================
 export GOPATH=$HOME/golang
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin/darwin_amd64
 export PATH=/opt/homebrew/opt/go@1.18/bin:$PATH
+export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
+export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
+export GOSUMDB="sum.golang.google.cn"
 # build go project 
 alias build="go build ."
 # 开启go mod
@@ -130,7 +136,7 @@ alias grb='git rebase'
 alias grst='git reset'
 alias gmd='git commit --amend'
 alias gbr='git branch'
-alias gpl="git pull -p"
+alias gpl="git pull"
 alias gps="git push"
 alias gco="git checkout"
 alias gcz="git checkout zmx_dev"
@@ -310,30 +316,28 @@ jump_ppe_by_psm () {
 alias ppe=jump_ppe_by_psm
 
 
-#=============== devbox mock Setting =============================================
-source $HOME/github/mydotfiles/mac_mock_devbox.sh
-set_devbox_env_var
-
-
-
-#=============== online dev config =============================================
-dev_log_dir() {
-    echo 'cd /opt/tiger/toutiao/log/app' | pbcopy
-}
-
-
 #=============== plantuml config =============================================
 export PLANTUML_LIMIT_SIZE=65536
 
 
 #=============== sonic compile config =============================================
-export GOARCH=amd64
+export GOARCH=arm64
+
+
+#=============== sonic compile config =============================================
+export CONSUL_HTTP_HOST=10.37.2.187
+export CONSUL_HTTP_PORT=2280
+
+
 #=============== rust config =============================================
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
-#=============== golang config =============================================
-export GO111MODULE=on
-export GOPROXY="https://go-mod-proxy.byted.org,https://proxy.golang.org,direct"
-export GOPRIVATE="*.byted.org,*.everphoto.cn"
-export GOSUMDB="sum.golang.google.cn"
+
+#=============== tce api config =============================================
+export API_KEY=cf78b5adaacb1c37743c6a933aa99f0c
+
+
+#=============== metrics api config =============================================
+export METRICS_APP=ugc_devops
+export METRICS_KEY=46b428e790eb4ac2b502526ef835f859

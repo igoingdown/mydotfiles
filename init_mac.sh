@@ -1,6 +1,6 @@
 #/bin/bash
 
-#source common_init_funcs.sh
+source common_init_funcs.sh
 
 
 #=============== generate ssh key and upload it to github ===========================================
@@ -13,20 +13,19 @@
 
 
 #=============== install wget ===========================================
-#brew install wget
+# brew install wget
 
 
 #=============== install zsh  ===========================================
-#installZsh
+# installZsh
 
 
 #=============== install vundle  ========================================
-#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-## run :PluginInstall
+# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 
 #=============== Install tmux ====================================
-#brew install tmux
+# brew install tmux
 
 
 #=============== config tmux, vim, zsh and bash ====================================
@@ -34,7 +33,7 @@
 
 
 #=============== Install nmap ====================================
-#brew install nmap 
+# brew install nmap 
 
 
 #=============== Install exa ====================================
@@ -43,13 +42,10 @@
 
 #=============== Install j ====================================
 #brew install autojump
-### copy some lines to .zshrc
 
 
 #=============== install golang =========================================
-#brew install go
-export GOPROXY="https://go-mod-proxy.byted.org,https://proxy.golang.org,direct"
-export GOPRIVATE="*.byted.org,*.everphoto.cn"
+#  brew install go
 
 
 #=============== install ag =========================================
@@ -96,4 +92,4 @@ export GOPRIVATE="*.byted.org,*.everphoto.cn"
 
 
 #=============== install GNU reallink =========================================
-#brew install coreutils
+brew install coreutils
