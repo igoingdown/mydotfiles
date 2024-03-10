@@ -93,3 +93,12 @@ source common_init_funcs.sh
 
 #=============== install GNU reallink =========================================
 brew install coreutils
+
+
+#=============== install osxphotos: a terminal photo export tool ======
+brew install pipx
+pipx install osxphotos
+# TODO:  add bin to $PATH
+# like the following command
+# export PATH=$HOME/Library/Application Support/pipx/venvs/osxphotos/bin:$PATH
+

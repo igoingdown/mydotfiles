@@ -24,6 +24,8 @@ export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
 export PATH=/opt/homebrew/opt/go@1.20/bin:$PATH
 # 加入 goto 命令
 export PATH=$HOME/my_bin:$PATH
+# 加入 osxphotos 命令
+export PATH=$HOME/Library/Application Support/pipx/venvs/osxphotos/bin:$PATH
 
 
 #=============== MySQL Setting =============================================

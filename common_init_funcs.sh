@@ -18,6 +18,7 @@ alias grv='git remote -v'
 alias grb='git rebase'
 alias gbr='git branch'
 alias gpl="git pull"
+alias gpom="git pull origin master"
 alias gps="git push"
 alias gco="git checkout"
 alias gl="git log"
