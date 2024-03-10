@@ -20,8 +20,10 @@ export PATH=$PATH:/opt/homebrew/bin
 export PATH=$PATH:$HOME/.cargo/bin
 # 加入 gnu 的 bin
 export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
-# 加入 python 脚本 bin
-export PATH=$HOME/golang/src/code.byted.org/wenqing.88/python_tools/tools:$PATH
+# 加入 golang 的bin，使用 brew 安装 golang 之后需要执行
+export PATH=/opt/homebrew/opt/go@1.20/bin:$PATH
+# 加入 goto 命令
+export PATH=$HOME/my_bin:$PATH
 
 
 #=============== MySQL Setting =============================================
@@ -37,10 +39,8 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 export GOPATH=$HOME/golang
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOPATH/bin/darwin_amd64
-export PATH=/opt/homebrew/opt/go@1.18/bin:$PATH
-export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
-export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export GOSUMDB="sum.golang.google.cn"
+export PATH=/opt/homebrew/opt/go@1.20/bin:$PATH
 # build go project 
 alias build="go build ."
 # 开启go mod
