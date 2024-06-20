@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-source $HOME/github/mydotfiles/my_shell_config.sh
+source $HOME/github/my_dot_files/my_shell_config.sh
 
 case $1 in
     wechat)
