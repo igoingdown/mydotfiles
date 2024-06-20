@@ -18,7 +18,7 @@ alias grv='git remote -v'
 alias grb='git rebase'
 alias gbr='git branch'
 alias gpl="git pull"
-alias gpom="git pull origin master"
+alias gplom="git pull origin master"
 alias gps="git push"
 alias gco="git checkout"
 alias gl="git log"
@@ -37,7 +37,7 @@ push_through(){
 
 #=============== Common Alias Setting =============================================
 alias ll='ls -al -G'
-alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
+alias zconf='vim $HOME/github/my_dot_files/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
 alias md="mkdir -p"
@@ -94,7 +94,7 @@ configMyGithubRepos() {
 
 #=============== tmux, zsh, bash and vim config ============================================
 dragConfFromGithub() {
-	cd $HOME/github/mydotfiles
+	cd $HOME/github/my_dot_files
 	cp .vimrc ~/
 	cp .zshrc ~/
 	cp .tmux.conf ~/
