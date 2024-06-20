@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #=============== load common funcs =============================================
-source $HOME/github/mydotfiles/common_init_funcs.sh
+source $HOME/github/my_dot_files/common_init_funcs.sh
 
 
 #=============== Base PATH Setting =============================================
@@ -20,12 +20,8 @@ export PATH=$PATH:/opt/homebrew/bin
 export PATH=$PATH:$HOME/.cargo/bin
 # 加入 gnu 的 bin
 export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
-# 加入 golang 的bin，使用 brew 安装 golang 之后需要执行
-export PATH=/opt/homebrew/opt/go@1.20/bin:$PATH
-# 加入 goto 命令
-export PATH=$HOME/my_bin:$PATH
-# 加入 osxphotos 命令
-export PATH=$HOME/Library/Application Support/pipx/venvs/osxphotos/bin:$PATH
+# 加入 python 脚本 bin
+export PATH=$HOME/golang/src/code.byted.org/wenqing.88/python_tools/tools:$PATH
 
 
 #=============== MySQL Setting =============================================
@@ -41,8 +37,11 @@ export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
 export GOPATH=$HOME/golang
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOPATH/bin/darwin_amd64
+export PATH=/opt/homebrew/opt/go@1.21/bin:$PATH
+export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
+export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export GOSUMDB="sum.golang.google.cn"
-export PATH=/opt/homebrew/opt/go@1.20/bin:$PATH
+export GOOS="darwin"
 # build go project 
 alias build="go build ."
 # 开启go mod
@@ -118,7 +117,7 @@ alias hd='hexo g -d'
 
 #=============== Github repos Setting =============================================
 alias gt="cd $HOME/github/"
-alias dots="cd $HOME/github/mydotfiles"
+alias dots="cd $HOME/github/my_dot_files"
 alias lc="cd $HOME/github/leetcode"
 alias resume="cd $HOME/github/MyResume"
 alias posts="cd $HOME/github/myblog/blog"
@@ -161,6 +160,26 @@ gacp(){
     gps origin $2
 }
 
+gdtf(){
+	gs
+    fail_report
+    git add $1
+    fail_report
+    git commit -m "test"
+    fail_report
+    gps origin master
+    fail_report
+    mv $2 $1
+    fail_report
+    git add $1
+    git commit -m "test"
+    fail_report
+    gps origin master
+    fail_report
+}
+
+
+
 
 #=============== Open File Setting =============================================
 # open file with sublime 
@@ -197,7 +216,7 @@ poff() {
 
 #=============== Common Alias Setting =============================================
 alias ll='exa -al'
-alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
+alias zconf='vim $HOME/github/my_dot_files/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
 alias md="mkdir -p"
@@ -214,10 +233,12 @@ alias cd....="cd ../../.."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias did="echo -n 4063392393857421 | tee >(pbcopy)"
+alias uid="echo -n 2783600558227156 | tee >(pbcopy)"
 alias eid="echo -n 8152681 | tee >(pbcopy)"
 alias alarmid="echo -n 6796652467007258628 | tee >(pbcopy)"
 alias fcid="echo -n 6214830155051807 | tee >(pbcopy)"
 alias pnum="echo -n 18810860130 | tee >(pbcopy)"
+
 alias gkb="ginkgo bootstrap"
 alias gkg="ginkgo generate"
 alias gink="gkb && gkg"
@@ -307,7 +328,7 @@ alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen
 
 
 #=============== BYR BBS Setting =============================================
-source $HOME/github/mydotfiles/bbs_conf.sh
+source $HOME/github/my_dot_files/bbs_conf.sh
 
 
 #=============== ppe shell config =============================================
@@ -343,3 +364,10 @@ export API_KEY=cf78b5adaacb1c37743c6a933aa99f0c
 #=============== metrics api config =============================================
 export METRICS_APP=ugc_devops
 export METRICS_KEY=46b428e790eb4ac2b502526ef835f859
+
+
+#=============== repo name extract =============================================
+repo_name () {
+    echo $1 | gsed 's/.*:\(.*\)\.git/\1/'
+}
+

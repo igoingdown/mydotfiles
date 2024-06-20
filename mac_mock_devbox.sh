@@ -14,7 +14,7 @@ unset_devbox_env_var() {
 }
 
 local_test() {
-    source $HOME/github/mydotfiles/my_shell_config.sh
+    source $HOME/github/my_dot_files/my_shell_config.sh
     go test -count=1 -v -coverprofile cover.out
     go tool cover -html=cover.out -o cover.html
     open cover.html
