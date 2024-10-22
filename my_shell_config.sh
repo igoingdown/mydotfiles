@@ -213,6 +213,19 @@ poff() {
 	#unset https_proxy
 }
 
+proxy() {
+    export http_proxy=10.20.47.147:3128
+    export https_proxy=10.20.47.147:3128
+    export no_proxy=*.byted.org
+    echo "proxy: on"
+}
+
+noproxy() {
+    unset http_proxy
+    unset https_proxy
+    echo "proxy: off"
+}
+
 
 #=============== Common Alias Setting =============================================
 alias ll='exa -al'
@@ -371,3 +384,11 @@ repo_name () {
     echo $1 | gsed 's/.*:\(.*\)\.git/\1/'
 }
 
+
+#=============== plantuml preview =============================================
+ppv() {
+    plantuml $1.puml && open $1.png
+}
+ppc() {
+    cat $1.puml | pbcopy
+}
