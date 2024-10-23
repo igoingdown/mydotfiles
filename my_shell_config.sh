@@ -7,7 +7,7 @@ initAlias
 #=============== Base PATH Setting =============================================
 export PATH=/home/zhaomingxing.93/bin:/home/zhaomingxing.93/bin:/opt/tiger/toutiao/lib:/opt/tiger/jdk/jdk1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/tiger/ss_bin:/usr/local/jdk/bin:/usr/sbin/:/opt/tiger/ss_lib/bin:/opt/tiger/ss_lib/python_package/lib/python2.7/site-packages/django/bin:/opt/tiger/yarn_deploy/hadoop/bin/:/opt/tiger/yarn_deploy/hive/bin/:/opt/tiger/yarn_deploy/jdk/bin/:/opt/tiger/hadoop_deploy/jython-2.5.2/bin:/opt/tiger/dev_toolkit/bin:/home/zhaomingxing.93/golang/bin:/home/zhaomingxing.93/local/go1.13/go/bin:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/home/zhaomingxing.93/bin:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
 
-export PATH=$PATH:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin:~/apache-maven-3.8.3/bin
+export Pgo env GOROOTATH=$PATH:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin:~/apache-maven-3.8.3/bin
 
 
 # 加入开发机的常用bin
@@ -17,10 +17,12 @@ export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy
 export PATH=$PATH:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
 
 #=============== Golang Setting =============================================
-export GOPATH=$HOME/golang
-export GOROOT=$HOME/local/go1.13/go
-export PATH=$PATH:$GOPATH/bin
+export GOROOT=/usr/local/lib/bytedance-go
+export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
+export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/golang
+export PATH=$PATH:$GOPATH/bin
 # build go project 
 alias build="go build ."
 # 开启go mod
@@ -129,18 +131,6 @@ tm() {
 # open markdown file with typora 
 tpr() {
 	open -a /Applications/Typora.app $1
-}
-
-
-#=============== proxy setting  =============================================
-# 现在基本不需要设置proxy了，公司的网络都可以自动跳转proxy
-pon() {
-	export http_proxy=10.110.216.52:3128
-	export https_proxy="http://10.110.216.52:3128"
-}
-poff() {
-	unset http_proxy
-	unset https_proxy
 }
 
 
@@ -261,13 +251,18 @@ time2stamp() {
 alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
 
-#=============== autojump setting =============================================
-. /usr/share/autojump/autojump.sh
+#=============== zsh plugins =============================================
+plugins=(git ssh-agent zsh-autosuggestions)
 
 
 #=============== j 命令 =============================================
  [[ -s /home/zhaomingxing.93/.autojump/etc/profile.d/autojump.sh  ]] && source /home/zhaomingxing.93/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
+
+
+#=============== BOE redis 环境变量 =============================================
+export BYTED_HOST_IPV6=::1
+export MY_HOST_IPV6=::1
 
 
 
