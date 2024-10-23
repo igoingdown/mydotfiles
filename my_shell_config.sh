@@ -68,10 +68,12 @@ alias tx="tmux"
 # dev machine ssh login
 DEV_USER_NAME="zhaomingxing.93"
 DEV_IP="10.37.2.187"
+NEW_DEV_IP="10.37.27.207"
 # 线上开发机
 ONLINE_DEV_IP="10.25.60.33"
 alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
 alias dev="ssh $DEV_USER_NAME@$DEV_IP"
+alias ndev="ssh $DEV_USER_NAME@$NEW_DEV_IP"
 # copy local files to dev machine
 dscp() {
 	scp -r $1 $DEV_USER_NAME@$DEV_IP:~/
