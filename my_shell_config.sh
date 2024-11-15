@@ -5,15 +5,9 @@ source $HOME/github/my_dot_files/common_init_funcs.sh
 
 
 #=============== Base PATH Setting =============================================
-export PATH=$HOME/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
-export PATH=$PATH:/usr/sbin:/sbin:/opt/puppetlabs/bin:/usr/local/munki
+export PATH=$HOME/.autojump/bin:/usr/local/bin:/usr/bin:/bin
+export PATH=$PATH:/usr/sbin:/sbin:/opt/puppetlabs/bin
 export PATH=$PATH:~/bin
-# 加入 latex 工具集命令
-export PATH=$PATH:/usr/local/texlive/2020/bin/x86_64-darwin
-# 加入开发机的常用 bin
-export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin
-# 加入 maven 的 bin
-export PATH=$PATH:$HOME/apache-maven-3.8.4/bin
 # 加入 homebrew 的 bin
 export PATH=$PATH:/opt/homebrew/bin
 # 加入 rust 的 bin
@@ -22,15 +16,8 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
 # 加入 python 脚本 bin
 export PATH=$HOME/golang/src/code.byted.org/wenqing.88/python_tools/tools:$PATH
-
-
-#=============== MySQL Setting =============================================
-export MYSQLPATH=/usr/local/mysql
-export PATH=$PATH:$MYSQLPATH/bin
-export PATH=$PATH:/usr/local/opt/mysql-client/bin
-export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"
-export CPPFLAGS="-I/usr/local/opt/mysql-client/include"
-export LDFLAGS="-L/usr/local/opt/mysql-client/lib"
+# 加入 latex 命令 bin
+export PATH=/usr/local/texlive/2024basic/bin/universal-darwin:$PATH
 
 
 #=============== Golang Setting =============================================
@@ -82,6 +69,15 @@ dscp() {
 cpb() {
 	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 ~/
 }
+# copy local files to new dev machine
+ndscp() {
+	scp -r $1 $DEV_USER_NAME@$NEW_DEV_IP:~/
+}
+# copy file on dev machine to local
+ncpb() {
+	scp -r $DEV_USER_NAME@$NEW_DEV_IP:~/$1 ~/
+}
+
 # copy file on dev machine to local with specified destination
 cpbd() {
 	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 $2 
