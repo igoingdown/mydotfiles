@@ -5,39 +5,53 @@ source $HOME/github/my_dot_files/common_init_funcs.sh
 
 
 #=============== Base PATH Setting =============================================
-export PATH=$HOME/.autojump/bin:/usr/local/bin:/usr/bin:/bin
-export PATH=$PATH:/usr/sbin:/sbin:/opt/puppetlabs/bin
-export PATH=$PATH:~/bin
-# 加入 homebrew 的 bin
-export PATH=$PATH:/opt/homebrew/bin
-# 加入 rust 的 bin
-export PATH=$PATH:$HOME/.cargo/bin
-# 加入 gnu 的 bin
-export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
-# 加入 python 脚本 bin
-export PATH=$HOME/golang/src/code.byted.org/wenqing.88/python_tools/tools:$PATH
-# 加入 latex 命令 bin
-export PATH=/usr/local/texlive/2024basic/bin/universal-darwin:$PATH
+# 封装路径设置逻辑
+add_to_path() {
+    if [ -d "$1" ]; then
+        export PATH="$1:$PATH"
+    else
+        echo "Warning: Directory $1 does not exist, skipping."
+    fi
+}
+
+add_to_path "/usr/local/bin"
+add_to_path "/usr/bin"
+add_to_path "/bin"
+add_to_path "/usr/sbin"
+add_to_path "/sbin"
+
+export PATH=/usr/local/bin:$PATH
+add_to_path "/opt/puppetlabs/bin"
+add_to_path "$HOME/bin"
+add_to_path "/opt/homebrew/bin"
+add_to_path "$HOME/.cargo/bin"
+add_to_path "/opt/homebrew/opt/coreutils/libexec/gnubin"
+add_to_path "/usr/local/texlive/2024basic/bin/universal-darwin"
 
 
 #=============== Golang Setting =============================================
-export GOPATH=$HOME/golang
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOPATH/bin/darwin_amd64
-export PATH=/opt/homebrew/opt/go@1.21/bin:$PATH
+export GOPATH="$HOME/golang"
+add_to_path "$GOPATH/bin"
+add_to_path "/opt/homebrew/opt/go@1.22/bin"
 export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
 export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export GOSUMDB="sum.golang.google.cn"
 export GOOS="darwin"
+export GOROOT="/opt/homebrew/Cellar/go@1.22/1.22.12/libexec"
+
 # build go project 
 alias build="go build ."
+
 # 开启go mod
 mod_on() {
-	export GO111MODULE=on
+    export GO111MODULE=on
+    echo "Go module is enabled."
 }
+
 # 关闭go mod
 mod_off() {
-	export GO111MODULE=off
+    export GO111MODULE=off
+    echo "Go module is disabled."
 }
 
 
@@ -61,31 +75,71 @@ ONLINE_DEV_IP="10.25.60.33"
 alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
 alias dev="ssh $DEV_USER_NAME@$DEV_IP"
 alias ndev="ssh $DEV_USER_NAME@$NEW_DEV_IP"
+
 # copy local files to dev machine
 dscp() {
-	scp -r $1 $DEV_USER_NAME@$DEV_IP:~/
+    if [ -z "$1" ]; then
+        echo "Error: Source file or directory is required."
+        return 1
+    fi
+    scp -r "$1" "$DEV_USER_NAME@$DEV_IP:~/"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to copy files to $DEV_IP."
+    fi
 }
+
 # copy file on dev machine to local
 cpb() {
 	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 ~/
 }
 # copy local files to new dev machine
 ndscp() {
-	scp -r $1 $DEV_USER_NAME@$NEW_DEV_IP:~/
+    if [ -z "$1" ]; then
+        echo "Error: Source file or directory is required."
+        return 1
+    fi
+    scp -r "$1" "$DEV_USER_NAME@$NEW_DEV_IP:~/"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to copy files to $NEW_DEV_IP."
+    fi
 }
+
 # copy file on dev machine to local
 ncpb() {
-	scp -r $DEV_USER_NAME@$NEW_DEV_IP:~/$1 ~/
+    if [ -z "$1" ]; then
+        echo "Error: Remote file or directory is required."
+        return 1
+    fi
+    scp -r "$DEV_USER_NAME@$NEW_DEV_IP:~/$1" ~/
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to copy files from $NEW_DEV_IP."
+    fi
 }
 
 # copy file on dev machine to local with specified destination
 cpbd() {
-	scp -r $DEV_USER_NAME@$DEV_IP:~/$1 $2 
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Error: Both remote file and local destination are required."
+        return 1
+    fi
+    scp -r "$DEV_USER_NAME@$DEV_IP:~/$1" "$2"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to copy files from $DEV_IP to specified destination."
+    fi
 }
+
 # copy local files to online dev machine
 odscp() {
-	scp -r $1 $DEV_USER_NAME@$ONLINE_DEV_IP:~/
+    if [ -z "$1" ]; then
+        echo "Error: Source file or directory is required."
+        return 1
+    fi
+    scp -r "$1" "$DEV_USER_NAME@$ONLINE_DEV_IP:~/"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to copy files to $ONLINE_DEV_IP."
+    fi
 }
+
 # copy file on online dev machine to local
 ocpb() {
 	scp -r $DEV_USER_NAME@$ONLINE_DEV_IP:~/$1 ~/
@@ -101,15 +155,30 @@ alias redis="redis-server /usr/local/etc/redis.conf"
 #=============== CPP Setting =============================================
 # compile cpp program with c++11
 cppc() {
-	g++ -std=c++11 $1
+    if [ -z "$1" ]; then
+        echo "Error: Source file is required."
+        return 1
+    fi
+    g++ -std=c++11 "$1"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to compile C++ program."
+    fi
 }
 
 
 #=============== Hexo Setting =============================================
 # new hexo post  
 newp() {
-	hexo new post $1
+    if [ -z "$1" ]; then
+        echo "Error: Post title is required."
+        return 1
+    fi
+    hexo new post "$1"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to create new Hexo post."
+    fi
 }
+
 alias hd='hexo g -d'
 
 
@@ -141,7 +210,7 @@ alias gco="git checkout"
 alias gcz="git checkout zmx_dev"
 alias gl="git log --oneline --graph --decorate --all"
 alias gc="git commit -m"
-alias gac="ga . & gc"
+alias gac="ga . && gc"
 alias st="git stash"
 alias sta="git stash apply"
 alias stp="git stash pop"
@@ -153,9 +222,10 @@ gacp(){
     fail_report
     git add .
     fail_report
-    git commit -m $1
+    git commit -m "$1"
     fail_report
     gps origin $2
+    fail_report
 }
 
 gdtf(){
@@ -182,19 +252,35 @@ gdtf(){
 #=============== Open File Setting =============================================
 # open file with sublime 
 sublime() {
-	open -a /Applications/Sublime\ Text.app $1
+    if [ -z "$1" ]; then
+        echo "Error: File path is required."
+        return 1
+    fi
+    open -a /Applications/Sublime\ Text.app "$1"
 }
 # open file with VSC 
 vsc() {
-	open -a /Applications/Visual\ Studio\ Code.app $1
+    if [ -z "$1" ]; then
+        echo "Error: File path is required."
+        return 1
+    fi
+    open -a /Applications/Visual\ Studio\ Code.app "$1"
 }
 # execute bash scripts in a new terminal 
 tm() {
-	open -a Terminal.app $1
+    if [ -z "$1" ]; then
+        echo "Error: Script path is required."
+        return 1
+    fi
+    open -a Terminal.app "$1"
 }
 # open markdown file with typora 
 tpr() {
-	open -a /Applications/Typora.app $1
+    if [ -z "$1" ]; then
+        echo "Error: Markdown file path is required."
+        return 1
+    fi
+    open -a /Applications/Typora.app "$1"
 }
 
 
@@ -205,6 +291,7 @@ pon() {
 	#export http_proxy=10.110.216.52:3128
 	#export https_proxy="http://10.110.216.52:3128"
 }
+
 poff() {
     echo "ok"
 	#unset http_proxy
@@ -259,36 +346,65 @@ alias aga='apply-git-acl'
 #=============== Common Function Setting =============================================
 # find specified pattern under particular path recursively 
 deepfind() {
-	grep -r $1 $2
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Error: Pattern and path are required."
+        return 1
+    fi
+    grep -r "$1" "$2"
 }
+
 # find command line history
 fh() {
-	history | grep $1
+    if [ -z "$1" ]; then
+        echo "Error: Search pattern is required."
+        return 1
+    fi
+    history | grep "$1"
 }
+
 # report error and stop running commands below 
 fail_report() {
-  if [[ $? -ne 0 ]]; then
-    echo "error!"
-    exit
-  fi
+    if [ $? -ne 0 ]; then
+        echo "Command failed with exit code $?. Stopping execution."
+        exit 1
+    fi
 }
+
 # 删除当前目录下文件名符合特定pattern的文件
 rm_pattern_files() {
-  find -name $1 | xargs rm -rf
+    if [ -z "$1" ]; then
+        echo "Error: File pattern is required."
+        return 1
+    fi
+    find -name "$1" | xargs rm -rf
 }
+
 # 使用doas运行测试, 需要两个参数，分别是服务psm和需要运行的测试函数名
 got() {
-  doas -p $1 go test -v -run $2
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Error: Service PSM and test function name are required."
+        return 1
+    fi
+    doas -p "$1" go test -v -run "$2"
 }
+
 # 在当前目录下创建特定conf的软链接
 lcnf() {
-  ln -s $1 conf
+    if [ -z "$1" ]; then
+        echo "Error: Source file or directory is required."
+        return 1
+    fi
+    ln -s "$1" conf
 }
 
 # 文件生成
 # 参数表示文件和长度
 pwfgen() {
-    pwgen -H $1 -Bncyv $2 1 | pbcopy
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "Error: File and length are required."
+        return 1
+    fi
+    pwgen -H "$1" -Bncyv "$2" 1 | pbcopy
 }
 
 #=============== protobuffer version Setting =============================================
@@ -379,14 +495,39 @@ export METRICS_KEY=46b428e790eb4ac2b502526ef835f859
 
 #=============== repo name extract =============================================
 repo_name () {
-    echo $1 | gsed 's/.*:\(.*\)\.git/\1/'
+    if [ -z "$1" ]; then
+        echo "Error: Repository URL is required."
+        return 1
+    fi
+    echo "$1" | gsed 's/.*:\(.*\)\.git/\1/'
 }
 
 
 #=============== plantuml preview =============================================
 ppv() {
-    plantuml $1.puml && open $1.png
+    if [ -z "$1" ]; then
+        echo "Error: PlantUML file name is required."
+        return 1
+    fi
+    plantuml "$1.puml" && open "$1.png"
 }
+
 ppc() {
-    cat $1.puml | pbcopy
+    if [ -z "$1" ]; then
+        echo "Error: PlantUML file name is required."
+        return 1
+    fi
+    cat "$1.puml" | pbcopy
 }
+
+
+
+#=============== nvm lazy load =============================================
+load_nvm() {
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+
+load_nvm
+
