@@ -23,6 +23,7 @@ call vundle#rc()
 " required!
 
 Bundle 'VundleVim/Vundle.vim'
+Bundle "XadillaX/json-formatter.vim"
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
