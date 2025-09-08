@@ -115,41 +115,30 @@ installGo4() {
 }
 
 
-#=============== install go in specific version  =========================================
-installGoxx(){
-    destPath=$HOME/local/go1.13
-    if [ ! -d "$destPath"]; then
-        echo "$destPath 不存在"
-        mkdir -p "$destPath"
-        cd $destPath
-	    git clone git@github.com:golang/go.git
-    else
-        echo "$destPath 已存在"
-        cd $destPath
-        git pull
-    fi
-	cd go/src
-    echo "目标 go 版本：\"$1\""
-	gco go$1
-	export GOROOT_BOOTSTRAP=$HOME/local/go1.4/go
-	./all.bash
-}
-
-
-#=============== install go  =========================================
-installGo() {
-	installGo4
-	installGoxx
-}
-
-
 #=============== install zsh =========================================
 installZsh() {
-
-	sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-	which zsh
-	chsh -s /usr/bin/zsh
-	echo $SHELL
+    if ! command -v wget >/dev/null 2>&1 && ! command -v curl >/dev/null 2>&1; then
+        echo "错误: 需要wget或curl安装oh-my-zsh"
+        return 1
+    fi
+    
+    if command -v curl >/dev/null 2>&1; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    else
+        sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+    
+    if command -v zsh >/dev/null 2>&1; then
+        which zsh
+        if chsh -s "$(which zsh)" >/dev/null 2>&1; then
+            echo "成功切换到zsh: $(which zsh)"
+        else
+            echo "警告: 无法切换默认shell，可能需要手动运行: chsh -s $(which zsh)"
+        fi
+    else
+        echo "错误: zsh安装失败"
+        return 1
+    fi
 }
 
 
@@ -157,34 +146,6 @@ installZsh() {
 installDlv() {
 	source my_shell_config.sh
 	go get -u github.com/go-delve/delve/cmd/dlv
-}
-
-
-#=============== install cool projects =========================================
-# install some cool projects that I should learn through
-installCoolProjects() {
-	go get -d k8s.io/kubernetes
-	cd $GOPATH/src/k8s.io/kubernetes
-	make
-}
-
-#=============== install ycm  =========================================
-# TODO: ycm should be installed at the end. or the vim will down!
-installYCM() {
-
-	cd ~/.vim/bundle/YouCompleteMe
-	go get golang.org/x/xerrors
-	./install.py --all
-}
-
-
-#=============== install redis =========================================
-installRedis() {
-	wget http://download.redis.io/releases/redis-5.0.5.tar.gz
-	tar xzf redis-5.0.5.tar.gz
-	cd redis-5.0.5
-	make
-	sudo cp src/redis-cli /usr/local/bin/
 }
 
 
@@ -225,21 +186,47 @@ existF() {
 
 #================== 为 sed 命令转义 ==========================
 expr_for_sed() {
-    new_expr=$(echo $1 | gsed 's/\//\\\//g')
-    echo $new_expr
+    local sed_cmd
+    if command -v gsed >/dev/null 2>&1; then
+        sed_cmd="gsed"
+    else
+        sed_cmd="sed"
+    fi
+    new_expr=$(echo "$1" | $sed_cmd 's/\//\\\//g')
+    echo "$new_expr"
 }
 
 
 #================== 利用 sed 命令实现递归关键词搜索并替换 ==========================
-k_repalce() {
-    search_keyword=$1
-    origin_keyword=$2
-    new_keyword=$3
-    dest_dir=$4
-    origin_expr=$(expr_for_sed $origin_keyword)
-    new_expr=$(expr_for_sed $new_keyword)
-    echo $new_expr $origin_expr
-    grep -Rl --exclude-dir=kitex_gen "$search_keyword" $dest_dir | xargs gsed -i "s#$origin_expr#$new_expr#g"
+k_replace() {
+    if [ $# -ne 4 ]; then
+        echo "用法: k_replace <搜索关键词> <原关键词> <新关键词> <目标目录>"
+        return 1
+    fi
+    
+    local search_keyword=$1
+    local origin_keyword=$2
+    local new_keyword=$3
+    local dest_dir=$4
+    
+    local sed_cmd
+    if command -v gsed >/dev/null 2>&1; then
+        sed_cmd="gsed"
+    else
+        sed_cmd="sed"
+    fi
+    
+    local origin_expr=$(expr_for_sed "$origin_keyword")
+    local new_expr=$(expr_for_sed "$new_keyword")
+    
+    echo "替换: $origin_expr -> $new_expr"
+    
+    if [ ! -d "$dest_dir" ]; then
+        echo "错误: 目录 $dest_dir 不存在"
+        return 1
+    fi
+    
+    grep -Rl --exclude-dir=kitex_gen "$search_keyword" "$dest_dir" | xargs $sed_cmd -i "s#$origin_expr#$new_expr#g"
 }
 
 
@@ -252,8 +239,17 @@ battery() {
 }
 
 
-#================== 非交互式使用 kinit ==========================
-alias knp='kinit --password-file=$HOME/password/kinit.txt zhaomingxing.93@BYTEDANCE.COM'
+#================== 安全kinit认证 ==========================
+knp() {
+    if [ -f "$HOME/.kinit_pass" ]; then
+        zhaomingxing.93@BYTEDANCE.COM
+        kinit --password-file="$HOME/.kinit_pass" "zhaomingxing.93@BYTEDANCE.COM"
+
+    else
+        echo "请创建 ~/.kinit_pass 文件或使用 kinit 手动认证"
+        kinit "zhaomingxing.93@BYTEDANCE.COM"
+    fi
+}
 
 
 #================== 安装 rust ==========================

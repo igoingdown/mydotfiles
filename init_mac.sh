@@ -13,7 +13,7 @@ source common_init_funcs.sh
 
 
 #=============== install wget ===========================================
-# brew install wget
+#brew install wget
 
 
 #=============== install zsh  ===========================================
@@ -21,11 +21,11 @@ source common_init_funcs.sh
 
 
 #=============== install vundle  ========================================
-# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 
 #=============== Install tmux ====================================
-# brew install tmux
+#brew install tmux
 
 
 #=============== config tmux, vim, zsh and bash ====================================
@@ -33,7 +33,7 @@ source common_init_funcs.sh
 
 
 #=============== Install nmap ====================================
-# brew install nmap 
+#brew install nmap 
 
 
 #=============== Install exa ====================================
@@ -92,12 +92,12 @@ source common_init_funcs.sh
 
 
 #=============== install GNU reallink =========================================
-brew install coreutils
+#brew install coreutils
 
 
 #=============== install osxphotos: a terminal photo export tool ======
-brew install pipx
-pipx install osxphotos
+#brew install pipx
+#pipx install osxphotos
 # TODO:  add bin to $PATH
 # like the following command
 # export PATH=$HOME/Library/Application Support/pipx/venvs/osxphotos/bin:$PATH

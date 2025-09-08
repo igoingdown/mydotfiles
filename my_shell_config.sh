@@ -24,20 +24,21 @@ export PATH=/usr/local/bin:$PATH
 add_to_path "/opt/puppetlabs/bin"
 add_to_path "$HOME/bin"
 add_to_path "/opt/homebrew/bin"
-add_to_path "$HOME/.cargo/bin"
+#add_to_path "$HOME/.cargo/bin"
 add_to_path "/opt/homebrew/opt/coreutils/libexec/gnubin"
-add_to_path "/usr/local/texlive/2024basic/bin/universal-darwin"
+#add_to_path "/usr/local/texlive/2024basic/bin/universal-darwin"
 
 
 #=============== Golang Setting =============================================
 export GOPATH="$HOME/golang"
 add_to_path "$GOPATH/bin"
-add_to_path "/opt/homebrew/opt/go@1.22/bin"
+add_to_path "/opt/homebrew/opt/go@1.24/bin"
 export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
 export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export GOSUMDB="sum.golang.google.cn"
 export GOOS="darwin"
-export GOROOT="/opt/homebrew/Cellar/go@1.22/1.22.12/libexec"
+export GOROOT="/opt/homebrew/opt/go/libexec"
+add_to_path "$GOROOT/bin"
 
 # build go project 
 alias build="go build ."
@@ -216,6 +217,7 @@ alias sta="git stash apply"
 alias stp="git stash pop"
 alias grhom="git reset --hard origin/master"
 alias grmb="git branch | grep -v master | xargs git branch -D "
+alias gmm="git merge master"
 # after status and diff, push it through
 gacp(){
 	gs
@@ -313,7 +315,7 @@ noproxy() {
 
 
 #=============== Common Alias Setting =============================================
-alias ll='exa -al'
+alias ll='ls -ahl --color=auto'
 alias zconf='vim $HOME/github/my_dot_files/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
