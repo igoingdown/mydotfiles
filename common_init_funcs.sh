@@ -16,6 +16,7 @@ initAlias() {
   alias gco="git checkout"
   alias gl="git log"
   alias gc="git commit -m"
+  alias gmm="git merge master"
   alias grst="git reset"
   
   

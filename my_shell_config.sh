@@ -5,7 +5,7 @@ source ~/github/mydotfiles/common/funcs.sh
 initAlias
 
 #=============== Base PATH Setting =============================================
-export PATH=/home/zhaomingxing.93/bin:/home/zhaomingxing.93/bin:/opt/tiger/toutiao/lib:/opt/tiger/jdk/jdk1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/tiger/ss_bin:/usr/local/jdk/bin:/usr/sbin/:/opt/tiger/ss_lib/bin:/opt/tiger/ss_lib/python_package/lib/python2.7/site-packages/django/bin:/opt/tiger/yarn_deploy/hadoop/bin/:/opt/tiger/yarn_deploy/hive/bin/:/opt/tiger/yarn_deploy/jdk/bin/:/opt/tiger/hadoop_deploy/jython-2.5.2/bin:/opt/tiger/dev_toolkit/bin:/home/zhaomingxing.93/golang/bin:/home/zhaomingxing.93/local/go1.13/go/bin:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/home/zhaomingxing.93/bin:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
+export PATH=/home/zhaomingxing.93/bin:/home/zhaomingxing.93/bin:/opt/tiger/toutiao/lib:/opt/tiger/jdk/jdk1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/tiger/ss_bin:/usr/local/jdk/bin:/usr/sbin/:/opt/tiger/ss_lib/bin:/opt/tiger/ss_lib/python_package/lib/python2.7/site-packages/django/bin:/opt/tiger/yarn_deploy/hadoop/bin/:/opt/tiger/yarn_deploy/hive/bin/:/opt/tiger/yarn_deploy/jdk/bin/:/opt/tiger/hadoop_deploy/jython-2.5.2/bin:/opt/tiger/dev_toolkit/bin:/home/zhaomingxing.93/golang/bin:/home/zhaomingxing.93/local/go1.13/go/bin:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/home/zhaomingxing.93/bin:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy/hadoop/bin:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin:/home/linuxbrew/.linuxbrew/bin/
 
 export Pgo env GOROOTATH=$PATH:/home/zhaomingxing.93/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:~/bin:~/apache-maven-3.8.3/bin
 
@@ -16,9 +16,13 @@ export PATH=$PATH:/opt/tiger/ss_bin:/opt/tiger/ss_lib/bin:/opt/tiger/yarn_deploy
 # 加入node的bin
 export PATH=$PATH:/home/zhaomingxing.93/node-v12.14.1-linux-x64/bin
 
+
+# 加入 coco 的bin
+export PATH=$PATH:~/bin/coco
+
 #=============== Golang Setting =============================================
-export GOROOT=/usr/local/lib/bytedance-go
-export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,https://proxy.golang.org,direct"
+export GOPROXY="https://goproxy.byted.org|https://goproxy.cn|direct"
+export GOSUMDB="sum.golang.google.cn"
 export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/golang
@@ -42,7 +46,8 @@ alias tx="tmux"
 
 #=============== Dev machine Setting =============================================
 DEV_USER_NAME="zhaomingxing.93"
-DEV_IP="10.227.19.33"
+DEV_IP="10.37.27.207"
+ 
 # copy local files to dev machine
 dscp() {
 	scp -r $1 $DEV_USER_NAME@$DEV_IP:~/
@@ -135,7 +140,7 @@ tpr() {
 
 
 #=============== Common Alias Setting =============================================
-alias ll='ls -al -G'
+alias ll='ls -alh -G'
 alias zconf='vim $HOME/github/mydotfiles/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
@@ -256,7 +261,6 @@ plugins=(git ssh-agent zsh-autosuggestions)
 
 
 #=============== j 命令 =============================================
- [[ -s /home/zhaomingxing.93/.autojump/etc/profile.d/autojump.sh  ]] && source /home/zhaomingxing.93/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
 
