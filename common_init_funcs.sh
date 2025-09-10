@@ -242,7 +242,6 @@ battery() {
 #================== 安全kinit认证 ==========================
 knp() {
     if [ -f "$HOME/.kinit_pass" ]; then
-        zhaomingxing.93@BYTEDANCE.COM
         kinit --password-file="$HOME/.kinit_pass" "zhaomingxing.93@BYTEDANCE.COM"
 
     else
