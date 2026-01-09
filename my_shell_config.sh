@@ -315,7 +315,7 @@ noproxy() {
 
 
 #=============== Common Alias Setting =============================================
-alias ll='ls -ahl --color=auto'
+alias ll='eza -ahl --color=auto'
 alias zconf='vim $HOME/github/my_dot_files/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
