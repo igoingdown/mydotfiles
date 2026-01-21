@@ -9,3 +9,5 @@ output/
 *.swo
 .idea/
 /idl
+secrets.sh
+.dotfiles_secrets
