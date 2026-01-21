@@ -1,6 +1,7 @@
 #!/bin/zsh
 
-source $HOME/github/my_dot_files/my_shell_config.sh
+export DOTFILES_ROOT=${DOTFILES_ROOT:-"$HOME/github/my_dot_files"}
+source ${DOTFILES_ROOT}/my_shell_config.sh
 
 case $1 in
     wechat)
