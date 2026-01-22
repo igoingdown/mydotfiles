@@ -524,6 +524,14 @@ ppc() {
 }
 
 
+# zsh key binding
+#=============== zsh key binding =============================================
+# 显式绑定 Option + J 到向后跳词
+bindkey "^[j" backward-word
+
+# 显式绑定 Option + L 到向前跳词
+bindkey "^[l" forward-word
+
 
 #=============== nvm lazy load =============================================
 load_nvm() {
@@ -533,4 +541,6 @@ load_nvm() {
 }
 
 load_nvm
+
+
 
