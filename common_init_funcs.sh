@@ -1,5 +1,16 @@
 #!/bin/bash
 
+export DOTFILES_ROOT=$HOME/github/my_dot_files
+
+# Load secrets if available
+if [ -f "${DOTFILES_ROOT}/secrets.sh" ]; then
+    source "${DOTFILES_ROOT}/secrets.sh"
+else
+    # Fallback/Placeholder
+    echo "Error: secrets.sh not found"
+    exit 1
+fi
+
 
 #=============== CPP Setting =============================================
 # compile cpp program with c++11
@@ -25,11 +36,15 @@ alias gl="git log"
 alias gc="git commit -m"
 # after status and diff, push it through
 push_through(){
+    if [ -z "$1" ]; then
+        echo "Usage: push_through <commit_message>"
+        return 1
+    fi
 	gs
     fail_report
     git add .
     fail_report
-    git commit -m $1
+    git commit -m "$1"
     fail_report
     gps
 }
@@ -37,7 +52,7 @@ push_through(){
 
 #=============== Common Alias Setting =============================================
 alias ll='ls -al -G'
-alias zconf='vim $HOME/github/my_dot_files/my_shell_config.sh'
+alias zconf='vim ${DOTFILES_ROOT}/my_shell_config.sh'
 alias zload='source ~/.zshrc'
 alias ssh="ssh -X"
 alias md="mkdir -p"
@@ -87,14 +102,14 @@ cloneMyGithubRepos() {
 
 #=============== config github repos ============================================
 configMyGithubRepos() {
-	git config user.email "fycjmingxing@126.com"
-	git config user.name "igoingdown"
+	git config user.email "${GITHUB_USER_EMAIL}"
+	git config user.name "${GITHUB_USER_NAME}"
 }
 
 
 #=============== tmux, zsh, bash and vim config ============================================
 dragConfFromGithub() {
-	cd $HOME/github/my_dot_files
+	cd ${DOTFILES_ROOT}
 	cp .vimrc ~/
 	cp .zshrc ~/
 	cp .tmux.conf ~/
@@ -142,6 +157,24 @@ installZsh() {
 }
 
 
+#=============== Install Spaceship Prompt =======================================
+installSpaceship() {
+    local ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
+    if [ ! -d "$ZSH_CUSTOM/themes/spaceship-prompt" ]; then
+        echo "Installing Spaceship prompt..."
+        git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+        ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+    else
+        echo "Updating Spaceship prompt..."
+        if [ -d "$ZSH_CUSTOM/themes/spaceship-prompt/.git" ]; then
+            cd "$ZSH_CUSTOM/themes/spaceship-prompt" && git pull
+        else
+            echo "Spaceship directory exists but is not a git repo. Skipping update."
+        fi
+    fi
+}
+
+
 #=============== Install dlv ============================================
 installDlv() {
 	source my_shell_config.sh
@@ -155,7 +188,6 @@ installPB() {
 	cd ~/github/
 	wget https://github.com/google/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.gz
 	tar -zxvf protobuf-2.6.1.tar.gz 
-	# 不确定下面这句要不要，开发环境如果是旧的话，这些基本都有，如果是全新的，最好加上
 	# sudo apt-get install build-essential # 不装会报错
 	cd protobuf-2.6.1/ 
 	./configure 
@@ -242,11 +274,11 @@ battery() {
 #================== 安全kinit认证 ==========================
 knp() {
     if [ -f "$HOME/.kinit_pass" ]; then
-        kinit --password-file="$HOME/.kinit_pass" "zhaomingxing.93@BYTEDANCE.COM"
+        kinit --password-file="$HOME/.kinit_pass" "${KINIT_USER}"
 
     else
         echo "请创建 ~/.kinit_pass 文件或使用 kinit 手动认证"
-        kinit "zhaomingxing.93@BYTEDANCE.COM"
+        kinit "${KINIT_USER}"
     fi
 }
 
