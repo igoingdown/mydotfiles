@@ -1,104 +1,54 @@
-#/bin/bash
+#!/bin/bash
 
-source common_init_funcs.sh
+# Source common functions
+# Ensure DOTFILES_ROOT is set if not already
+export DOTFILES_ROOT=${DOTFILES_ROOT:-$HOME/github/my_dot_files}
+source ${DOTFILES_ROOT}/common_init_funcs.sh
 
-
-#=============== generate ssh key and upload it to github ===========================================
-# ssh-keygen
-# TODO: upload public key to github or use http first
-
+echo "Starting macOS initialization..."
 
 #=============== install brew ===========================================
-#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
+    # Add brew to PATH for immediate use (M1/M2/M3 vs Intel)
+    if [ -f "/opt/homebrew/bin/brew" ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [ -f "/usr/local/bin/brew" ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+else
+    echo "Homebrew already installed."
+fi
+
+#=============== install dependencies via Brewfile ===========================================
+echo "Installing dependencies from Brewfile..."
+brew bundle --file=${DOTFILES_ROOT}/Brewfile || echo "Brew bundle finished with some warnings/errors."
 
 
-#=============== install wget ===========================================
-#brew install wget
+#=============== install zsh & oh-my-zsh ===========================================
+installZsh
 
 
-#=============== install zsh  ===========================================
-# installZsh
-
-
-#=============== install vundle  ========================================
-#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-
-#=============== Install tmux ====================================
-#brew install tmux
+#=============== install vundle ========================================
+if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+    echo "Installing Vundle..."
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+else
+    echo "Vundle already installed."
+fi
 
 
 #=============== config tmux, vim, zsh and bash ====================================
-# dragConfFromGithub
+echo "Linking configuration files..."
+dragConfFromGithub
 
 
-#=============== Install nmap ====================================
-#brew install nmap 
+#=============== Install Spaceship Prompt =======================================
+installSpaceship
 
 
-#=============== Install exa ====================================
-#brew install exa
-
-
-#=============== Install j ====================================
-#brew install autojump
-
-
-#=============== install golang =========================================
-#  brew install go
-
-
-#=============== install ag =========================================
-#brew install the_silver_searcher
-
-
-#=============== install jq =========================================
-#brew install jq
-
-
-#=============== install plantuml =========================================
-#brew install plantuml
-#export PLANTUML_LIMIT_SIZE=65536
-
-
-#=============== install git delta for git diff =========================================
-#brew install git-delta
-
-
-#=============== Install dlv ============================================
-# installDlv
-
-
-#=============== install cool projects =========================================
-# install some cool projects that I should learn through
-# installCoolProjects
-
-
-#=============== install YCM  =========================================
-# installYCM
-
-
-#=============== install PB =========================================
-# installPB
-
-
-#=============== install GNU sed =========================================
-#brew install gnu-sed
-
-
-#=============== install rust =========================================
-#install_rust
-
-
-
-#=============== install GNU reallink =========================================
-#brew install coreutils
-
-
-#=============== install osxphotos: a terminal photo export tool ======
-#brew install pipx
-#pipx install osxphotos
-# TODO:  add bin to $PATH
-# like the following command
-# export PATH=$HOME/Library/Application Support/pipx/venvs/osxphotos/bin:$PATH
-
+#=============== Post-Install Checks ===========================================
+echo "Initialization complete!"
+echo "Please restart your terminal or run 'source ~/.zshrc' to apply changes."
