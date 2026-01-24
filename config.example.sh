@@ -7,6 +7,10 @@
 export GIT_USER_NAME="your_name"
 export GIT_USER_EMAIL="your_email@example.com"
 
+# Github Configuration
+export GITHUB_USER_NAME="your_github_name"
+export GITHUB_USER_EMAIL="your_github_email@example.com"
+
 # Dev Machine Configuration
 export DEV_USER_NAME="your.username"
 export DEV_IP="10.0.0.1"
@@ -23,17 +27,11 @@ export METRICS_APP="your_metrics_app_name"
 export METRICS_KEY="your_metrics_key"
 
 # Consul Configuration
-export CONSUL_HOST_DEV="10.0.0.5"
-export CONSUL_PORT_DEV="2280"
-export CONSUL_HOST_MOCK="10.0.0.6"
+export CONSUL_HTTP_HOST=$DEV_IP
+export CONSUL_HTTP_PORT="2280"
 
 # Kinit/Kerberos
 export KINIT_USER="your.username@EXAMPLE.COM"
-
-# BBS / Personal Info
-# Use single quotes to avoid expansion issues if special chars are present
-export BBS_INTRO='Your introduction text here'
-export BBS_THANK='Your thank you message here'
 
 # IDs and Personal Numbers (Desensitized)
 export MY_DID="your_did"
