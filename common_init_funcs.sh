@@ -7,8 +7,8 @@ if [ -f "${DOTFILES_ROOT}/secrets.sh" ]; then
     source "${DOTFILES_ROOT}/secrets.sh"
 else
     # Fallback/Placeholder
-    echo "Error: secrets.sh not found"
-    exit 1
+    echo "Warning: secrets.sh not found at ${DOTFILES_ROOT}/secrets.sh"
+    echo "Some features may not work without secrets.sh. Continuing..."
 fi
 
 
