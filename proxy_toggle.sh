@@ -5,6 +5,7 @@
 INTERFACE="Wi-Fi"  # 根据你的网络接口修改
 
 if [ "$1" = "on" ]; then
+    brew services restart xray
     echo "🔄 启用Xray代理..."
     networksetup -setwebproxy "$INTERFACE" 127.0.0.1 8080
     networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 1080
@@ -16,6 +17,8 @@ elif [ "$1" = "off" ]; then
     echo "🔄 禁用Xray代理..."
     networksetup -setwebproxystate "$INTERFACE" off
     networksetup -setsocksfirewallproxystate "$INTERFACE" off
+
+    brew services stop xray
     echo "❌ 代理已禁用"
 
 else
