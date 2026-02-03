@@ -170,8 +170,17 @@ proxy() {
 noproxy() {
     unset http_proxy
     unset https_proxy
+    unset no_proxy
     echo "proxy: off"
 }
+
+xray_proxy() {
+    export http_proxy=${XRAY_PROXY_IP}:${XRAY_PROXY_PORT}
+    export https_proxy=${XRAY_PROXY_IP}:${XRAY_PROXY_PORT}
+    export no_proxy=*.byted.org
+    echo "proxy: on"
+}
+
 
 #=============== Common Functions =============================================
 # find specified pattern under particular path recursively 

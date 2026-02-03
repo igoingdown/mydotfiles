@@ -2,6 +2,9 @@
 
 # Xray代理一键切换脚本
 
+export DOTFILES_ROOT=${DOTFILES_ROOT:-$HOME/github/my_dot_files}
+source ${DOTFILES_ROOT}/shell/functions.sh
+
 INTERFACE="Wi-Fi"  # 根据你的网络接口修改
 
 if [ "$1" = "on" ]; then
@@ -12,6 +15,7 @@ if [ "$1" = "on" ]; then
     networksetup -setwebproxystate "$INTERFACE" on
     networksetup -setsocksfirewallproxystate "$INTERFACE" on
     echo "✅ 代理已启用"
+    xray_proxy
 
 elif [ "$1" = "off" ]; then
     echo "🔄 禁用Xray代理..."
@@ -20,6 +24,7 @@ elif [ "$1" = "off" ]; then
 
     brew services stop xray
     echo "❌ 代理已禁用"
+    noproxy
 
 else
     echo "📖 使用方法:"
