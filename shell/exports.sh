@@ -9,6 +9,8 @@ export GOSUMDB="sum.golang.google.cn"
 export GONOSUMDB="*.byted.org,*.everphoto.cn,git.smartisan.com,cloud.google.com/*"
 export GOOS="darwin"
 export GOROOT="/opt/homebrew/opt/go/libexec"
+go env -w GOTOOLCHAIN=local
+
 add_to_path "$GOROOT/bin"
 
 #=============== ETCD Setting =============================================
@@ -33,3 +35,14 @@ export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 #=============== tce api config =============================================
 export API_KEY=${TCE_API_KEY}
+
+
+
+#=============== CCR config =============================================
+export ANTHROPIC_AUTH_TOKEN="test"
+export ANTHROPIC_BASE_URL="http://127.0.0.1:3456"
+export NO_PROXY="127.0.0.1"
+export DISABLE_TELEMETRY="true"
+export DISABLE_COST_WARNINGS="true"
+export API_TIMEOUT_MS="600000"
+unset CLAUDE_CODE_USE_BEDROCK
