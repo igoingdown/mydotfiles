@@ -14,6 +14,9 @@ if [ "$1" = "on" ]; then
     networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 1080
     networksetup -setwebproxystate "$INTERFACE" on
     networksetup -setsocksfirewallproxystate "$INTERFACE" on
+    export https_proxy=http://127.0.0.1:8080
+    export http_proxy=http://127.0.0.1:8080
+    export all_proxy=socks5://127.0.0.1:8080
     echo "✅ 代理已启用"
     xray_proxy
 
@@ -21,7 +24,9 @@ elif [ "$1" = "off" ]; then
     echo "🔄 禁用Xray代理..."
     networksetup -setwebproxystate "$INTERFACE" off
     networksetup -setsocksfirewallproxystate "$INTERFACE" off
-
+    unset https_proxy
+    unset http_proxy
+    unset all_proxy
     brew services stop xray
     echo "❌ 代理已禁用"
     noproxy
