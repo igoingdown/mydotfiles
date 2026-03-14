@@ -138,11 +138,15 @@ installPB() {
 #=============== proxy setting  =============================================
 # 现在基本不需要设置proxy了，公司的网络都可以自动跳转proxy
 pon() {
-	export http_proxy=10.110.216.52:3128
-	export https_proxy="http://10.110.216.52:3128"
+	export http_proxy=http://sys-proxy-rd-relay.byted.org:8118
+	export https_proxy=http://sys-proxy-rd-relay.byted.org:8118
+	export HTTP_PROXY=$http_proxy
+	export HTTPS_PROXY=$https_proxy
 }
 poff() {
 	unset http_proxy
 	unset https_proxy
+	unset HTTP_PROXY
+	unset HTTPS_PROXY
 }
 
