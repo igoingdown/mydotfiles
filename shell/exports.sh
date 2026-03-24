@@ -1,5 +1,6 @@
 #=============== Golang Setting =============================================
 export GOPATH="$HOME/golang"
+export GOBIN=$HOME/golang/bin
 # Note: add_to_path is defined in shell/paths.sh
 add_to_path "$GOPATH/bin"
 add_to_path "/opt/homebrew/opt/go@1.24/bin"
