@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Xray代理一键切换脚本
 
