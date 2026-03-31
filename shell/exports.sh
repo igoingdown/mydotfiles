@@ -22,7 +22,7 @@ export ETCDCTL_API=3
 export LD_LIBRARY_PATH=/usr/local/lib
 
 #=============== python setting =============================================
-export PYTHONPATH=$PYTHONPATH:"~/repos/toutiao/app:~/repos/toutiao/lib:/~/repos/toutiao/lib/python_package/lib/python2.7/site-packages:~/repos/toutiao/lib/python_package"
+export PYTHONPATH=$PYTHONPATH:"$HOME/repos/toutiao/app:$HOME/repos/toutiao/lib:/$HOME/repos/toutiao/lib/python_package/lib/python2.7/site-packages:$HOME/repos/toutiao/lib/python_package"
 
 #=============== plantuml config =============================================
 export PLANTUML_LIMIT_SIZE=65536
