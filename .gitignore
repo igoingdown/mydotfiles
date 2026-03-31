@@ -11,3 +11,4 @@ output/
 /idl
 secrets.sh
 .dotfiles_secrets
+.claude/

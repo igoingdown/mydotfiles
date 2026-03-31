@@ -21,6 +21,11 @@ export ONLINE_DEV_IP="10.0.0.3"
 export PROXY_IP="10.0.0.4"
 export PROXY_PORT="3128"
 
+# Xray Proxy Configuration
+export XRAY_PROXY_IP="127.0.0.1"
+export XRAY_PROXY_PORT="8080"
+
+
 # API Keys and Secrets
 export TCE_API_KEY="your_tce_api_key"
 export METRICS_APP="your_metrics_app_name"

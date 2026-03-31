@@ -203,9 +203,10 @@ fh() {
 
 # report error and stop running commands below 
 fail_report() {
-    if [ $? -ne 0 ]; then
-        echo "Command failed with exit code $?. Stopping execution."
-        exit 1
+    local last_exit=$?
+    if [ $last_exit -ne 0 ]; then
+        echo "Command failed with exit code $last_exit. Stopping."
+        return 1
     fi
 }
 

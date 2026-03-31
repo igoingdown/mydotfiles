@@ -10,7 +10,7 @@ export GOSUMDB="sum.golang.google.cn"
 export GONOSUMDB="*.byted.org,*.everphoto.cn,git.smartisan.com,cloud.google.com/*"
 export GOOS="darwin"
 export GOROOT="/opt/homebrew/opt/go/libexec"
-go env -w GOTOOLCHAIN=local
+export GOTOOLCHAIN=local
 
 add_to_path "$GOROOT/bin"
 

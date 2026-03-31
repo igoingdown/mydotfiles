@@ -14,8 +14,6 @@ add_to_path "/usr/bin"
 add_to_path "/bin"
 add_to_path "/usr/sbin"
 add_to_path "/sbin"
-
-export PATH=/usr/local/bin:$PATH
 add_to_path "/opt/puppetlabs/bin"
 add_to_path "$HOME/bin"
 add_to_path "/opt/homebrew/bin"
