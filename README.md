@@ -33,10 +33,7 @@ This script will:
 - Link configuration files
 
 #### Linux (Ubuntu/Debian)
-Use the dev initialization script:
-```bash
-./init_dev.sh
-```
+Linux initialization scripts are maintained in the `dev` branch.
 
 ### 4. Load Shell Configuration
 Add the following line to your `~/.zshrc` or `~/.bashrc` to load the configurations:
@@ -53,7 +50,6 @@ source ~/github/my_dot_files/my_shell_config.sh
 ├── common_init_funcs.sh    # Shared functions (installation, config loading)
 ├── config.example.sh       # Template for secrets & config (Copy to secrets.sh)
 ├── goto                    # Quick directory jump script
-├── init_dev.sh             # Linux initialization scripts (apt-get based)
 ├── init_mac.sh             # macOS initialization script
 ├── mac_mock_devbox.sh      # Mock env vars for local testing on Mac
 ├── my_shell_config.sh      # Main shell configuration entry point
