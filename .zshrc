@@ -117,8 +117,17 @@ alias goto="~/goto"
 _goto_completion () {
     compadd `\grep ")" ~/goto | cut -f 1 -d ")"`
 }
+
+# 先初始化补全
+autoload -Uz compinit
+compinit
+
+# 再定义自己的补全
 compdef _goto_completion goto
 
 
 
 export SPACESHIP_DIR_TRUNC=0
+
+
+eval "$(zoxide init zsh --cmd j)"
