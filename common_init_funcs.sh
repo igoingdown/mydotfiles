@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DOTFILES_ROOT=$HOME/github/my_dot_files
+export DOTFILES_ROOT=${DOTFILES_ROOT:-$HOME/github/my_dot_files}
 
 # Load secrets if available
 if [ -f "${DOTFILES_ROOT}/secrets.sh" ]; then
@@ -211,4 +211,3 @@ knp() {
 install_rust() {
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
-

@@ -161,8 +161,10 @@ tpr() {
 
 #=============== Proxy Functions =============================================
 proxy() {
-    export http_proxy=${PROXY_IP}:${PROXY_PORT}
-    export https_proxy=${PROXY_IP}:${PROXY_PORT}
+    local proxy_ip=${PROXY_IP:-127.0.0.1}
+    local proxy_port=${PROXY_PORT:-8080}
+    export http_proxy=http://${proxy_ip}:${proxy_port}
+    export https_proxy=http://${proxy_ip}:${proxy_port}
     export no_proxy=*.byted.org
     echo "proxy: on"
 }
@@ -170,13 +172,17 @@ proxy() {
 noproxy() {
     unset http_proxy
     unset https_proxy
+    unset all_proxy
     unset no_proxy
     echo "proxy: off"
 }
 
 xray_proxy() {
-    export http_proxy=${XRAY_PROXY_IP}:${XRAY_PROXY_PORT}
-    export https_proxy=${XRAY_PROXY_IP}:${XRAY_PROXY_PORT}
+    local proxy_ip=${XRAY_PROXY_IP:-127.0.0.1}
+    local proxy_port=${XRAY_PROXY_PORT:-8080}
+    export http_proxy=http://${proxy_ip}:${proxy_port}
+    export https_proxy=http://${proxy_ip}:${proxy_port}
+    export all_proxy=socks5://${XRAY_SOCKS_IP:-127.0.0.1}:${XRAY_SOCKS_PORT:-1080}
     export no_proxy=*.byted.org
     echo "proxy: on"
 }
@@ -299,11 +305,14 @@ load_nvm() {
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    return 0
 }
 
 #=============== ZSH Key Binding =============================================
-# 显式绑定 Option + J 到向后跳词
-bindkey "^[j" backward-word
+if command -v bindkey >/dev/null 2>&1; then
+    # 显式绑定 Option + J 到向后跳词
+    bindkey "^[j" backward-word
 
-# 显式绑定 Option + L 到向前跳词
-bindkey "^[l" forward-word
+    # 显式绑定 Option + L 到向前跳词
+    bindkey "^[l" forward-word
+fi

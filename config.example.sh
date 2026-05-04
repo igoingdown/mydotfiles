@@ -24,6 +24,8 @@ export PROXY_PORT="3128"
 # Xray Proxy Configuration
 export XRAY_PROXY_IP="127.0.0.1"
 export XRAY_PROXY_PORT="8080"
+export XRAY_SOCKS_IP="127.0.0.1"
+export XRAY_SOCKS_PORT="1080"
 
 
 # API Keys and Secrets

@@ -2,7 +2,10 @@
 # 封装路径设置逻辑
 add_to_path() {
     if [ -d "$1" ]; then
-        export PATH="$1:$PATH"
+        case ":$PATH:" in
+            *":$1:"*) ;;
+            *) export PATH="$1:$PATH" ;;
+        esac
     else
         # echo "Warning: Directory $1 does not exist, skipping."
         :
