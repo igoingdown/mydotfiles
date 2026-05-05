@@ -6,14 +6,14 @@ INTERFACE="Wi-Fi"
 if [ "$1" = "on" ]; then
     brew services restart xray
     echo "🔄 启用Xray代理..."
-    networksetup -setwebproxy "$INTERFACE" 127.0.0.1 8080
-    networksetup -setsecurewebproxy "$INTERFACE" 127.0.0.1 8080  # ← 新增 HTTPS
+    networksetup -setwebproxy "$INTERFACE" 127.0.0.1 1087
+    networksetup -setsecurewebproxy "$INTERFACE" 127.0.0.1 1087  # ← 新增 HTTPS
     networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 1080
     networksetup -setwebproxystate "$INTERFACE" on
     networksetup -setsecurewebproxystate "$INTERFACE" on          # ← 新增 HTTPS
     networksetup -setsocksfirewallproxystate "$INTERFACE" on
-    export https_proxy=http://127.0.0.1:8080
-    export http_proxy=http://127.0.0.1:8080
+    export https_proxy=http://127.0.0.1:1087
+    export http_proxy=http://127.0.0.1:1087
     export all_proxy=socks5://127.0.0.1:1080                     # ← 修正端口
     echo "✅ 代理已启用"
     xray_proxy
