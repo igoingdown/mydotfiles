@@ -2,8 +2,6 @@
 
 # set envs to mock devbox on mac
 set_devbox_env_var() {
-    export CONSUL_HTTP_PORT=2280
-    export CONSUL_HTTP_HOST=10.227.19.33
     export RUNTIME_IDC_NAME=boe
 }
 

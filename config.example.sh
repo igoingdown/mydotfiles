@@ -11,12 +11,6 @@ export GIT_USER_EMAIL="your_email@example.com"
 export GITHUB_USER_NAME="your_github_name"
 export GITHUB_USER_EMAIL="your_github_email@example.com"
 
-# Dev Machine Configuration
-export DEV_USER_NAME="your.username"
-export DEV_IP="10.0.0.1"
-export NEW_DEV_IP="10.0.0.2"
-export ONLINE_DEV_IP="10.0.0.3"
-
 # Proxy Configuration
 export PROXY_IP="10.0.0.4"
 export PROXY_PORT="3128"
@@ -32,10 +26,6 @@ export XRAY_SOCKS_PORT="1080"
 export TCE_API_KEY="your_tce_api_key"
 export METRICS_APP="your_metrics_app_name"
 export METRICS_KEY="your_metrics_key"
-
-# Consul Configuration
-export CONSUL_HTTP_HOST=$DEV_IP
-export CONSUL_HTTP_PORT="2280"
 
 # Kinit/Kerberos
 export KINIT_USER="your.username@EXAMPLE.COM"

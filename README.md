@@ -75,7 +75,6 @@ source ~/github/my_dot_files/my_shell_config.sh
 ### Secrets Management
 The project uses `secrets.sh` to manage sensitive data. Define the following in your `secrets.sh`:
 - Git User/Email
-- Dev Machine IPs (`DEV_IP`, `ONLINE_DEV_IP`)
 - API Keys (`TCE_API_KEY`, `METRICS_KEY`)
 - Personal IDs (`MY_DID`, `MY_UID`, etc.)
 

@@ -23,12 +23,6 @@ if [ -f "${DOTFILES_ROOT}/bbs_conf.sh" ]; then
     source ${DOTFILES_ROOT}/bbs_conf.sh
 fi
 
-# 4. Initialization Logic
-# Check secrets
-if [ -z "$DEV_USER_NAME" ]; then
-    echo "Warning: DEV_USER_NAME is not set. Please configure secrets.sh."
-fi
-
 # Load NVM (Lazy load or direct load as per previous config)
 # load_nvm is defined in shell/functions.sh
 load_nvm

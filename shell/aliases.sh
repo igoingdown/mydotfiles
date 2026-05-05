@@ -1,11 +1,6 @@
 #=============== Golang Alias =============================================
 alias build="go build ."
 
-#=============== Dev machine Alias =============================================
-alias odev="ssh $DEV_USER_NAME@$ONLINE_DEV_IP"
-alias dev="ssh $DEV_USER_NAME@$DEV_IP"
-alias ndev="ssh $DEV_USER_NAME@$NEW_DEV_IP"
-
 #=============== Hexo Alias =============================================
 alias hd='hexo g -d'
 
