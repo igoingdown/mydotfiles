@@ -4,12 +4,12 @@ export GOBIN=$HOME/golang/bin
 # Note: add_to_path is defined in shell/paths.sh
 add_to_path "$GOPATH/bin"
 add_to_path "/opt/homebrew/opt/go@1.24/bin"
-export GOPROXY="https://go-mod-proxy.byted.org,https://goproxy.cn,direct"
+export GOPROXY="https://goproxy.cn,direct"
 export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export GOSUMDB="sum.golang.google.cn"
 export GONOSUMDB="*.byted.org,*.everphoto.cn,git.smartisan.com,cloud.google.com/*"
 export GOOS="darwin"
-export GOROOT="/opt/homebrew/opt/go/libexec"
+export GOROOT="/opt/homebrew/opt/go@1.25/libexec"
 export GOTOOLCHAIN=local
 
 add_to_path "$GOROOT/bin"
