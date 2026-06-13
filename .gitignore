@@ -12,3 +12,4 @@ output/
 secrets.sh
 .dotfiles_secrets
 .claude/
+.agents/

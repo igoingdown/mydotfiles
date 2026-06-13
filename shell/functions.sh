@@ -96,7 +96,7 @@ proxy() {
     local proxy_port=${PROXY_PORT:-8080}
     export http_proxy=http://${proxy_ip}:${proxy_port}
     export https_proxy=http://${proxy_ip}:${proxy_port}
-    export no_proxy=*.byted.org
+    export no_proxy="localhost,127.0.0.1,::1"
     echo "proxy: on"
 }
 
@@ -110,11 +110,11 @@ noproxy() {
 
 xray_proxy() {
     local proxy_ip=${XRAY_PROXY_IP:-127.0.0.1}
-    local proxy_port=${XRAY_PROXY_PORT:-8080}
+    local proxy_port=${XRAY_PROXY_PORT:-1087}
     export http_proxy=http://${proxy_ip}:${proxy_port}
     export https_proxy=http://${proxy_ip}:${proxy_port}
     export all_proxy=socks5://${XRAY_SOCKS_IP:-127.0.0.1}:${XRAY_SOCKS_PORT:-1080}
-    export no_proxy=*.byted.org
+    export no_proxy="localhost,127.0.0.1,::1"
     echo "proxy: on"
 }
 

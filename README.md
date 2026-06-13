@@ -72,6 +72,24 @@ source ~/github/my_dot_files/my_shell_config.sh
     - `got`: Run specific Go tests with `doas`.
 - **Environment**: Sets up `GOPATH`, `PYTHONPATH`, and internal proxy settings.
 
+### Proxy Management (`proxy_toggle.sh`)
+
+`proxy_toggle.sh` toggles the local Xray proxy across three layers in one command: the Xray service (`brew services`), the macOS system proxy (`networksetup`), and the environment variables inherited by GUI-launched apps (`launchctl setenv`). The latter is what lets GUI apps such as Claude Desktop / Cursor and their embedded agents use the proxy, since they don't reliably inherit shell exports or the macOS system proxy.
+
+```bash
+./proxy_toggle.sh on      # Start Xray, enable system proxy + launchd proxy env
+./proxy_toggle.sh off     # Disable system proxy + launchd proxy env, stop Xray
+./proxy_toggle.sh status  # Show system proxy, local port, and launchd proxy state
+./proxy_toggle.sh sync    # Reconcile launchd proxy env with the current proxy state
+```
+
+Ports and hosts default to `XRAY_PROXY_IP/PORT` (`127.0.0.1:1087`) and `XRAY_SOCKS_IP/PORT` (`127.0.0.1:1080`), overridable in `secrets.sh`.
+
+Notes:
+- **Run it as `./proxy_toggle.sh on`, not `source proxy_toggle.sh on`.**
+- **Already-running GUI apps must be fully quit and reopened** to pick up the new proxy environment; macOS cannot change a running process's environment.
+- **`launchctl setenv` does not persist across reboot.** After a reboot (where the system proxy may still be on and Xray may auto-start), re-run `./proxy_toggle.sh on` or `./proxy_toggle.sh sync` to restore the launchd proxy env.
+
 ### Secrets Management
 The project uses `secrets.sh` to manage sensitive data. Define the following in your `secrets.sh`:
 - Git User/Email
