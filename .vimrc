@@ -1,5 +1,19 @@
+"=====================配置快捷键的前缀======================================
+" 定义快捷键的前缀，即<Leader>
+let mapleader=";"
+
+
+"=====================配色方案======================================
+" 配色方案
+set background=dark
+"colorscheme solarized
+colorscheme molokai
+
+"colorscheme phd
+
+
 "=====================开始安装插件===========================================
-set nocompatible               " 关闭兼容模式
+set nocompatible               " be iMproved
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -9,6 +23,7 @@ call vundle#rc()
 " required!
 
 Bundle 'VundleVim/Vundle.vim'
+Bundle "XadillaX/json-formatter.vim"
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -22,48 +37,37 @@ Bundle 'yann2192/vim-vitamins'
 Bundle 'fatih/vim-go'
 Bundle 'scrooloose/syntastic'
 Bundle 'solarnz/thrift.vim'
+Bundle 'ruanyl/vim-gh-line'
 
 " Snipmate
 Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'mileszs/ack.vim'
 Plugin 'w0rp/ale'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'zivyangll/git-blame.vim'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'jspringyc/vim-word'
+
 
 filetype plugin indent on     " required!
 
 
-"=============不同类型的文件加载不同配置================================
+"=====================文件类型侦测设置===========================================
 " 开启文件类型侦测
 filetype on
+
 " 根据侦测到的不同类型加载对应的插件
-filetype plugin on"
-
-
-
-"=============定义快捷键================================
-" 定义快捷键到行首和行尾
-nmap LB 0
-nmap LE $
-" 定义快捷键保存所有窗口内容并退出 vim
-nmap <Leader>WQ :wa<CR>:q<CR>
-" 不做任何保存，直接退出 vim
-nmap <Leader>Q :qa!<CR>
-
-
-"=============定义快捷键前缀，即<leader>================================
-let mapleader=";"
+" C++ 的语法高亮插件与python 的不同
+filetype plugin on
 
 
 "=============其实就是在保存之后重新载入一下================================
@@ -72,10 +76,24 @@ let mapleader=";"
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 
-"==============不知道这个东西有啥用，我先干掉了！============================
+"=============搜索与补全================================
+" 开启实时搜索功能
+set incsearch
+" 搜索时大小写不敏感
+set ignorecase
+" vim 自身命令行模式智能补全
+set wildmenu
+
+
+"==============不知道这个东西有啥用============================
+" 关闭兼容模式
+set nocompatible
+
+
+"==============设置突出显示============================
 set nu " 设置行号
 set cursorline "突出显示当前行
-set cursorcolumn " 突出显示当前列
+" set cursorcolumn " 突出显示当前列
 set showmatch " 显示括号匹配
 
 
@@ -83,13 +101,8 @@ set showmatch " 显示括号匹配
 set tabstop=4 " 设置Tab长度为4空格
 set shiftwidth=4 " 设置自动缩进长度为4空格
 set autoindent " 继承前一行的缩进方式，适用于多行注释
-
-
-
-"==============c++专用配置============================
-" *.cpp 和 *.h 间切换
-nmap <silent> <Leader>sw :FSHere<cr>
-
+set softtabstop=4   " 使得按退格键时可以一次删掉 4 个空格
+set expandtab"
 
 
 "==============系统剪切板复制粘贴============================
@@ -101,22 +114,9 @@ nmap <Leader>c "+yy
 nmap <Leader>v "+p
 
 
-"==============缩进配置============================
-" 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=1
-" 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=2
-" 色块宽度
-let g:indent_guides_guide_size=1
-" 快捷键 i 开/关缩进可视化
-:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
-
-
 "==============搜索设置============================
 " 开启实时搜索
 set incsearch
-" 高亮显示搜索结果
-set hlsearch
 " 搜索时大小写不敏感
 set ignorecase
 syntax enable
@@ -224,3 +224,42 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+
+"==============用 ag 代替 ack============================
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+
+"==============ack 快捷键配置============================
+nnoremap √ <C-v>
+nnoremap ˙ <C-w>h
+nnoremap ∆ <C-w>j
+nnoremap ˚ <C-w>k
+nnoremap ¬ <C-w>l
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+
+"==============git blame 配置============================
+nnoremap gb :<C-u>call gitblame#echo()<CR>
+
+
+
+"============== browse remote ============================
+let g:gh_gitlab_domain = "xxx"
+
+
+"============== code 折叠与展开配置 ============================
+set foldmethod=indent
+
+
+"============== 复制粘贴配置 ============================
+set clipboard=unnamedplus,unnamed,autoselect
+
+
+
+"============== snipmate parser 更新减少warning ============================
+let g:snipMate = { 'snippet_version' : 1 }

@@ -8,4 +8,9 @@ output/
 *.swn
 *.swo
 .idea/
-/idl
+secrets.sh
+.dotfiles_secrets
+.claude/
+.agents/
+UBUNTU_REFACTOR_PLAN.md
+UBUNTU_REFACTOR_TASKS.md
