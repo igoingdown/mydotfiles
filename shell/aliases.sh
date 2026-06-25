@@ -76,10 +76,6 @@ alias dorm='docker rm'
 #=============== ag Alias =============================================
 alias ag='ag --ignore-dir thrift_gen --ignore-dir clients --ignore-dir kitex_gen --ignore-dir pb_gen --ignore-dir ugc_thecat_pyrpc'
 
-#=============== ppe Alias =============================================
-alias ppe=jump_ppe_by_psm
-
-
 #=============== brew Alias =============================================
 alias brewdump='brew bundle dump --force --describe'
 

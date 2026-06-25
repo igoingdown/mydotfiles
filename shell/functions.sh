@@ -199,12 +199,6 @@ time2stamp() {
    python3 $HOME/github/python_demo_and_tool/tools/time_tools/time2stamp.py $1
 }
 
-#=============== PPE Functions =============================================
-jump_ppe_by_psm () {
-    cat ~/psm.txt | cut -f 1 -d " " | fzf | read psm
-    ~/scripts/bytedance/byteshell_ppe.sh $psm
-}
-
 #=============== Repo Functions =============================================
 repo_name () {
     if [ -z "$1" ]; then
