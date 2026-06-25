@@ -24,8 +24,6 @@ export XRAY_SOCKS_PORT="1080"
 
 # API Keys and Secrets
 export TCE_API_KEY="your_tce_api_key"
-export METRICS_APP="your_metrics_app_name"
-export METRICS_KEY="your_metrics_key"
 
 # Kinit/Kerberos
 export KINIT_USER="your.username@EXAMPLE.COM"

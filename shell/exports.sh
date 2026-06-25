@@ -36,14 +36,3 @@ export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 #=============== tce api config =============================================
 export API_KEY=${TCE_API_KEY}
-
-
-
-#=============== CCR config =============================================
-export ANTHROPIC_AUTH_TOKEN="test"
-export ANTHROPIC_BASE_URL="http://127.0.0.1:3456"
-export NO_PROXY="127.0.0.1"
-export DISABLE_TELEMETRY="true"
-export DISABLE_COST_WARNINGS="true"
-export API_TIMEOUT_MS="600000"
-unset CLAUDE_CODE_USE_BEDROCK

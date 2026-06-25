@@ -153,7 +153,7 @@ rm_pattern_files() {
         echo "Error: File pattern is required."
         return 1
     fi
-    find -name "$1" | xargs rm -rf
+    find . -name "$1" -print0 | xargs -0 rm -rf
 }
 
 # 使用doas运行测试, 需要两个参数，分别是服务psm和需要运行的测试函数名

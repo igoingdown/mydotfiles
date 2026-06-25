@@ -58,12 +58,12 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 # IDs
-alias did="echo -n ${MY_DID} | tee >(pbcopy)"
-alias uid="echo -n ${MY_UID} | tee >(pbcopy)"
-alias eid="echo -n ${MY_EID} | tee >(pbcopy)"
-alias alarmid="echo -n ${MY_ALARMID} | tee >(pbcopy)"
-alias fcid="echo -n ${MY_FCID} | tee >(pbcopy)"
-alias pnum="echo -n ${MY_PHONE} | tee >(pbcopy)"
+alias did='echo -n ${MY_DID} | tee >(pbcopy)'
+alias uid='echo -n ${MY_UID} | tee >(pbcopy)'
+alias eid='echo -n ${MY_EID} | tee >(pbcopy)'
+alias alarmid='echo -n ${MY_ALARMID} | tee >(pbcopy)'
+alias fcid='echo -n ${MY_FCID} | tee >(pbcopy)'
+alias pnum='echo -n ${MY_PHONE} | tee >(pbcopy)'
 
 
 #=============== python Alias =============================================
