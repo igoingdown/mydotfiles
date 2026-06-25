@@ -7,7 +7,9 @@ let mapleader=";"
 " 配色方案
 set background=dark
 "colorscheme solarized
-colorscheme molokai
+" 注意: molokai 由 vim-colorschemes 插件提供，必须等 Vundle 把插件加入 runtimepath
+" (call vundle#end / filetype plugin indent on) 之后才能找到，所以实际的 colorscheme
+" 设置放在下面插件块之后，见 `silent! colorscheme molokai`。
 
 "colorscheme phd
 
@@ -59,6 +61,10 @@ Plugin 'jspringyc/vim-word'
 
 
 filetype plugin indent on     " required!
+
+"=====================配色方案（需在插件加载后应用）===========================
+" 插件已加入 runtimepath，此时才能找到 molokai；silent! 避免插件缺失时报 E185。
+silent! colorscheme molokai
 
 
 "=====================文件类型侦测设置===========================================
@@ -257,7 +263,42 @@ set foldmethod=indent
 
 
 "============== 复制粘贴配置 ============================
-set clipboard=unnamedplus,unnamed,autoselect
+" 仅在 vim 编译了 +clipboard 时设置，否则 -clipboard 的构建会报 E474。
+" unnamedplus 还需要 +X11；缺失时退回 unnamed，避免报错。
+if has('clipboard')
+  if has('unnamedplus')
+    set clipboard=unnamedplus,unnamed,autoselect
+  else
+    set clipboard=unnamed,autoselect
+  endif
+endif
+
+"=====================走 xclip 的系统剪贴板（-clipboard 构建的兜底）===============
+" 这台 vim 是 -clipboard，无法用 "+y / "*y 直接访问系统剪贴板。
+" 装了 xclip 时，用外部命令把寄存器内容送入/取出系统剪贴板。
+" 仍需可达的 X server（如 ssh -X）；DISPLAY 未设置时只给提示，不报错。
+if !has('clipboard') && executable('xclip')
+  " 复制：可视模式选中后 <leader>y，把选区(字符/行/块均保留)送进系统剪贴板
+  function! s:XclipYank() abort
+    if empty($DISPLAY)
+      echohl WarningMsg | echo 'xclip: $DISPLAY 未设置（需 ssh -X），已跳过复制' | echohl None
+      return
+    endif
+    call system('xclip -selection clipboard', @z)
+  endfunction
+  xnoremap <silent> <leader>y "zy:call <SID>XclipYank()<CR>
+
+  " 粘贴：普通模式 <leader>p，从系统剪贴板取内容粘到光标后
+  function! s:XclipPaste() abort
+    if empty($DISPLAY)
+      echohl WarningMsg | echo 'xclip: $DISPLAY 未设置（需 ssh -X），已跳过粘贴' | echohl None
+      return
+    endif
+    let @z = system('xclip -selection clipboard -o')
+    normal! "zp
+  endfunction
+  nnoremap <silent> <leader>p :call <SID>XclipPaste()<CR>
+endif
 
 
 

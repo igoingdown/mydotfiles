@@ -55,6 +55,7 @@ fi
 #   installGo             # Go toolchain — this box already has Go (brew). Uncomment on a fresh box.
 #   installSilverSearch   # the_silver_searcher (ag) — this box already has ag + rg
 #   installDlv            # Delve, the Go debugger — uncomment if you debug Go here
+#   installXclipNoRoot    # xclip into ~/.local (no root) — Homebrew lacks xclip; needed by the pbcopy shim
 
 
 #=============== link ~/.bashrc to the repo (full Ubuntu base + dotfiles entry) =======
