@@ -83,3 +83,10 @@ alias ppe=jump_ppe_by_psm
 #=============== brew Alias =============================================
 alias brewdump='brew bundle dump --force --describe'
 
+
+#=============== SSH 远端开发机 Alias =====================================
+# 直接用 Host 名连接对应的远端开发机；ssh -X 开启 X11 转发（便于远端用 xclip 等）。
+# test2 / devbox 需在 ~/.ssh/config 里配置为 Host。
+alias test2="ssh -X test2"
+alias devbox="ssh -X devbox"
+
