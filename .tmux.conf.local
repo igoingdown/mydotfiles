@@ -1,0 +1,13 @@
+# ~/.tmux.conf.local
+# gpakosz/.tmux (oh-my-tmux) 的本地覆盖文件。
+# 主 .tmux.conf 末尾(第140行)会 `source ~/.tmux.conf.local`,
+# 因此这里的设置在主文件之后加载,可以覆盖主文件。
+# 原则:只在本文件里做覆盖,不直接改主 .tmux.conf,方便将来升级 oh-my-tmux。
+
+# --- 默认 shell 改回 bash ----------------------------------------------------
+# 主文件第17-18行把 default-shell/command 设成了 /bin/zsh,
+# 但本机 dotfiles 全配在 bash(~/.bashrc 软链生效, ~/.zshrc 不存在),
+# tmux 里起裸 zsh 会导致所有 alias/函数(gs/gc/cxd/cxx/cxt 等)都不加载。
+# 改回 bash 后,tmux 内的每个 pane 都会正常加载 my_dot_files 配置。
+set -g default-shell   /bin/bash
+set -g default-command /bin/bash
