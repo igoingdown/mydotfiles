@@ -82,3 +82,11 @@ alias brewdump='brew bundle dump --force --describe'
 
 #=============== Claude Code Alias =============================================
 alias claude='claude --effort xhigh --dangerously-skip-permissions'
+
+#=============== CC Switch (Codex provider) Alias =============================================
+# 切到 default(fantacy 中转站), 切完回显当前生效的 provider
+alias cxd='cc-switch -a codex use default && cc-switch -a codex provider current'
+# 切到 sssai 中转站, 切完回显当前生效的 provider
+alias cxx='cc-switch -a codex use sssai && cc-switch -a codex provider current'
+# 对所有 codex provider 测速, 比较延迟挑快的用
+alias cxt='cc-switch -a codex provider speedtest'
