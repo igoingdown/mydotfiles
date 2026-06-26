@@ -90,6 +90,24 @@ tpr() {
     open -a /Applications/Typora.app "$1"
 }
 
+# 当前分支名(供 gpsup 等别名用);不在 git 仓库时静默返回空。
+git_current_branch() {
+    git symbolic-ref --quiet --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null
+}
+
+# 探测主分支名(main/trunk/master 顺序优先),供 gcm 用;都不存在则回退 master。
+git_main_branch() {
+    command git rev-parse --git-dir >/dev/null 2>&1 || return
+    local ref
+    for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,master}; do
+        if command git show-ref -q --verify "$ref"; then
+            echo "${ref##*/}"
+            return
+        fi
+    done
+    echo master
+}
+
 #=============== Proxy Functions =============================================
 proxy() {
     local proxy_ip=${PROXY_IP:-127.0.0.1}
