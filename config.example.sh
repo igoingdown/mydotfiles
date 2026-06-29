@@ -17,6 +17,17 @@ export XRAY_SOCKS_IP="127.0.0.1"
 export XRAY_SOCKS_PORT="1080"
 
 
+# Hexo Blog Configuration (used by the `hdeploy` function)
+# Both are OPTIONAL and have sane defaults — uncomment only to override.
+#   HEXO_BLOG_DIR:     path to the blog source repo
+#                      (default: $HOME/github/igoingdown/hexo-posts)
+#   HEXO_NODE_VERSION: nvm Node version used to build the blog. The old Hexo
+#                      toolchain breaks on Node 26+ (util.isDate removed), so
+#                      18 is the known-good version. (default: 18)
+# export HEXO_BLOG_DIR="$HOME/github/igoingdown/hexo-posts"
+# export HEXO_NODE_VERSION="18"
+
+
 # API Keys and Secrets
 export TCE_API_KEY="your_tce_api_key"
 export METRICS_APP="your_metrics_app_name"
