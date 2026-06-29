@@ -78,9 +78,39 @@ The entry point loads the modular `shell/` files in order (`paths` -> `exports` 
 - **Functions**:
     - `cppc`: compile C++11 source files.
     - `gacp`: git add, commit, and push in one go.
+    - `newp`: create a new Hexo blog post.
+    - `hdeploy`: one-shot publish + deploy of the Hexo blog (see below).
     - `deepfind`: recursive grep over a path.
     - `pbcopy` / `pbpaste`: clipboard shims backed by `xclip`/`xsel` on Linux.
 - **Environment**: sets up `GOPATH`, `GOPROXY`, and related exports.
+
+### Blog publishing (`hdeploy`)
+
+`hdeploy` publishes the Hexo blog end to end with a single command: it switches
+to the build-compatible Node version, commits and pushes the post sources, then
+runs `hexo clean && generate && deploy` to push the rendered site live.
+
+```bash
+hdeploy "post: my new article"   # commit message
+hdeploy                          # message defaults to "update posts: <timestamp>"
+```
+
+Behavior:
+
+- Switches to Node 18 via `nvm`. The old Hexo toolchain breaks on Node 26+
+  (the removed `util.isDate` API), so Node 18 is the known-good version.
+- Commits and pushes the post sources; if there are no changes, it skips the
+  commit and only re-generates and deploys.
+- Stops immediately if any step fails (directory / Node version / git repo are
+  validated up front).
+- It is a shell function, so call it directly — it cannot be wrapped by external
+  commands such as `timeout` or `sudo`.
+
+Optional overrides (defaults are fine for the standard setup; see
+`config.example.sh`):
+
+- `HEXO_BLOG_DIR` — blog source repo path (default `$HOME/github/igoingdown/hexo-posts`).
+- `HEXO_NODE_VERSION` — Node version used to build (default `18`).
 
 ### Secrets management
 
