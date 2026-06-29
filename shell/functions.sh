@@ -52,6 +52,61 @@ newp() {
     fi
 }
 
+# hdeploy: 一键发文 + 部署博客。
+#   1. 切到能构建的 Node 版本(老 Hexo 工具链在 Node 26+ 上会因 util.isDate
+#      被移除而构建失败,必须用 Node 18)。
+#   2. 提交并推送文章源码到博客源码仓库。
+#   3. hexo clean && generate && deploy,把渲染产物部署上线。
+# 用法: hdeploy ["commit 信息"]
+#   - commit 信息可缺省,缺省时用 "update posts: <时间戳>"。
+#   - 无未提交改动时跳过 commit/push,只重新生成并部署。
+# 可用环境变量覆盖默认值:
+#   HEXO_BLOG_DIR       博客源码仓库目录(默认 ~/github/igoingdown/hexo-posts)
+#   HEXO_NODE_VERSION   构建用的 Node 版本(默认 18)
+hdeploy() {
+    local blog_dir="${HEXO_BLOG_DIR:-$HOME/github/igoingdown/hexo-posts}"
+    local node_version="${HEXO_NODE_VERSION:-18}"
+    local msg="$1"
+
+    if [ ! -d "$blog_dir" ]; then
+        echo "Error: blog dir not found: $blog_dir (set HEXO_BLOG_DIR to override)."
+        return 1
+    fi
+
+    # 切到能构建的 Node 版本。
+    load_nvm
+    nvm use "$node_version" >/dev/null 2>&1 || {
+        echo "Error: Node $node_version not installed in nvm. Run: nvm install $node_version"
+        return 1
+    }
+
+    cd "$blog_dir" || return 1
+
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+        echo "Error: $blog_dir is not a git repository."
+        return 1
+    fi
+
+    # 提交并推送源码;无改动则跳过。
+    if [ -n "$(git status --porcelain)" ]; then
+        if [ -z "$msg" ]; then
+            msg="update posts: $(date '+%Y-%m-%d %H:%M:%S')"
+        fi
+        git add . || return 1
+        git commit -m "$msg" || return 1
+        git push origin "$(git_current_branch)" || return 1
+    else
+        echo "No source changes to commit; rebuilding and deploying only."
+    fi
+
+    # 渲染并部署上线。
+    npx hexo clean || return 1
+    npx hexo generate || return 1
+    npx hexo deploy || return 1
+
+    echo "hdeploy done. Site: https://igoingdown.github.io/"
+}
+
 #=============== Git Functions =============================================
 # after status and diff, push it through
 gacp(){
