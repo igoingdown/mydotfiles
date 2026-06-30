@@ -56,6 +56,7 @@ fi
 #   installSilverSearch   # the_silver_searcher (ag) — this box already has ag + rg
 #   installDlv            # Delve, the Go debugger — uncomment if you debug Go here
 #   installXclipNoRoot    # xclip into ~/.local (no root) — Homebrew lacks xclip; needed by the pbcopy shim
+#   installTmuxPlugins    # tmux-resurrect + tmux-continuum into ~/.tmux/plugins (会话存档 / 自动恢复)
 
 
 #=============== link ~/.bashrc to the repo (full Ubuntu base + dotfiles entry) =======

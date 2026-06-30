@@ -89,6 +89,41 @@ installSilverSearch() {
 }
 
 
+#=============== install tmux plugins (resurrect + continuum, 方案 B 手动 clone) ==========
+# 方案 B：不引入 TPM，直接把插件 clone 到 ~/.tmux/plugins/，再由 ~/.tmux.conf.local
+# 用 run-shell 直接 source 它们。幂等：已 clone 过就跳过，方便 DevBox 反复初始化。
+# 具体开关（自动恢复 / 5 分钟存档 / 保存 pane 内容 / 恢复 vim）都在 .tmux.conf.local 里配。
+# 以后要加插件，只需往 plugins 数组里加一行 "目录名=git地址"，再在 .tmux.conf.local 里 source。
+installTmuxPlugins() {
+    if ! command -v git >/dev/null 2>&1; then
+        echo "错误: 需要 git 来 clone tmux 插件"
+        return 1
+    fi
+
+    local plugin_dir="$HOME/.tmux/plugins"
+    mkdir -p "$plugin_dir"
+
+    local plugins=(
+        "tmux-resurrect=https://github.com/tmux-plugins/tmux-resurrect.git"
+        "tmux-continuum=https://github.com/tmux-plugins/tmux-continuum.git"
+    )
+
+    local entry name url dest
+    for entry in "${plugins[@]}"; do
+        name="${entry%%=*}"
+        url="${entry#*=}"
+        dest="$plugin_dir/$name"
+        if [ -d "$dest" ]; then
+            echo "ok $name (already cloned at $dest)"
+        else
+            git clone "$url" "$dest" && echo "cloned $name -> $dest"
+        fi
+    done
+
+    echo "tmux 插件已就绪。重载配置: tmux source ~/.tmux.conf （或在 tmux 里按 prefix + r）"
+}
+
+
 #=============== Install Go ============================================
 installGo() {
     if command -v brew >/dev/null 2>&1; then

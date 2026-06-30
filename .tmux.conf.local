@@ -11,3 +11,22 @@
 # 改回 bash 后,tmux 内的每个 pane 都会正常加载 my_dot_files 配置。
 set -g default-shell   /bin/bash
 set -g default-command /bin/bash
+
+# --- 加大滚动历史 ------------------------------------------------------------
+# 主文件第25行设的是 history-limit 5000,Claude 等工具长输出容易把回滚缓冲冲掉。
+# 调大到 50000,长输出不丢。
+# (注:base-index / pane-base-index 已是主文件默认的 1,无需在此重复设置。)
+set -g history-limit 50000
+
+# --- tmux-resurrect + tmux-continuum(方案 B:手动 clone 直接 source)----------
+# 插件由 common_init_funcs.sh 的 installTmuxPlugins() clone 到 ~/.tmux/plugins/。
+# 选项必须在 source 插件脚本之前设置;且 resurrect 要在 continuum 之前 source。
+# 存档键: prefix + Ctrl-s   恢复键: prefix + Ctrl-r
+# 存档目录: ~/.local/share/tmux/resurrect/
+set -g @resurrect-capture-pane-contents 'on'  # 连同 pane 屏幕内容一起存
+set -g @resurrect-strategy-vim 'session'      # 恢复 vim 会话(需 pane 工作目录里有 Session.vim)
+set -g @continuum-restore 'on'                # tmux 服务启动时自动恢复上次环境
+set -g @continuum-save-interval '5'           # 每 5 分钟自动存一次
+
+run-shell ~/.tmux/plugins/tmux-resurrect/resurrect.tmux
+run-shell ~/.tmux/plugins/tmux-continuum/continuum.tmux
