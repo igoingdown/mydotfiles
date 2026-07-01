@@ -18,6 +18,20 @@ set -g default-command /bin/bash
 # (注:base-index / pane-base-index 已是主文件默认的 1,无需在此重复设置。)
 set -g history-limit 50000
 
+# --- 鼠标滚轮 & 终端类型:修复"往上滑内容被遮挡" -----------------------------
+# 现象:mouse off 时滚轮不归 tmux 管,事件穿到外层终端去翻它自己的 scrollback,
+#      而 tmux 状态栏 + Claude 的输入框/spinner 一直重绘,一重绘就把滑上去看的
+#      内容盖掉。开 mouse 后滚轮直接进 copy-mode 滚 tmux 自己的 50000 行历史,
+#      不再走外层终端那条错路,遮挡消失。(前缀 + m 也能临时开关鼠标)
+set -g mouse on
+
+# 主文件第12行把 default-terminal 设成老旧的 screen-256color,清行/重绘能力弱,
+# 容易留残影、叠字。换成更新的 tmux-256color,重绘更干净。
+# 注:default-terminal 只对"新开的 pane / 重启 tmux 服务"生效。
+set -g default-terminal "tmux-256color"
+# 保留真彩色(本机 COLORTERM=truecolor,外层是 xterm-256color)。
+set -ga terminal-overrides ",xterm-256color:Tc"
+
 # --- tmux-resurrect + tmux-continuum(方案 B:手动 clone 直接 source)----------
 # 插件由 common_init_funcs.sh 的 installTmuxPlugins() clone 到 ~/.tmux/plugins/。
 # 选项必须在 source 插件脚本之前设置;且 resurrect 要在 continuum 之前 source。
