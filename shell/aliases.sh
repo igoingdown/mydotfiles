@@ -112,7 +112,8 @@ alias test2="ssh -X test2"
 alias devbox="ssh -X devbox"
 
 #=============== Claude Code Alias =====================================
-# 默认带 --chrome 启动，接入 Claude in Chrome 扩展以便直接操控浏览器。
+# 默认带 --chrome 启动，接入 Claude in Chrome 扩展以便直接操控浏览器（仅 mac 有 GUI，dev 分支不加）。
+# --effort xhigh + bypass permissions 与 dev 分支语义对齐。
 # 同名 alias 不会递归展开，内层 claude 仍解析到 PATH 里的二进制。
-alias claude="claude --chrome"
+alias claude="claude --chrome --effort xhigh --dangerously-skip-permissions"
 
