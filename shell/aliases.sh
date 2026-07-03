@@ -111,3 +111,8 @@ alias brewdump='brew bundle dump --force --describe'
 alias test2="ssh -X test2"
 alias devbox="ssh -X devbox"
 
+#=============== Claude Code Alias =====================================
+# 默认带 --chrome 启动，接入 Claude in Chrome 扩展以便直接操控浏览器。
+# 同名 alias 不会递归展开，内层 claude 仍解析到 PATH 里的二进制。
+alias claude="claude --chrome"
+
