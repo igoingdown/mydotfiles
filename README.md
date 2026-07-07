@@ -83,6 +83,8 @@ source ~/github/my_dot_files/my_shell_config.sh
 ./proxy_toggle.sh sync    # Reconcile launchd proxy env with the current proxy state
 ```
 
+With the shell config loaded, the `pt` function (defined in `shell/functions.sh`) wraps the script so it works from any directory: `pt on` / `pt off` / `pt status` / `pt sync`. On top of the script's three layers, `pt on` / `pt off` also applies `xray_proxy` / `noproxy` so the current shell's proxy env vars stay in sync (the script itself is executed, not sourced, so its own exports don't reach your shell).
+
 Ports and hosts default to `XRAY_PROXY_IP/PORT` (`127.0.0.1:1087`) and `XRAY_SOCKS_IP/PORT` (`127.0.0.1:1080`), overridable in `secrets.sh`.
 
 Notes:

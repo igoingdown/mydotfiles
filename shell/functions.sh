@@ -136,6 +136,17 @@ xray_proxy() {
     echo "proxy: on"
 }
 
+# pt: wrapper for proxy_toggle.sh usable from any directory.
+# proxy_toggle.sh is executed (not sourced), so its xray_proxy/noproxy calls
+# only affect the script process; re-apply them here for the current shell.
+pt() {
+    "${DOTFILES_ROOT:-$HOME/github/my_dot_files}/proxy_toggle.sh" "$@" || return
+    case "$1" in
+        on)  xray_proxy ;;
+        off) noproxy ;;
+    esac
+}
+
 
 #=============== Common Functions =============================================
 # find specified pattern under particular path recursively 
