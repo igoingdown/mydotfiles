@@ -117,3 +117,6 @@ alias devbox="ssh -X devbox"
 # 同名 alias 不会递归展开，内层 claude 仍解析到 PATH 里的二进制。
 alias claude="claude --chrome --effort xhigh --dangerously-skip-permissions"
 
+#=============== Codex Alias =============================================
+# 默认以 YOLO 模式启动；同名 alias 不会递归展开。
+alias codex='codex --yolo'
