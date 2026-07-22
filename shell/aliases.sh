@@ -105,9 +105,6 @@ alias dorm='docker rm'
 #=============== brew Alias =============================================
 alias brewdump='brew bundle dump --force --describe'
 
-#=============== Claude Code Alias =============================================
-alias claude='claude --effort xhigh --dangerously-skip-permissions'
-
 #=============== Codex Alias =============================================
 # 默认以 YOLO 模式启动；同名 alias 不会递归展开。
 alias codex='codex --yolo'

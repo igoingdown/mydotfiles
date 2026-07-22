@@ -26,6 +26,22 @@ if ! command -v pbcopy >/dev/null 2>&1; then
     fi
 fi
 
+#=============== Claude Code Functions =============================================
+# Clear provider variables inherited from a stale shell/tmux environment before
+# Claude Code loads the provider selected by cc-switch from its own settings.
+# Keep this unalias for shells that sourced the previous alias-based config.
+unalias claude 2>/dev/null
+claude() {
+    env \
+        -u ANTHROPIC_BASE_URL \
+        -u ANTHROPIC_AUTH_TOKEN \
+        -u ANTHROPIC_API_KEY \
+        /home/linuxbrew/.linuxbrew/bin/claude \
+        --effort xhigh \
+        --dangerously-skip-permissions \
+        "$@"
+}
+
 #=============== CPP Functions =============================================
 # compile cpp program with c++11
 cppc() {
