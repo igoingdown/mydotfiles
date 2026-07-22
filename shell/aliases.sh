@@ -108,6 +108,10 @@ alias brewdump='brew bundle dump --force --describe'
 #=============== Claude Code Alias =============================================
 alias claude='claude --effort xhigh --dangerously-skip-permissions'
 
+#=============== Codex Alias =============================================
+# 默认以 YOLO 模式启动；同名 alias 不会递归展开。
+alias codex='codex --yolo'
+
 #=============== CC Switch (Codex provider) Alias =============================================
 # 切到 default(fantacy 中转站), 切完回显当前生效的 provider
 alias cxd='cc-switch -a codex use default && cc-switch -a codex provider current'
