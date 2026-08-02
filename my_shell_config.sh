@@ -26,3 +26,11 @@ fi
 # Load NVM (Lazy load or direct load as per previous config)
 # load_nvm is defined in shell/functions.sh
 load_nvm
+
+# 4. Restore proxy env if xray is up.
+# Conditional by design -- see proxy_autoinit in shell/functions.sh. Do NOT
+# replace this with a plain `export http_proxy=...`; that would resurrect the
+# proxy in every new terminal after `pt off`.
+if command -v proxy_autoinit >/dev/null 2>&1; then
+    proxy_autoinit
+fi

@@ -12,14 +12,22 @@ export GITHUB_USER_NAME="your_github_name"
 export GITHUB_USER_EMAIL="your_github_email@example.com"
 
 # Proxy Configuration
-export PROXY_IP="10.0.0.4"
-export PROXY_PORT="3128"
+# Optional. Only for a plain upstream HTTP proxy (e.g. a corporate one), used by
+# the `proxy` function. Leave empty unless you actually have one.
+export PROXY_IP=""
+export PROXY_PORT=""
 
 # Xray Proxy Configuration
+# REQUIRED per machine, and deliberately left empty: there is no default in the
+# shared code, so a wrong value fails loudly instead of silently routing every
+# CLI into a dead port. Fill these in from your local xray inbounds:
+#   jq '.inbounds[] | {protocol, port}' /opt/homebrew/etc/xray/config.json
+# Convention: SOCKS on 1080, HTTP on 1087. Avoid 8080 for the HTTP inbound --
+# local dev servers claim it constantly, and the resulting failure is opaque.
 export XRAY_PROXY_IP="127.0.0.1"
-export XRAY_PROXY_PORT="1087"
+export XRAY_PROXY_PORT=""
 export XRAY_SOCKS_IP="127.0.0.1"
-export XRAY_SOCKS_PORT="1080"
+export XRAY_SOCKS_PORT=""
 
 
 # API Keys and Secrets
