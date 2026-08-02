@@ -85,12 +85,19 @@ source ~/github/my_dot_files/my_shell_config.sh
 
 With the shell config loaded, the `pt` function (defined in `shell/functions.sh`) wraps the script so it works from any directory: `pt on` / `pt off` / `pt status` / `pt sync`. On top of the script's three layers, `pt on` / `pt off` also applies `xray_proxy` / `noproxy` so the current shell's proxy env vars stay in sync (the script itself is executed, not sourced, so its own exports don't reach your shell).
 
-Ports and hosts default to `XRAY_PROXY_IP/PORT` (`127.0.0.1:1087`) and `XRAY_SOCKS_IP/PORT` (`127.0.0.1:1080`), overridable in `secrets.sh`.
+Ports **must** be set per machine in `secrets.sh` (`XRAY_PROXY_PORT`, `XRAY_SOCKS_PORT`); the hosts default to `127.0.0.1`. There is intentionally no port default: this repo is shared across machines whose xray inbounds differ, and a wrong default silently routes every CLI into a dead socket. Read the real values off the local config:
+
+```bash
+jq '.inbounds[] | {protocol, port}' /opt/homebrew/etc/xray/config.json
+```
+
+`xray_proxy` exports each endpoint under both lower and upper case (curl reads lowercase; Go and JVM tooling read uppercase), uses `socks5h://` so DNS resolves at the proxy rather than locally, and sets `NODE_USE_ENV_PROXY=1` — without which Node's built-in `fetch` ignores proxy env vars entirely.
 
 Notes:
 - **Run it as `./proxy_toggle.sh on`, not `source proxy_toggle.sh on`.**
 - **Already-running GUI apps must be fully quit and reopened** to pick up the new proxy environment; macOS cannot change a running process's environment.
-- **`launchctl setenv` does not persist across reboot.** After a reboot (where the system proxy may still be on and Xray may auto-start), re-run `./proxy_toggle.sh on` or `./proxy_toggle.sh sync` to restore the launchd proxy env.
+- **`launchctl setenv` does not persist across reboot,** while the macOS system proxy does. Each boot therefore starts in a split state: GUI apps stay proxied, CLIs silently go direct. New shells self-heal via `proxy_autoinit` (see below), but the launchd env — which GUI-launched processes inherit — still needs `pt sync` once per boot. `pt status` warns when it detects this split.
+- **`proxy_autoinit` in `my_shell_config.sh` restores proxy env on shell start,** but only when xray's HTTP port is actually listening. Keep it conditional: replacing it with a plain `export http_proxy=...` in `.zshrc` would resurrect the proxy in every new terminal after `pt off`, producing a machine whose proxy cannot be turned off. Since `pt off` stops the xray service, a dead port doubles as "the user turned it off"; if `pt off` ever stops halting the service, this needs an explicit state file instead.
 
 ### Secrets Management
 The project uses `secrets.sh` to manage sensitive data. Define the following in your `secrets.sh`:

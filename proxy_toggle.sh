@@ -4,13 +4,18 @@ source ${DOTFILES_ROOT}/common_init_funcs.sh
 source ${DOTFILES_ROOT}/shell/functions.sh
 INTERFACE="Wi-Fi"
 
+# Endpoints come from secrets.sh via _proxy_resolve; no defaults here, so a
+# machine with unconfigured ports fails loudly instead of using someone else's.
+if ! _proxy_resolve verbose; then
+    exit 1
+fi
 PROXY_IP="${XRAY_PROXY_IP:-127.0.0.1}"
-PROXY_PORT="${XRAY_PROXY_PORT:-1087}"
+PROXY_PORT="${XRAY_PROXY_PORT}"
 SOCKS_IP="${XRAY_SOCKS_IP:-127.0.0.1}"
-SOCKS_PORT="${XRAY_SOCKS_PORT:-1080}"
-HTTP_PROXY_URL="http://${PROXY_IP}:${PROXY_PORT}"
-SOCKS_PROXY_URL="socks5://${SOCKS_IP}:${SOCKS_PORT}"
-NO_PROXY_VALUE="localhost,127.0.0.1,::1"
+SOCKS_PORT="${XRAY_SOCKS_PORT}"
+HTTP_PROXY_URL="$_px_http"
+SOCKS_PROXY_URL="$_px_socks"
+NO_PROXY_VALUE="$PROXY_NO_PROXY_DEFAULT"
 
 wait_for_proxy() {
     local retries=40
@@ -39,10 +44,12 @@ set_launchd_proxy() {
     launchctl setenv https_proxy "$HTTP_PROXY_URL"
     launchctl setenv all_proxy "$SOCKS_PROXY_URL"
     launchctl setenv no_proxy "$NO_PROXY_VALUE"
+    # GUI-launched node apps ignore *_proxy without this.
+    launchctl setenv NODE_USE_ENV_PROXY 1
 }
 
 unset_launchd_proxy() {
-    for name in HTTP_PROXY HTTPS_PROXY ALL_PROXY NO_PROXY http_proxy https_proxy all_proxy no_proxy; do
+    for name in HTTP_PROXY HTTPS_PROXY ALL_PROXY NO_PROXY http_proxy https_proxy all_proxy no_proxy NODE_USE_ENV_PROXY; do
         launchctl unsetenv "$name"
     done
 }
@@ -62,6 +69,16 @@ show_status() {
     echo "HTTPS_PROXY: $(launchctl getenv HTTPS_PROXY)"
     echo "ALL_PROXY:   $(launchctl getenv ALL_PROXY)"
     echo "NO_PROXY:    $(launchctl getenv NO_PROXY)"
+    echo "NODE_USE_ENV_PROXY: $(launchctl getenv NODE_USE_ENV_PROXY)"
+    echo
+    # The system proxy survives reboot but launchctl setenv does not, so this
+    # pair drifts apart on every boot: GUI apps stay proxied while CLIs go
+    # direct with no visible cause. Call it out rather than printing two
+    # unrelated-looking blocks and leaving the reader to spot it.
+    if system_proxy_enabled && [ -z "$(launchctl getenv HTTP_PROXY)" ]; then
+        echo "⚠️  系统代理已启用，但 launchd 代理环境为空 (通常是重启后的正常现象)。"
+        echo "   GUI 应用仍走代理，新启动的 CLI 不会继承 -> 运行 'pt sync' 修复。"
+    fi
 }
 
 if [ "$1" = "on" ]; then
@@ -84,7 +101,9 @@ if [ "$1" = "on" ]; then
     set_launchd_proxy
     echo "✅ 代理已启用"
     echo "ℹ️ 已打开launchd代理环境；已运行的GUI应用需要重启后才会继承"
-    xray_proxy
+    # Only affects this script's own process; the pt wrapper re-applies it to the
+    # calling shell and reports there. Silenced to avoid a duplicate line.
+    xray_proxy >/dev/null
 elif [ "$1" = "off" ]; then
     echo "🔄 禁用Xray代理..."
     unset_launchd_proxy
@@ -94,7 +113,7 @@ elif [ "$1" = "off" ]; then
     brew services stop xray
     echo "❌ 代理已禁用"
     echo "ℹ️ 已清理launchd代理环境；已运行的GUI应用如仍异常，请重启应用"
-    noproxy
+    noproxy >/dev/null
 elif [ "$1" = "status" ]; then
     show_status
 elif [ "$1" = "sync" ]; then
