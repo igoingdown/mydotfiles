@@ -7,14 +7,22 @@
 # ~/.gitconfig, not here. Do not duplicate it in secrets.sh.
 
 # Proxy Configuration
+# Optional. Only for a plain upstream HTTP proxy (e.g. a corporate one), used by
+# the `proxy` function. Leave empty unless you actually have one.
 export PROXY_IP="127.0.0.1"
-export PROXY_PORT="8080"
+export PROXY_PORT=""
 
 # Xray Proxy Configuration
+# Per-machine, and deliberately left empty: there is no default in the shared
+# code, so a wrong value fails loudly instead of silently routing every CLI into
+# a dead port. Fill these in from this box's own xray inbounds:
+#   jq '.inbounds[] | {protocol, port}' /etc/xray/config.json
+# Convention: SOCKS on 1080, HTTP on 1087. Avoid 8080 for the HTTP inbound --
+# local dev servers claim it constantly, and the resulting failure is opaque.
 export XRAY_PROXY_IP="127.0.0.1"
-export XRAY_PROXY_PORT="1087"
+export XRAY_PROXY_PORT=""
 export XRAY_SOCKS_IP="127.0.0.1"
-export XRAY_SOCKS_PORT="1080"
+export XRAY_SOCKS_PORT=""
 
 
 # Hexo Blog Configuration (used by the `hdeploy` function)

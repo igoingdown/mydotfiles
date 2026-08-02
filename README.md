@@ -82,7 +82,36 @@ The entry point loads the modular `shell/` files in order (`paths` -> `exports` 
     - `hdeploy`: one-shot publish + deploy of the Hexo blog (see below).
     - `deepfind`: recursive grep over a path.
     - `pbcopy` / `pbpaste`: clipboard shims backed by `xclip`/`xsel` on Linux.
+    - `proxy` / `xray_proxy` / `noproxy`: proxy env toggles (see below).
 - **Environment**: sets up `GOPATH`, `GOPROXY`, and related exports.
+
+### Proxy (`xray_proxy` / `proxy` / `noproxy`)
+
+Ports come from `secrets.sh` and are **required per machine** — the shared code
+carries no port default on purpose. This repo is checked out on several boxes
+whose xray inbounds differ; guessing a port would send every CLI to a dead
+socket while reporting nothing about proxies. Read the real values off the box:
+
+```bash
+jq '.inbounds[] | {protocol, port}' /etc/xray/config.json
+```
+
+Both `xray_proxy` and `proxy` export the endpoint under **every** spelling the
+ecosystem expects, which is not belt-and-braces but two half-coverages:
+
+- `http_proxy` / `https_proxy` (lowercase) — curl reads only these. Setting just
+  the uppercase pair makes curl connect directly.
+- `HTTP_PROXY` / `HTTPS_PROXY` (uppercase) — Go (`net/http`) and most JVM and
+  Ruby tooling read these.
+- `NODE_USE_ENV_PROXY=1` — Node 24+ built-in `fetch`/undici ignores `*_proxy`
+  entirely without it. Any Node CLI that uses `fetch` needs this.
+
+`xray_proxy` uses `socks5h://` rather than `socks5://` for `ALL_PROXY`: the `h`
+defers hostname resolution to xray at the far end, which is the step that gets
+poisoned when resolved locally.
+
+`noproxy` clears both cases plus `NODE_USE_ENV_PROXY` — clearing only the
+lowercase set would leave half the ecosystem still proxied.
 
 ### Blog publishing (`hdeploy`)
 

@@ -173,31 +173,73 @@ git_main_branch() {
 }
 
 #=============== Proxy Functions =============================================
+# 端口只存在于 secrets.sh(git-ignored、按机器区分)。这里故意不留端口默认值:
+# 本仓库跨多台机器共享, 各机器的 xray inbound 并不相同, 猜一个值会让所有 CLI
+# 静默连到一个死端口, 且不报告任何与代理有关的信息。宁可显式失败。
+# IP 仍默认回环 —— 本地代理监听在别处不是值得猜的情形。
+#
+# no_proxy 覆盖三段私有网段: 公司内网和开发机常在 10/8 与 172.16/12 上,
+# 原来只排除 localhost 会让内网流量绕一趟代理再回来。
+PROXY_NO_PROXY_DEFAULT="localhost,127.0.0.1,::1,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12,*.local"
+
+# 把一个代理地址按生态里需要的所有拼写导出。
+# 大小写都写不是双保险, 而是两边各缺一半: curl 只认小写 http_proxy
+# (实测只设大写时 curl 直接直连), 而 Go 和多数 JVM / Ruby 工具链认大写。
+_proxy_export() {
+    local http_url=$1 socks_url=$2
+    export http_proxy="$http_url" HTTP_PROXY="$http_url"
+    export https_proxy="$http_url" HTTPS_PROXY="$http_url"
+    if [ -n "$socks_url" ]; then
+        export all_proxy="$socks_url" ALL_PROXY="$socks_url"
+    fi
+    export no_proxy="$PROXY_NO_PROXY_DEFAULT" NO_PROXY="$PROXY_NO_PROXY_DEFAULT"
+    # Node >=24 的内置 fetch/undici 没有这个变量就完全忽略 *_proxy。
+    # 任何用 fetch 的 node CLI 都需要。
+    export NODE_USE_ENV_PROXY=1
+}
+
+# 普通上游 HTTP 代理(如公司代理), 与 xray 无关。
 proxy() {
-    local proxy_ip=${PROXY_IP:-127.0.0.1}
-    local proxy_port=${PROXY_PORT:-8080}
-    export http_proxy=http://${proxy_ip}:${proxy_port}
-    export https_proxy=http://${proxy_ip}:${proxy_port}
-    export no_proxy="localhost,127.0.0.1,::1"
-    echo "proxy: on"
+    if [ -z "$PROXY_PORT" ]; then
+        echo "proxy: PROXY_IP/PROXY_PORT 未在 secrets.sh 中配置" >&2
+        return 1
+    fi
+    _proxy_export "http://${PROXY_IP:-127.0.0.1}:${PROXY_PORT}" ""
+    echo "proxy: on (${PROXY_IP:-127.0.0.1}:${PROXY_PORT})"
 }
 
 noproxy() {
-    unset http_proxy
-    unset https_proxy
-    unset all_proxy
-    unset no_proxy
+    # 大小写和 NODE_USE_ENV_PROXY 都要清, 否则"关掉"之后生态里仍有一半在走代理。
+    unset http_proxy https_proxy all_proxy no_proxy
+    unset HTTP_PROXY HTTPS_PROXY ALL_PROXY NO_PROXY
+    unset NODE_USE_ENV_PROXY
     echo "proxy: off"
 }
 
 xray_proxy() {
-    local proxy_ip=${XRAY_PROXY_IP:-127.0.0.1}
-    local proxy_port=${XRAY_PROXY_PORT:-1087}
-    export http_proxy=http://${proxy_ip}:${proxy_port}
-    export https_proxy=http://${proxy_ip}:${proxy_port}
-    export all_proxy=socks5://${XRAY_SOCKS_IP:-127.0.0.1}:${XRAY_SOCKS_PORT:-1080}
-    export no_proxy="localhost,127.0.0.1,::1"
-    echo "proxy: on"
+    local missing=""
+    [ -n "$XRAY_PROXY_PORT" ] || missing="XRAY_PROXY_PORT"
+    [ -n "$XRAY_SOCKS_PORT" ] || missing="${missing:+$missing }XRAY_SOCKS_PORT"
+    if [ -n "$missing" ]; then
+        cat >&2 <<EOF
+proxy: 未配置 -- $missing 为空。
+  在 ${DOTFILES_ROOT:-$HOME/github/mydotfiles}/secrets.sh 里填上本机 xray 的 inbound 端口。
+EOF
+        return 1
+    fi
+    # socks5h 而非 socks5: 把主机名交给 xray 在远端解析。
+    # 先在本地解析正是会被投毒的那一步。
+    _proxy_export "http://${XRAY_PROXY_IP:-127.0.0.1}:${XRAY_PROXY_PORT}" \
+                  "socks5h://${XRAY_SOCKS_IP:-127.0.0.1}:${XRAY_SOCKS_PORT}"
+    echo "proxy: on (${XRAY_PROXY_IP:-127.0.0.1}:${XRAY_PROXY_PORT}, socks ${XRAY_SOCKS_PORT})"
+}
+
+# 代理端口是否真的在监听。用 -w 而非 mac 上的 -G: -G 是 BSD nc 专属,
+# Linux 的 netcat-openbsd 不认这个 flag。
+proxy_port_alive() {
+    local ip=${XRAY_PROXY_IP:-127.0.0.1}
+    [ -n "$XRAY_PROXY_PORT" ] || return 1
+    nc -z -w 1 "$ip" "$XRAY_PROXY_PORT" >/dev/null 2>&1
 }
 
 
