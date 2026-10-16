@@ -32,6 +32,24 @@ set -g default-terminal "tmux-256color"
 # 保留真彩色(本机 COLORTERM=truecolor,外层是 xterm-256color)。
 set -ga terminal-overrides ",xterm-256color:Tc"
 
+# --- 3.8 内置主题:关掉,减少高延迟线路(如 jp-dev)上切窗口的卡顿 -------------
+# tmux 3.8 新增 theme 选项(默认 detect),给 choose-tree 等列表套了一层真彩色
+# 配色,选中行/普通行都改用 24 位色(如 \e[38;2;179;179;179m)。实测 prefix+w
+# 打开一次列表的数据量因此翻倍(jp-dev 从 17.6KB 涨到 35.8KB),延迟越高的线路
+# (去日本比去香港多 20~30ms、丢包也更多)越明显卡顿。改回 terminal 用回旧配色,
+# 数据量降到 23.9KB。
+# -s 是 server 级选项,3.7c 没有这个选项,加 -q 后 3.7c 虽然还会在 attach 时
+# 打一行 "invalid option: theme" 的警告,但不会中断后续配置加载,两台机器
+# (devbox 3.7c / jp-dev 3.8)可以共用这一份配置。
+set -sq theme terminal
+
+# --- 切窗口/会话列表:关掉右侧预览面板,进一步减少重绘流量 -------------------
+# choose-tree 默认带一个实时刷新的预览面板,每次移动选中项都要重新渐染一遍,
+# 是 prefix+w / prefix+s 时真正的流量大头。-N 关闭预览,只保留列表本身。
+# 叠加上面的 theme terminal,jp-dev 打开一次列表的数据量从 35.8KB 降到 4.8KB。
+bind-key w choose-tree -NZw
+bind-key s choose-tree -NZs
+
 # --- tmux-resurrect + tmux-continuum(方案 B:手动 clone 直接 source)----------
 # 插件由 common_init_funcs.sh 的 installTmuxPlugins() clone 到 ~/.tmux/plugins/。
 # 选项必须在 source 插件脚本之前设置;且 resurrect 要在 continuum 之前 source。
