@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "state_dir": "/absolute/private/report-state",
+  "aliyun_cli": "/absolute/bin/aliyun",
+  "lark_cli": "/absolute/bin/lark-cli",
+  "node_cli": "/absolute/bin/node",
+  "aliyun_profile": "configured-profile",
+  "aliyun_region": "configured-region",
+  "receiver": {"app_id": "cli_example", "open_id": "ou_example"},
+  "clusters": [{"key": "primary_mysql", "instance_id": "pc-example", "engine": "mysql"}],
+  "code_wrap_checker": "/absolute/private/ensure_code_wrap.py",
+  "workers": 2
+}
